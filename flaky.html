@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <title>EVERYBODY LOVES HYPNOTOAD</title>
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/_pygments.css" type="text/css">
+      <style type="text/css"></style>
+  </head>
+  <body screen_capture_injected="true">
+    <div class="container">
+      <div class="header">
+        <a href="http://dimaborzov.com">Dima Borzov</a>'s code and writings
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><a href="http://ca.linkedin.com/pub/dima-borzov/69/58/533/"><img src="./css/linkedin.png" width="20">LinkedIn</a>
+          </li><li><a href="https://github.com/dborzov"><img src="./css/octocat.png" width="20">Github</a>
+        </li></ul>
+      </div>
+      <div class="body"><h1>Flaky: a datatype standard for quantities in real world</h1>
+
+<h2> <em>Abstract:</em> Modern datatype implementations for numbers and quantities (mass, time ,length) should be smarter: keep track of all the possible averaging errors, understand units and conversion. Flaky, an open source framework, solves all these issues (by using classic advances of the functional programming, but if you are a user, you don't have to worry about all this crap).</h2>
+
+<blockquote>
+  <p>An infinite number of mathematicians walk into a bar. The first orders a beer. The second orders half a beer. The third orders a quarter of a beer. Before the next one can order, the bartender says, “You’re all assholes,” and pours two beers.<a href="http://www.komplexify.com/math/jokes/MathWalksIntoABar3.html">TE</a></p>
+</blockquote>
+
+<p>Floating point datatype is the de-facto standard accross the industry. Since its introduction, floating point was accepted almost universally accross the technology and nowdays lies in the foundation of every system whether it is money amount in a trading system, size of the bridge built from an AutoCAD file, universally we have the very same representation.</p>
+
+<p>However, the floating point is incredibly fragile and can lead to errors. Let us consider 3 illustrating examples of things going wrong.</p>
+
+<h2>Accumulating errors</h2>
+
+<p>Well, this one is no brainer. Let one pound of bananas consts $1.99. How much does a kg cost? Let us run a program:
+    price<em>per</em>pound = 1.99
+    pound<em>in</em>killograms = 0.453592
+    for i in range(10**100):
+        price<em>per</em>kilogram = price<em>per</em>pound/pound<em>in</em>killograms
+        price<em>per</em>pound = price<em>per</em>kilogram * pound<em>in</em>killograms
+    print price<em>per</em>pound</p>
+
+<p>Whoah, some free bananas.</p>
+
+<h2>Square equation</h2>
+
+<p>Let us take the following quadratic equation:
+    $10^{-19} x^2 + 15 x = 0$
+And solve it using the library of your choice. Here is the first Google result for quadratic equation solver:</p>
+
+<p><img src="http://dimaborzov.com/img/QuadraticEquation.png" alt="Img" /></p>
+
+<p>Yet this is not the feature of a , but a sign of the general deep-rooted problem.</p>
+
+<p><a href="http://what-if.xkcd.com/11/">Obligatory xkcd</a></p>
+
+<h2>Logarithms.</h2>
+
+<p>Things could go very bad very quickly with non-analitical terms in the expansion. Let us assume we study function the leading term for which looks as one of this options:
+    $f(x) =Log [Log[\frac{1}{x}]] + x$
+    $f(x) = Log [\frac{1}{x}] + x$</p>
+
+<p>This is an actual problem I encountered, when we were working on the research study on 2D.</p>
+
+<h2>Doing things right</h2>
+
+<p>This issues are well known and of course are . Not only errors go unreported but it is</p>
+
+<h2>Let it be Flaky</h2>
+
+<p>So we saw that how to make things better than going floating points and why we should. These reasons compeled me start Flaky, an open-source project project, with following features:</p>
+
+<p>Flaky is written in Go.</p>
+
+<p>The easiest way to play is at the FlakyPastry website: a sandbox for playing with FlakyQuantities.
+Please join me and to contribute to</p>
+      </div>
+      <div class="footer">
+        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a> Dmitry Borzov, 2013.
+        </p>
+      </div>
+    </div>
+
+
+</div></body></html>
