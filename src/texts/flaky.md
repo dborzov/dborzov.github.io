@@ -50,7 +50,9 @@ Let us take the following quadratic equation:
     \[ 10^{-19} x^2 + 15 x = 0 \]
 And solve it using the library of your choice. Here is the first Google result for quadratic equation solver:
 
+\[
 ![Img](http://dimaborzov.com/img/QuadraticEquation.png)
+\]
 
 Yet this is not the feature of a , but a sign of the general deep-rooted problem.
 
