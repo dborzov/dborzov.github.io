@@ -9,9 +9,9 @@ title = 'flaky'
 mdSrc = open('texts/'+title+'.md', 'rb').read()
 content = markdown2.markdown(mdSrc).encode('ascii', 'ignore')
 content = content.replace('[','<center><div lang="latex">')
-content = content.replace('[','<center><div lang="latex">').replace(']','</div><br></center>')
+content = content.replace('[','<center><div lang="latex">').replace(']','</div></center><br>')
 
-header = [pystache.render(each_line,{'title':title,'full_title': content[0][4:-5]}) for each_line in open('templates/header.html', 'rb').readlines()]
+header = [pystache.render(each_line,{'title':title,'full_title': content.split('\n')[0][4:-5]}) for each_line in open('templates/header.html', 'rb').readlines()]
 footer = open('templates/footer.html', 'rb').readlines()
 
 

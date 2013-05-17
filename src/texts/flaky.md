@@ -1,4 +1,4 @@
-Flaky: a datatype standard for quantities in real world
+Flaky: datatypes for real world quantities
 ===============================
 
 
