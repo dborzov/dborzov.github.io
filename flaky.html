@@ -16,7 +16,7 @@
 
       <style type="text/css"></style>
 
-      <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+      <script type="text/javascript" src="./js/latexit.js"></script>
 
   </head>
 
@@ -107,41 +107,54 @@ with 60 iterations, we get 1.0
 
 <p>What I wanted to emphasize here instead is the total equanimity of the floating type. It is very hard to understand what is going on at various stages. In my opinion, it is an incredible engineering design flaw.</p>
 
-<p>To see what I mean, let us figure out why the error is of order of 10% for 50 iterations, but converges to a wrong answer at 60. To do this we have to know how the number is represented internally, look up the default  <a href="https://en.wikipedia.org/wiki/Significand">mantissa/significand</a> size for the programming language of our choice and make the estimation calculation on a piece of paper. Seriously. In 2013.</p>
+<p>To see what I mean, let us figure out why the error is of order of 10% for 50 iterations, but converges to a wrong answer at 60. To do this we have to know how the number is represented internally, look up the default  <a href="https://en.wikipedia.org/wiki/Significand">mantissa/significand</a> size for the programming language of our choice and make the estimation calculation on a piece of paper.</p>
 
-<h4>A square equation</h4>
+<h4>The quadratic equation</h4>
 
-<p>Let us take the following quadratic equation:
-    <center><div lang="latex"> 10^{-19} x^2 + 15 x = 0 </div></center><br>
-And solve it using the library of your choice. Here is the first Google result for quadratic equation solver:</p>
+<p>Even writing a program that solves the quadratic equation
+for arbitrary constant values is a serious task.
+For example, let us consider the following equation
+</p><center><div lang="latex">
+<img src="./img/quadratic.gif" alt="Img" />
+</div></center><br><p>
+Note that there is no constant term and thus one solution is simply zero. However, the naive solution with the quadratic formula fails to reflect this. Here is the first Google result for "quadratic equation solver":</p>
 
-<p><center><div lang="latex">
+<p></p><center><div lang="latex">
 <img src="http://dimaborzov.com/img/QuadraticEquation.png" alt="Img" />
-</div></center><br></p>
+</div></center><br><p>
+For the general case implementation, we must treat each marginal case separately. First, if the constant term is zero, then if the quadratic term is absent, and so on, one by one.</p>
 
-<p>Yet this is not the feature of a , but a sign of the general deep-rooted problem.</p>
-
-<p><a href="http://what-if.xkcd.com/11/">Obligatory xkcd</a></p>
+<p>Quadratic equation is the simplest case of a numerical problem imaginable. Yet even here we see that one needs to manualy implement basic calculus behind the known solution.</p>
 
 <h4>Logarithms.</h4>
 
-<p>Things could go very bad very quickly with non-analitical terms in the expansion. Let us assume we study function the leading term for which looks as one of this options:
-    <center><div lang="latex"> f(x) =\textrm{Log} \Large( Log(\frac{1}{x}) \Large) + x </div></center><br>
-    <center><div lang="latex"> f(x) = Log \Large( \frac{1}{x} \Large) + x </div></center><br></p>
+<p>Logarithmic terms are notoriously hard to work with. Let us assume we study an unknown function numerically the leading term for which looks as one of this options:</p>
+
+<p></p><center><div lang="latex"> f(x) = \textrm{Log} \Large( x \Large)^{N} + x </div></center><br><p></p>
 
 <p>This is an actual problem I encountered, when we were working on the research study on 2D.</p>
 
 <h4>Summary.</h4>
 
-<p>Another feature, that is, in my opinion, completely undervaluated is how. It is very hard to trace when the rounding of error happens with floating point datatypes. It is a well known design concept that .</p>
+<p>Here is how the new quantity datatypes could be better:</p>
 
-<p>For the better number datatype, every operation performed with the number should be tracable. Errors and uncertainties also should be traced from each operation and reported when needed.</p>
+<ul>
+<li>We saw in the example of accumulating errors that every operation performed with the number should be tracable. Errors and uncertainties should be recorded from each operation and reported when needed.</li>
+<li>With the quadratic equation solver it is obvious that tracing analytic expressions used for computations allow for automatic implementation of the marginal cases and can save the developer a lot of time.</li>
+<li>Datatype representation scaling should match the problem at hand and not be fixed.</li>
+</ul>
 
 <h2>Doing things right</h2>
 
-<p>This issues are well known and of course are . Not only errors go unreported but it is</p>
+<p>This issues are well known. Now we let us discuss the solutions that solve these issues.</p>
 
 <h4>What is out there.</h4>
+
+<p>One good classic where the functional number representation was implemented and used since the days of yan is in the language behind Wolphram Mathematica. Numbers are represented.</p>
+
+<p>Too bad that for reasons that is destined to slowly go into obscurity being locked despite its technological briliance.</p>
+
+<p>Another example when things are done right is the SymPy, a Python package for symbolic computations. Functional number representation is very solid, Although the focus is on making tools for symbolic calculations, not the viable alternative to the floating point.</p>
 
 <h4>Why not flaky.</h4>
 
@@ -150,18 +163,23 @@ And solve it using the library of your choice. Here is the first Google result f
   <a href="http://www.komplexify.com/math/jokes/MathWalksIntoABar3.html">TE</a></p>
 </blockquote>
 
-<p>So we saw that how to make things better than going floating points and why we should. These reasons compeled me start Flaky, an open-source project project, with following features:</p>
+<p>So we saw that how to make things better than going floating points and why we should. These reasons compeled me start Flaky, an open-source project project.</p>
 
-<p>Flaky is written in Go.</p>
+<p>Numbers are represented as operations to the other numbers. Together they can make up long layers (or flakes). Simplifying occurs whenever possible.</p>
 
-<p>The easiest way to play is at the FlakyPastry website: a sandbox for playing with FlakyQuantities.
-Please join me and to contribute to</p>
+<p></p><center><div lang="latex">
+(\textrm{frac},4,\textrm{pow}(5,(\textrm{frac},1,2))) = \frac{4}{\sqrt{5}}
+</div></center><br><p></p>
+
+<p>The size parameter defines when the datatype length is too long, the rounding up occurs. When the rounding occurs there is a logging method to keep track of it. There is also the uncertainty estimation for margins of confidence.</p>
+
+<p>Flaky is written in the <a href="http://www.golang.org">Go programming language</a>. The repository is available on <a href="https://github.com/dborzov/FlakyPastry">Github</a>.</p>
 
       </div>
 
       <div class="footer">
 
-        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a> Dmitry Borzov, 2013.
+        <p><a href="http://creativecommons.org/licenses/by-nc-sa/2.5/ca/"><img src="./css/cc.jpg" width="15"></a> Dima Borzov, 2013.
 
         </p>
 
@@ -178,26 +196,6 @@ Please join me and to contribute to</p>
 </div></body>
 
 
-
-<script>
-
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-
-
-  ga('create', 'UA-41000570-1', 'dimaborzov.com');
-
-  ga('send', 'pageview');
-
-
-
-</script>
 
 
 

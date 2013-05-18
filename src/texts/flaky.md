@@ -58,43 +58,55 @@ That the end result breaks is hardly a suprise. Morover, a similar effect could 
 
 What I wanted to emphasize here instead is the total equanimity of the floating type. It is very hard to understand what is going on at various stages. In my opinion, it is an incredible engineering design flaw.
 
-To see what I mean, let us figure out why the error is of order of 10% for 50 iterations, but converges to a wrong answer at 60. To do this we have to know how the number is represented internally, look up the default  [mantissa/significand](https://en.wikipedia.org/wiki/Significand) size for the programming language of our choice and make the estimation calculation on a piece of paper. Seriously. In 2013.
+To see what I mean, let us figure out why the error is of order of 10% for 50 iterations, but converges to a wrong answer at 60. To do this we have to know how the number is represented internally, look up the default  [mantissa/significand](https://en.wikipedia.org/wiki/Significand) size for the programming language of our choice and make the estimation calculation on a piece of paper.
 
 
-#### A square equation ####
+#### The quadratic equation ####
 
-Let us take the following quadratic equation:
-    \[ 10^{-19} x^2 + 15 x = 0 \]
-And solve it using the library of your choice. Here is the first Google result for quadratic equation solver:
+Even writing a program that solves the quadratic equation
+for arbitrary constant values is a serious task.
+For example, let us consider the following equation
+\[
+![Img](./img/quadratic.gif)
+\]
+Note that there is no constant term and thus one solution is simply zero. However, the naive solution with the quadratic formula fails to reflect this. Here is the first Google result for "quadratic equation solver":
 
 \[
 ![Img](http://dimaborzov.com/img/QuadraticEquation.png)
 \]
+For the general case implementation, we must treat each marginal case separately. First, if the constant term is zero, then if the quadratic term is absent, and so on, one by one.
 
-Yet this is not the feature of a , but a sign of the general deep-rooted problem.
+Quadratic equation is the simplest case of a numerical problem imaginable. Yet even here we see that one needs to manualy implement basic calculus behind the known solution.
 
-[Obligatory xkcd](http://what-if.xkcd.com/11/)
+
 
 
 #### Logarithms. ####
 
-Things could go very bad very quickly with non-analitical terms in the expansion. Let us assume we study function the leading term for which looks as one of this options:
-    \[ f(x) =\textrm{Log} \Large( Log(\frac{1}{x}) \Large) + x \]
-    \[ f(x) = Log \Large( \frac{1}{x} \Large) + x \]
+Logarithmic terms are notoriously hard to work with. Let us assume we study an unknown function numerically the leading term for which looks as one of this options:
+
+\[ f(x) = \textrm{Log} \Large( x \Large)^{N} + x \]
 
 This is an actual problem I encountered, when we were working on the research study on 2D.
 
 #### Summary. ####
-Another feature, that is, in my opinion, completely undervaluated is how. It is very hard to trace when the rounding of error happens with floating point datatypes. It is a well known design concept that .
+Here is how the new quantity datatypes could be better:
 
-
-For the better number datatype, every operation performed with the number should be tracable. Errors and uncertainties also should be traced from each operation and reported when needed.
++ We saw in the example of accumulating errors that every operation performed with the number should be tracable. Errors and uncertainties should be recorded from each operation and reported when needed.
++ With the quadratic equation solver it is obvious that tracing analytic expressions used for computations allow for automatic implementation of the marginal cases and can save the developer a lot of time.
++ Datatype representation scaling should match the problem at hand and not be fixed.
 
 Doing things right
 ---------------------------------
-This issues are well known and of course are . Not only errors go unreported but it is
+This issues are well known. Now we let us discuss the solutions that solve these issues.
 
 #### What is out there. ####
+
+One good classic where the functional number representation was implemented and used since the days of yan is in the language behind Wolphram Mathematica. Numbers are represented.
+
+Too bad that for reasons that is destined to slowly go into obscurity being locked despite its technological briliance.
+
+Another example when things are done right is the SymPy, a Python package for symbolic computations. Functional number representation is very solid, Although the focus is on making tools for symbolic calculations, not the viable alternative to the floating point.
 
 #### Why not flaky. ####
 
@@ -102,12 +114,17 @@ This issues are well known and of course are . Not only errors go unreported but
 >[TE](http://www.komplexify.com/math/jokes/MathWalksIntoABar3.html)
 
 
-So we saw that how to make things better than going floating points and why we should. These reasons compeled me start Flaky, an open-source project project, with following features:
+So we saw that how to make things better than going floating points and why we should. These reasons compeled me start Flaky, an open-source project project.
 
-Flaky is written in Go.
+Numbers are represented as operations to the other numbers. Together they can make up long layers (or flakes). Simplifying occurs whenever possible.
 
-The easiest way to play is at the FlakyPastry website: a sandbox for playing with FlakyQuantities.
-Please join me and to contribute to
+\[
+(\textrm{frac},4,\textrm{pow}(5,(\textrm{frac},1,2))) = \frac{4}{\sqrt{5}}
+\]
+
+The size parameter defines when the datatype length is too long, the rounding up occurs. When the rounding occurs there is a logging method to keep track of it. There is also the uncertainty estimation for margins of confidence.
+
+Flaky is written in the [Go programming language](http://www.golang.org). The repository is available on [Github](https://github.com/dborzov/FlakyPastry).
 
 
 
