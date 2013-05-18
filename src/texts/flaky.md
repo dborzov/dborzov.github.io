@@ -138,12 +138,12 @@ Doing things right
 
 #### What is out there. ####
 
-Apparently, th best way to approach the problem is to use the functional programming concepts. To retain the analytical expression used for the value definition, at least to some limit, and to have tools to change it when needed.
+Apparently, the best way to approach the problem is to use the functional programming concepts. To retain the analytical expression used for the value definition, at least to some limit, and to have tools to change it when needed.
 
 A classic case where the functional number representation was implemented is the language behind Wolphram Mathematica.
 Too bad that for the non-technical reasons it is apparently destined to go into obscurity and not fulfill its full potential.
 
-Another example when things seem to be done right is the [SymPy](http://sympy.org/en/index.html), a Python package for symbolic computations. Functional number representation is very solid. Although the focus is on making tools for symbolic calculations, not the viable alternative to the floating point.
+Another example when things seem to be done right is the [SymPy](http://sympy.org/en/index.html), a Python package for symbolic computations. Functional number representation is very solid. It is important to note, however, that the goal of the project is to make tools for symbolic calculations, not to create a viable alternative to the floating point.
 
 #### Why not flaky. ####
 
