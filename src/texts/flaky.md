@@ -3,7 +3,7 @@ Flaky: datatypes for real world quantities
 
 
 
-### *Abstract:* Modern datatypes for quantities (such as length, time or a number) should employ ideas from the functional programming: keep track when the rounding errors arise,  support defining with functions, represent results appropriately to the context. Flaky, an open source framework, wants to make things right.
+### *Abstract:* Modern datatypes for quantities (such as length, time or a number) should employ ideas from the functional programming: keep track of when the rounding errors arise,  support defining with functions, represent results appropriately to the context. Flaky, an open source framework, wants to make things right.
 
 
 [Floating point datatype](https://en.wikipedia.org/wiki/Floating_point) is the de-facto standard for real world quantities. Whether it is a banking account or sizes of the bridge nearby (designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.
@@ -163,7 +163,9 @@ One may choose the specific representation of the number. Matching, rounding and
 
 Flaky is written in the [Go programming language](http://www.golang.org). The repository is available on [Github](https://github.com/dborzov/FlakyPastry) (or will be soon :)) .
 
-It should be fun! Also, here is an image of the flaky pastry from Wikipedia:
+This post caused some discussion on [Hacker News](https://news.ycombinator.com/item?id=5731366).
+
+Also, here is an image of the flaky pastry from Wikipedia:
 
 <br><br><br><br>
 

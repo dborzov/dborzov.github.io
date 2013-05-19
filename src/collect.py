@@ -20,6 +20,6 @@ footer = open('templates/footer.html', 'rb').readlines()
 
 resultant_text = header + content.split('\n') + footer
 
-out_file = open('../'+title+'-hn.html', 'wb')
+out_file = open('../'+title+'.html', 'wb')
 for each_line in resultant_text:
     out_file.write(each_line+'\n')
