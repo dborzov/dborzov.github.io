@@ -6,11 +6,11 @@ Flaky: datatypes for real world quantities
 ### *Abstract:* Modern datatypes for quantities (such as length, time or a number) should employ ideas from the functional programming: keep track of when the rounding errors arise,  support defining with functions, represent results appropriately to the context. Flaky, an open source framework, wants to make things right.
 
 
-[Floating point datatype](https://en.wikipedia.org/wiki/Floating_point) is the de-facto standard for real world quantities. Whether it is a banking account or sizes of the bridge nearby (designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.
+[Floating point datatype](https://en.wikipedia.org/wiki/Floating_point) is the de-facto standard for real world quantities. Whether it is your GPS coordinates or sizes of the bridge nearby that was designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.
 
-Advantages such as scalability, resilence and ease of use make floating point the datatype of choice again and again. However, it is also fragile and prone to errors. This limitations are well known, of course, and could be minimized with appropriate  expertise and focus.
+Advantages such as scalability, resilience and ease of use make floating point the datatype of choice again and again. However, it is also fragile and prone to errors. This limitations are well known, of course, and could be minimized with appropriate  expertise and focus.
 
-And yet I believe that we, as an industry, could do better. Number respresentation based on the ideas of functional programming minimizes flaws manifest to the floating point datatypes. And it can be made as resilient and scalable as the floating point. In this article, I outline why, I decided to write Flaky, an open source library that attempts to implement such concepts.
+And yet I believe that we, as an industry, could do better. Number representation based on the ideas of functional programming minimizes flaws manifest to the floating point datatypes. And it can be made as resilient and scalable as the floating point. In this article, I outline why, I decided to write Flaky, an open source library that attempts to implement such concepts.
 
 In the first section we will glance at illustrating cases of when floating point breaks and try to understand what flaws should be addressed. We then look at other initiatives in this space. Finally, I introduce the design that I came up with for Flaky.
 
@@ -54,7 +54,7 @@ This yields:
     with 50 iterations, we get 1.64872126455
     with 60 iterations, we get 1.0
 
-That the end result breaks is hardly a suprise. Morover, a similar effect could be achieved for any number respresentation datatype. Just from the general principles, if the size  of the [Kolmogorov complexity](http://en.wikipedia.org/wiki/Kolmogorov_complexity) of a number is larger than the memory allocated for the datatype, these types of errors cannot be ruled out.
+That the end result breaks is hardly a  surprise. Moreover, a similar effect could be achieved for any number representation datatype. Just from the general principles, if the size  of the [Kolmogorov complexity](http://en.wikipedia.org/wiki/Kolmogorov_complexity) of a number is larger than the memory allocated for the datatype, these types of errors cannot be ruled out.
 
 What I wanted to emphasize here instead is the total equanimity of the floating type. It is very hard to understand what is going on at various stages. In my opinion, this is an incredible engineering design flaw.
 
@@ -78,7 +78,7 @@ Note that there is no constant term and thus one solution is simply zero. Howeve
 \]
 For the general case implementation, we must treat each marginal case separately. First, if the constant term is zero, then if the quadratic term is absent, and so on, one by one.
 
-Quadratic equation is the simplest case of the numerical problem imaginable. Yet even here we see that one needs to manualy implement basic calculus logic behind the known solution.
+Quadratic equation is the simplest case of the numerical problem imaginable. Yet even here we see that one needs to manually implement basic calculus logic behind the known solution.
 
 
 
@@ -106,11 +106,11 @@ That is, the number representation for the floating point
 \underbrace{\text{integer}}_{\text{mantissa}} \cdot \text{base}^\text{exponent}
 \] offers the scale that is not appropriate for this problem. The solutions for large x should fail spectacularly. Interestingly, the solutions with the y going to the zero limit (x going negative, for example, x<-5) will be a little more resilient. The lack of the constant term (1. for large x) means that the base of the exponent will scale down gracefully.
 
-How does this issue work for the (relatively) real world problems? Let me share my personal experience. In our research study on [the physics of ultracold gases in 2D](http://prl.aps.org/abstract/PRL/v110/i14/e145301) we derived a complex equation we ended up solving numerically. The solution function was diverging logathmically in the limit in which we were interested
+How does this issue work for the (relatively) real world problems? Let me share my personal experience. In our research study on [the physics of ultracold gases in 2D](http://prl.aps.org/abstract/PRL/v110/i14/e145301) we derived a complex equation we ended up solving numerically. The solution function was diverging logarithmically in the limit in which we were interested
 
 \[ f(x) =  \textrm{Log}( x )^{w} + \text{ non-diverging terms }, x \rightarrow 0 \]
 
-However, it turned out practically impossible to learn the order of the divergency w from this numerical solution. The floating point representation meant that the log of the number is represented inefficiently for the problem.
+However, it turned out practically impossible to learn the order of the divergence w from this numerical solution. The floating point representation meant that the log of the number is represented inefficiently for the problem.
 
 The solution was to introduce the new variable
 \[
@@ -125,7 +125,7 @@ However, it would have been helpful if it was possible to tweak the scaling used
 #### Summary. ####
 Here is how the new quantity datatypes could be better:
 
-+ We saw in the example of accumulating errors that every operation performed with the number should be tracable. Errors and uncertainties should be recorded from each operation and reported when needed.
++ We saw in the example of accumulating errors that every operation performed with the number should be traceable. Errors and uncertainties should be recorded from each operation and reported when needed.
 + With the quadratic equation solver it is obvious that tracing analytic expressions used for computations allow for automatic implementation of the marginal cases and can save the developer a lot of time.
 + Datatype representation scaling should match the problem at hand and not be fixed. Tools must exist to do this with ease.
 
@@ -140,7 +140,7 @@ Doing things right
 
 Apparently, the best way to approach the problem is to use the functional programming concepts. To retain the analytical expression used for the value definition, at least to some limit, and to have tools to change it when needed.
 
-A classic case where the functional number representation was implemented is the language behind Wolphram Mathematica.
+A classic case where the functional number representation was implemented is the language behind Wolfram Mathematica.
 Too bad that for the non-technical reasons it is apparently destined to go into obscurity and not fulfill its full potential.
 
 Another example when things seem to be done right is the [SymPy](http://sympy.org/en/index.html), a Python package for symbolic computations. Functional number representation is very solid. It is important to note, however, that the goal of the project is to make tools for symbolic calculations, not to create a viable alternative to the floating point.
@@ -163,7 +163,7 @@ One may choose the specific representation of the number. Matching, rounding and
 
 Flaky is written in the [Go programming language](http://www.golang.org). The repository is available on [Github](https://github.com/dborzov/FlakyPastry) (or will be soon :)) .
 
-This post caused some discussion on [Hacker News](https://news.ycombinator.com/item?id=5731366).
+A discussion of this post is available on [Hacker News](https://news.ycombinator.com/item?id=5731366).
 
 Also, here is an image of the flaky pastry from Wikipedia:
 
