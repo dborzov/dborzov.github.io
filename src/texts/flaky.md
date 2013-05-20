@@ -149,7 +149,7 @@ Another example when things seem to be done right is the [SymPy](http://sympy.or
 
 
 
-So we saw how to make things better and why we should. These reasons compeled me start Flaky, the open-source project for quantity datatype based on the concepts of functional programming.
+So we saw how to make things better and why we should. These reasons compelled me start Flaky, the open-source project for quantity datatype based on the concepts of functional programming.
 
 Numbers are represented as operations to the other numbers. Together they can make up long layers (or flakes). Simplifying occurs whenever possible.
 
