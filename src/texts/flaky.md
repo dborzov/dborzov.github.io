@@ -10,7 +10,7 @@ Flaky: datatypes for real world quantities
 
 Advantages such as scalability, resilience and ease of use make floating point the datatype of choice again and again. However, it is also fragile and prone to errors. This limitations are well known, of course, and could be minimized with appropriate  expertise and focus.
 
-And yet I believe that we, as an industry, could do better. Number representation based on the ideas of functional programming minimizes flaws manifest to the floating point datatypes. And it can be made as resilient and scalable as the floating point. In this article, I outline why, I decided to write Flaky, an open source library that attempts to implement such concepts.
+And yet I believe that we, as an industry, could do better. Number representation based on the ideas of functional programming minimizes flaws characteristic to the floating point datatypes. And it can be made as resilient and scalable as the floating point. In this article, I outline why I decided to write Flaky, an open source library that attempts to implement such concepts.
 
 In the first section we will glance at illustrating cases of when floating point breaks and try to understand what flaws should be addressed. We then look at other initiatives in this space. Finally, I introduce the design that I came up with for Flaky.
 
