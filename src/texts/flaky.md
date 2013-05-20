@@ -6,7 +6,7 @@ Flaky: datatypes for real world quantities
 ### *Abstract:* Modern datatypes for quantities (such as length, time or a number) should employ ideas from the functional programming: keep track of when the rounding errors arise,  support defining with functions, represent results appropriately to the context. Flaky, an open source framework, wants to make things right.
 
 
-[Floating point datatype](https://en.wikipedia.org/wiki/Floating_point) is the de-facto standard for real world quantities. Whether it is your GPS coordinates or sizes of the bridge nearby that was designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.
+[Floating point datatype](https://en.wikipedia.org/wiki/Floating_point) is the de-facto standard for real world quantities. Whether it is your GPS coordinates or sizes of the bridge nearby (likely designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.
 
 Advantages such as scalability, resilience and ease of use make floating point the datatype of choice again and again. However, it is also fragile and prone to errors. This limitations are well known, of course, and could be minimized with appropriate  expertise and focus.
 
