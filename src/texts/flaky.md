@@ -122,7 +122,7 @@ Matching the number representation scale to the problem in the general case, is 
 
 However, it would have been helpful if it was possible to tweak the scaling used without too much hassle.
 
-#### Summary. ####
+#### Summary ####
 Here is how the new quantity datatypes could be better:
 
 + We saw in the example of accumulating errors that every operation performed with the number should be traceable. Errors and uncertainties should be recorded from each operation and reported when needed.
@@ -154,7 +154,7 @@ So we saw how to make things better and why we should. These reasons compelled m
 Numbers are represented as operations to the other numbers. Together they can make up long layers (or flakes). Simplifying occurs whenever possible.
 
 \[
-(\textrm{frac},4,\textrm{pow}(5,(\textrm{frac},1,2))) = \frac{4}{\sqrt{5}}
+(\textrm{frac},4,(\textrm{pow}, 5,(\textrm{frac},1,2))) = \frac{4}{\sqrt{5}}
 \]
 
 The size parameter defines when the datatype length is judged to be too long, then the rounding up occurs. There is a logging method to keep track of it. There is also the uncertainty estimation for margins of confidence.
