@@ -49,6 +49,8 @@
       <div class="body">
 <h1>Flaky: datatypes for real world quantities</h1>
 
+<h3>Hey there! The maintained version of this article with typos and factual errors fixed can be found [here](http://dimaborzov.com/flaky.html). This is an older edition that was was submitted to various social websites. I preserved it as it is so that comments there would make sense. </h3>
+
 <h3><em>Abstract:</em> Modern datatypes for quantities (such as length, time or a number) should employ ideas from the functional programming: keep track when the rounding errors arise,  support defining with functions, represent results appropriately to the context. Flaky, an open source framework, wants to make things right.</h3>
 
 <p><a href="https://en.wikipedia.org/wiki/Floating_point">Floating point datatype</a> is the de-facto standard for real world quantities. Whether it is a banking account or sizes of the bridge nearby (designed in AutoCAD), this datatype lies in the foundation of every system. Since its introduction in the dawn of computing, floating point was accepted almost universally.</p>
@@ -69,7 +71,7 @@
 
 <p>Let us, for example, take the square root of a number several times, and then try to reproduce the original value with the reversal operation (that is, taking squares)</p>
 
-<pre><code> 
+<pre><code>
 # price.py listing, a Python script
 import math
 INITIAL_VALUE=1.9934545345
@@ -93,7 +95,7 @@ print reversable_iterations(60)
 
 <p>This yields:</p>
 
-<pre><code> 
+<pre><code>
 The intial value is  1.9934545345
 with 1 iterations, we get 1.9934545345
 with 10 iterations, we get 1.9934545345
