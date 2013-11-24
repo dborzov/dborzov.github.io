@@ -3,7 +3,7 @@ This is my personal website: borzov.ca.
 I wrote a tiny static generator tailored for my own goals. Kinda overkill, and probably could have spent my time better but hey it happened.
 
 
-*** How to run that shitty static generator of yours, Peter?
+### How to run that shitty static generator of yours, Peter?
 
 Why, thank you for asking!
 
