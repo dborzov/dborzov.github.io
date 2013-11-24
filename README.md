@@ -7,13 +7,13 @@ I wrote a tiny static generator tailored for my own goals. Kinda overkill, and p
 
 Why, thank you for asking!
 
-It uses 'markdown2' library to parse the original articles written in Markdown and uses as a 'pystache' simple template language. So first, we need to install these:
+It uses `markdown2` library to parse the original articles written in Markdown and uses as a 'pystache' simple template language. So first, we need to install these:
 
     pip install markdown2 pystache
 
-Now we run the file 'src/collect.py' and point to the Markdown file (*.md) in question as an argument:
+Now we run the file `src/collect.py` and point to the Markdown file (*.md) in question as an argument:
 
     python src/collect.py flaky.md
 
-Tadah, we get the 'flaky.html' file as the result in the root directory. Piece of cake really.
+Tadah, we get the `flaky.html` file as the result in the root directory. Piece of cake really.
 
