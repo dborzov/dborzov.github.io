@@ -74,7 +74,7 @@ For example, let us consider the following equation
 Note that there is no constant term and thus one solution is simply zero. However, the naive solution with the quadratic formula fails to reflect this. Here is the first Google result for "quadratic equation solver":
 
 \[
-![Img](http://dimaborzov.com/img/QuadraticEquation.png)
+![Img](./img/QuadraticEquation.png)
 \]
 For the general case implementation, we must treat each marginal case separately. First, if the constant term is zero, then if the quadratic term is absent, and so on, one by one.
 
@@ -165,13 +165,6 @@ Flaky is written in the [Go programming language](http://www.golang.org). The re
 
 A discussion of this post is available on [Hacker News](https://news.ycombinator.com/item?id=5731366).
 
-Also, here is an image of the flaky pastry from Wikipedia:
-
-<br><br><br><br>
-
-\[
-![Img](http://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Sweet_potato_flaky_pastry.jpg/282px-Sweet_potato_flaky_pastry.jpg)
-\]
 
 
 

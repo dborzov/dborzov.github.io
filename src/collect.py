@@ -2,9 +2,11 @@
 
 import markdown2
 import pystache
+import sys
 
 
-title = 'flaky'
+title = sys.argv[1]
+print 'File title: %s' %title
 dateline = 'May, 2013'
 
 mdSrc = open('texts/'+title+'.md', 'rb').read()
