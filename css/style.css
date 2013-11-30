@@ -10,17 +10,20 @@ a:hover { color: #CC0033; }
 
 /* headlines */
 h1, h2, h3, h4, h5, h6      { font-family: 'Merriweather', serif;
-                              font-weight: 300; color: #223; }
+                              font-weight: 300; color: #223;  }
 h1 a, h2 a, h3 a, h4 a,
 h5 a, h6 a                  { text-decoration: none; }
 h1 a:hover, h2 a:hover,
-h3 a:hover, h4 a:hover      { text-decoration: underline; }
+h3 a:hover      { text-decoration: underline; }
 h1.title                    { width: 560px; }
 h1, h2                      { margin: 10px 0 25px 0; }
 h1                          { font-size: 42px; line-height: 52px; }
 h2                          { font-size: 32px; line-height: 40px; }
 h3                          { font-size: 18px; line-height: 40px; background: #FED0D0; padding: 18px;}
-h4                          { font-size: 24px; line-height: 40px; }
+h4                          { font-size: 24px; margin-bottom: 10px;}
+
+
+
 textarea, code,
 pre          { font-family: 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono',
                monospace!important; font-size: 15px; background: #eee; padding: 7px 7px;}
@@ -41,6 +44,9 @@ div.footer                  { border-top: 1px solid #555; padding-top: 9px;
                               margin-top: 42px; font-size: 16px;
                               text-align: center; color: #555; }
 div.footer p                { margin: 0; }
+b.date1 {
+  color: #880033;
+}
 
 /* margins and stuff */
 p, div.line-block, ul, ol,
@@ -50,8 +56,6 @@ dd                              { margin: 16px 0 25px 40px; padding: 0; }
 ul ol, ol ul, ul ul, ol ol      { margin: 10px 0; padding: 0 0 0 40px; }
 li                              { padding: 0; }
 h1 + p.date                     { margin-top: -25px; }
-
-/* code formatting.  no monospace because of webkit (bug?) */
 
 /* tables */
 table           { border: 1px solid #ddd; border-collapse: collapse;
