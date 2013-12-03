@@ -1,4 +1,4 @@
-Flaky: datatypes for real world quantities
+Floating-point considered harmful
 ===============================
 
 
