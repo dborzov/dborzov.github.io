@@ -13,6 +13,8 @@ We want to design a system that for a given query element of that sequence (such
 ![Img](./img/arrow.png)
 \]
 
+http://youtu.be/AjFtTQevtq0
+
 
 
 For the flight search website that would include the two following typical database tasks:
