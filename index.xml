@@ -67,11 +67,11 @@
 
 &lt;h2 id=&#34;writings:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Writings&lt;/h2&gt;
 
-&lt;h4 id=&#34;dec-2013-predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that-http-localhost-1313-posts-xfast:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/xfast/&#34;&gt;&lt;em&gt;Dec 2013&lt;/em&gt; Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;dec-2013-predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that-posts-xfast:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/xfast/&#34;&gt;&lt;em&gt;Dec 2013&lt;/em&gt; Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;Introduction to X-fast trie-style data structures.&lt;/p&gt;
 
-&lt;h4 id=&#34;may-2013-floating-point-considered-harmful-http-localhost-1313-posts-floating-point:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/floating-point/&#34;&gt;&lt;em&gt;May 2013&lt;/em&gt; Floating-point considered harmful&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;may-2013-floating-point-considered-harmful-posts-floating-point:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/floating-point/&#34;&gt;&lt;em&gt;May 2013&lt;/em&gt; Floating-point considered harmful&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;Limitations of calculations based on floating-point are well known. We explore how using custom data types tailored for a task at hand allows for bypassing them.&lt;/p&gt;
 
