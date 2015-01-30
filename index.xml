@@ -9,8 +9,33 @@
     
     
     
-    <lastBuildDate>Fri, 23 Jan 2015 12:43:09 &#43;0500</lastBuildDate>
+    <lastBuildDate>Fri, 30 Jan 2015 08:36:54 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT</title>
+      <link>http://localhost:1313/posts/kademlia/</link>
+      <pubDate>Fri, 30 Jan 2015 08:36:54 -0700</pubDate>
+      
+      <guid>http://localhost:1313/posts/kademlia/</guid>
+      <description>
+
+&lt;h1 id=&#34;understanding-routing-in-bittorrents-algorithms-behind-kademlia-dht:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;Understanding routing in Bittorrents: algorithms behind Kademlia DHT&lt;/h1&gt;
+
+&lt;p&gt;DHTs (Distributed Hash Tables) are important and useful. Here is a good introduction to the core concepts behind the DHT protocols: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That article introduces Chord DHT as it is somewhat simpler to understand. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;
+
+&lt;p&gt;Here I am going to use NetVis, an open source network visualizer framework, to review in detail how Kademlia protocol operates.&lt;/p&gt;
+
+&lt;p&gt;Kademlia needs to implement the following key commands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NEW NODE ENTERS NETWORK&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FIND VALUE&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Dmitry Peter Borzov</title>
