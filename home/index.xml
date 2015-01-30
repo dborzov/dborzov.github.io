@@ -42,6 +42,10 @@
 
 &lt;h2 id=&#34;writings:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Writings&lt;/h2&gt;
 
+&lt;h4 id=&#34;jan-2015-routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables-posts-kademlia:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/kademlia/&#34;&gt;&lt;em&gt;Jan 2015&lt;/em&gt; Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Using NetVis framework to visualize algorithms behind Kademlia-styled DHT.&lt;/p&gt;
+
 &lt;h4 id=&#34;dec-2013-predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that-posts-xfast:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/xfast/&#34;&gt;&lt;em&gt;Dec 2013&lt;/em&gt; Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;Introduction to X-fast trie-style data structures.&lt;/p&gt;

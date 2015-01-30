@@ -20,19 +20,30 @@
       <guid>http://localhost:1313/posts/kademlia/</guid>
       <description>
 
-&lt;h1 id=&#34;understanding-routing-in-bittorrents-algorithms-behind-kademlia-dht:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;Understanding routing in Bittorrents: algorithms behind Kademlia DHT&lt;/h1&gt;
+&lt;h1 id=&#34;routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/h1&gt;
 
-&lt;p&gt;DHTs (Distributed Hash Tables) are important and useful. Here is a good introduction to the core concepts behind the DHT protocols: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;DHTs (Distributed Hash Tables) protocols are practical and useful tehcnologies and I am sure tat we are only beginning to untap their potential. Here is a good introduction to the core concepts behind the DHT Networks: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;That article introduces Chord DHT as it is somewhat simpler to understand. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;
+&lt;p&gt;That article introduces Chord DHT protocol. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;
 
-&lt;p&gt;Here I am going to use NetVis, an open source network visualizer framework, to review in detail how Kademlia protocol operates.&lt;/p&gt;
+&lt;p&gt;Here I am going to use NetVis, an open source network visualizer framework, to visualize in detail how Kademlia protocol operates.&lt;/p&gt;
 
-&lt;p&gt;Kademlia needs to implement the following key commands:&lt;/p&gt;
+&lt;p&gt;We will review a Kademlia-style DHT implementation from the IPFS source code as an example.
+IPFS - Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should &lt;a href=&#34;https://github.com/jbenet/ipfs&#34;&gt;totally learn about it&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;While IPFS is an extensive project and combines many concepts, all we need to understand  for our purposes is that DHT there serves as  a routing purpose in the way similar to Bittorrent file swarm.&lt;/p&gt;
+
+&lt;p&gt;That is, DHT network is used to fetch content stored at other nodes.  Content is identified by a unique hash. The DHT stores these content block hashes as keys and addresses of the nodes that have these content blocks as values.&lt;/p&gt;
+
+&lt;p&gt;All that is implemented within the &lt;a href=&#34;https://godoc.org/github.com/jbenet/go-ipfs/routing&#34;&gt;routing/dht&lt;/a&gt; IPFS subpackage.&lt;/p&gt;
+
+&lt;p&gt;DHT routing needs implement the following key commands:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;NEW NODE ENTERS NETWORK&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;FIND VALUE&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PutValue&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GetValue&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Provide&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FindPeer&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -66,6 +77,10 @@
 &lt;p&gt;It uses in-memory suffix array to lookup index entries. RusticSearch is minimalistic in design and perfect when adding simple search functionality where &lt;a href=&#34;http://www.elasticsearch.org/&#34;&gt;fancier solutions&lt;/a&gt; can be an overkill.&lt;/p&gt;
 
 &lt;h2 id=&#34;writings:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Writings&lt;/h2&gt;
+
+&lt;h4 id=&#34;jan-2015-routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables-posts-kademlia:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/kademlia/&#34;&gt;&lt;em&gt;Jan 2015&lt;/em&gt; Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Using NetVis framework to visualize algorithms behind Kademlia-styled DHT.&lt;/p&gt;
 
 &lt;h4 id=&#34;dec-2013-predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that-posts-xfast:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://localhost:1313/posts/xfast/&#34;&gt;&lt;em&gt;Dec 2013&lt;/em&gt; Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/a&gt;&lt;/h4&gt;
 

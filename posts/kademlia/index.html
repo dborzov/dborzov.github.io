@@ -25,19 +25,30 @@
   <div class="body">
     
 
-<h1 id="understanding-routing-in-bittorrents-algorithms-behind-kademlia-dht:fe965123d7524294753e9acd8d3c8d0a">Understanding routing in Bittorrents: algorithms behind Kademlia DHT</h1>
+<h1 id="routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables:fe965123d7524294753e9acd8d3c8d0a">Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)</h1>
 
-<p>DHTs (Distributed Hash Tables) are important and useful. Here is a good introduction to the core concepts behind the DHT protocols: <a href="http://www.freedomlayer.org/articles/dht_intro.html">www.freedomlayer.org/articles/dht_intro.html</a></p>
+<p>DHTs (Distributed Hash Tables) protocols are practical and useful tehcnologies and I am sure tat we are only beginning to untap their potential. Here is a good introduction to the core concepts behind the DHT Networks: <a href="http://www.freedomlayer.org/articles/dht_intro.html">www.freedomlayer.org/articles/dht_intro.html</a></p>
 
-<p>That article introduces Chord DHT as it is somewhat simpler to understand. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.</p>
+<p>That article introduces Chord DHT protocol. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.</p>
 
-<p>Here I am going to use NetVis, an open source network visualizer framework, to review in detail how Kademlia protocol operates.</p>
+<p>Here I am going to use NetVis, an open source network visualizer framework, to visualize in detail how Kademlia protocol operates.</p>
 
-<p>Kademlia needs to implement the following key commands:</p>
+<p>We will review a Kademlia-style DHT implementation from the IPFS source code as an example.
+IPFS - Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should <a href="https://github.com/jbenet/ipfs">totally learn about it</a>.</p>
+
+<p>While IPFS is an extensive project and combines many concepts, all we need to understand  for our purposes is that DHT there serves as  a routing purpose in the way similar to Bittorrent file swarm.</p>
+
+<p>That is, DHT network is used to fetch content stored at other nodes.  Content is identified by a unique hash. The DHT stores these content block hashes as keys and addresses of the nodes that have these content blocks as values.</p>
+
+<p>All that is implemented within the <a href="https://godoc.org/github.com/jbenet/go-ipfs/routing">routing/dht</a> IPFS subpackage.</p>
+
+<p>DHT routing needs implement the following key commands:</p>
 
 <ul>
-<li><strong>NEW NODE ENTERS NETWORK</strong></li>
-<li><strong>FIND VALUE</strong></li>
+<li><strong>PutValue</strong></li>
+<li><strong>GetValue</strong></li>
+<li><strong>Provide</strong></li>
+<li><strong>FindPeer</strong></li>
 </ul>
 
   </div>
