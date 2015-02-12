@@ -27,7 +27,246 @@
 
 <h1 id="predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that:58b12276bf0ae383f71846d6c29edb1d">Predecessor search for Big Data: x-fast tries, locality of reference and all that</h1>
 
-<h3 id="abstract-we-get-a-bird-eye-view-on-the-fascinating-field-of-the-locality-of-reference-type-of-problems-and-then-get-practical-and-solve-our-toy-problem-by-implementing-an-x-fast-trie-in-python:58b12276bf0ae383f71846d6c29edb1d"><em>Abstract:</em> We get a bird eye view on the fascinating field of the locality of reference-type of problems and then get practical and solve our toy problem by implementing an x-fast trie in Python.</h3>
+<h3 id="abstract-an-intro-to-data-structures-with-locality-of-reference-type-features-we-review-x-fast-tries-in-somewhat-greater-detail-and-then-talk-some-about-similar-data-structures-where-they-shine-and-where-they-don-t:58b12276bf0ae383f71846d6c29edb1d"><em>Abstract:</em> An intro to data structures with locality of reference-type features. We review x-fast tries in somewhat greater detail and then talk some about similar data structures, where they shine and where they don&rsquo;t.</h3>
+
+<p>Let&rsquo;s consider a set <code>{n}</code> of <code>n</code> integers within the range <code>0..M</code>. We want to build a data structure that allows for performing the following operations efficiently:</p>
+
+<ul>
+<li><strong>Look up</strong>: check if an integer <code>i</code> is in <code>{n}</code></li>
+<li><strong>Update</strong>: Insert or delete an integer into <code>{n}</code>.</li>
+</ul>
+
+<p>This is how commonly used data structures are holding up with these: or simply a sorted array, balanced binary search tree (whether it is AVL or red-black), hash table:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Lookup</th>
+<th>Update</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Sorted Array</td>
+<td>Ө(log(n))</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Balanced binary tree</td>
+<td>Ө(log(n))</td>
+<td>Ө(log(n))</td>
+</tr>
+
+<tr>
+<td>Hash Table</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+</tr>
+</tbody>
+</table>
+
+<p>The design of hash table is tailored for these two operations, however it performs much worse if we add the following operation:</p>
+
+<ul>
+<li><strong>Find predecessor</strong>  item: look up an integer <code>i</code> and if it is not in the set, return the closest int within the set that is lower by value  (i.e, for 4 in {1,5,7} that would be 1)</li>
+</ul>
+
+<p><img src="/img/arrow.png" alt="Img" />
+</p>
+
+<p>Here is how we can implement Predecessor Search for these data structures:</p>
+
+<ul>
+<li><strong>Sorted Array</strong> we search for the value using binary search and when if turns out that it is not within the set, we simply take the next left value from where it should have been.</li>
+<li><strong>Binary Tree</strong> is similar to <strong>Sorted Array</strong>: we traverse to the next item left from where the value should have been</li>
+<li><strong>Hash Table</strong>: if the value <code>i</code> is not within the set, the only option is to look up <code>i-1</code> and continue looking up lower values until we stumble upon one within the set. The average distance between the two values is asymptotically <code>Ө(M/n)</code></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Lookup</th>
+<th>Update</th>
+<th>Predeccessor</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Sorted Array</td>
+<td>Ө(log(n))</td>
+<td>O(n)</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Balanced binary tree</td>
+<td>Ө(log(n))</td>
+<td>Ө(log(n))</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Hash Table</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+<td>O(M/n)</td>
+</tr>
+</tbody>
+</table>
+
+<p>We see that the advantage of hash table evaporates before the predecessor operation. Is there a way to improve the data structure to fix this bad performance?</p>
+
+<p>One way to improve things that may come to mind at this point is to just store pointers to predecessor and successor elements for each of the the elements within <code>M</code> right in the hash table.</p>
+
+<p>This would enable quick predecessor lookup, but would break the performance of the Update function.</p>
+
+<p>Indeed, adding a value for this Hash-Table with Predecessor Pointers means we need to update the predecessor pointer for all values from the new one to the closest larger one. Which, again, means O(M/n) operations.</p>
+
+<p>There is another drawback to this approach. Now we have to store not just <code>n</code> set elements but all the <code>M</code> possible values. Plus, each of the pointers is bound by <code>O(log(M))</code> needed to store the value position. So the total size of the structure depends on M, which gets quite large.</p>
+
+<p>So we sum up the state of affairs with this table:</p>
+
+<table>
+<thead>
+<tr>
+<th>Lookup</th>
+<th>Update</th>
+<th>Predeccessor</th>
+<th>Size</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Sorted Array</td>
+<td>Ө(log(n))</td>
+<td>O(n)</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Balanced binary tree</td>
+<td>Ө(log(n))</td>
+<td>Ө(log(n))</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Hash Table</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+<td>Ө(M/n)</td>
+</tr>
+
+<tr>
+<td>Hash-Table with Predecessor Pointers</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+<td>Ө(M/n)</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="reflection:58b12276bf0ae383f71846d6c29edb1d">Reflection</h4>
+
+<p>Let&rsquo;s reflect on these results a little bit. We see that hash table is ideal when we look up exact values but breaks down when we start inquiring on operations where <em>locality</em> of the value starts to matter.</p>
+
+<p>That makes sense. A proper hash function means a <a href="http://en.wikipedia.org/wiki/Numerical_stability">mathematically unstable</a> one: even small increments change the hash completely which insures the values are spread homogeneously among the hash table buckets.</p>
+
+<p>At the same time we see that binary search tree-style data structures are quite resielent to <em>locality</em> context class of problem. The search tree is based on the concept of proximity and contains the information about locality.</p>
+
+<p>X-fast trie is a data structure that combines the advantages of both search trees and hash tables.</p>
+
+<h4 id="enter-x-fast-trie:58b12276bf0ae383f71846d6c29edb1d">Enter X-fast trie</h4>
+
+<p>Let&rsquo;s build a bitwise search tree on top of all the M elements. All the M values are at the tree&rsquo;s leaves (which makes this search tree a trie). We now mark all those tree nodes where there is an ancestor leave which is within &lsquo;{n}&rsquo; with black. Now let&rsquo;s try out the following operations:</p>
+
+<ul>
+<li><p><strong>Predecessor</strong>: there is <code>log(M)</code> nodes within the search tree that are parents to the leave corresponding to the value we look up. If a node is marked with black all the nodes above are black too. That means we have a sorted array of <code>log(M)</code> values corresponding to the <code>i</code> element. We use binary search to find the lowest black element and then traverse down the left side along the black nodes to get to the predecessor value. How much will it cost? Binary search among <code>log(M)</code> values would be <code>Ө(log(log(M)))</code>, traversing down to predecessor value: <code>Ө(1)</code>.</p></li>
+
+<li><p><strong>Update</strong>: is quite similar to the simple trie update case. For adding a value, ee traverse through all the parent nodes and &ldquo;repaint&rdquo; all of them black. For removing an item, we paint with white all the parent nodes for which no other children leaves are black. So <code>Ө(log(M))</code>.</p></li>
+</ul>
+
+<p>Storage of the color bits for the whole each node within the search tree can grow quite quickly: we get 2M-1 nodes for a binary trie with M leaves. That is where a hash table comes in, we store all the &ldquo;black&rdquo;-marked nodes within the hash table for each level. That means <code>n</code> entries on the leave level, <code>n/2</code> on the second lowest and so on for each of the <code>log(M)</code> hash tables. So the space is  bound by <code>Ө(n log(M))</code>.</p>
+
+<p>Let&rsquo;s sum it up by updating the table</p>
+
+<table>
+<thead>
+<tr>
+<th>Lookup</th>
+<th>Update</th>
+<th>Predeccessor</th>
+<th>Size</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Sorted Array</td>
+<td>Ө(log(n))</td>
+<td>O(n)</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Balanced binary tree</td>
+<td>Ө(log(n))</td>
+<td>Ө(log(n))</td>
+<td>O(log(n))</td>
+</tr>
+
+<tr>
+<td>Hash Table</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+<td>Ө(M/n)</td>
+</tr>
+
+<tr>
+<td>Hash-Table with Predecessor Pointers</td>
+<td>Ө(1)</td>
+<td>Ө(1)</td>
+<td>Ө(M/n)</td>
+</tr>
+
+<tr>
+<td>X-fast trie</td>
+<td>O(1)</td>
+<td>O(log(M))</td>
+<td>O(log(log(M)))</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toy-example:58b12276bf0ae383f71846d6c29edb1d">Toy example</h4>
+
+<p>The easiest way to grok how these operations are implemented is to implement them yourself. So I <a href="https://github.com/dborzov/XLtrie">did</a>.</p>
+
+<p>Here is our toy case. With movie and tv show titles such as X-files, X-men and American History X, we have a trope of X standing for something misterious (and heavily implied to be hip). How often are movies with such titles released? What was the first X-movie released since, say 1975?</p>
+
+<p>To find out, let us build the X-fast trie index for such X-titled movies by the year of release.</p>
+
+<p>Let&rsquo;s consider years from 1950 + 64 = 2004 to be our M= 2^6 - 1=63 range.
+Here is a plot of what all the M leaves and the color of parent nodes for each of the depth levels:</p>
+
+<p><img src="/img/movies.png" alt="Img" />
+</p>
+
+<p>We have total of <code>x</code> levels, where x comes from $M &lt; 2^x -1$. That means we have got <code>x</code> hash functions where we store keys of the &ldquo;black&rdquo;-marked nodes. Root level 0 contains only one node, in our case a blue/black one (it is always black as long as there is a single value within <code>{n}</code>). The second lower level, 1, contains two nodes and so on.</p>
+
+<p>In order to look up the predecessor movie for 1975 we start the binary search for the specific level where the nodes turn white by looking up the corresponding node values within the parent nodes. We find out that the level is 3. Then we traverse down along the left side and find the corresponding predecessor movie: Lolly-Maddonna XXXX (1973).</p>
+
+<p>Let&rsquo;s now add another movie, say, &ldquo;Not a Real Movie X (1975)&rdquo;. That would mean we need to go through all the parent nodes and make sure they are added to the corresponding level hash functions.</p>
+
+<h4 id="back-to-earth-practical-examples:58b12276bf0ae383f71846d6c29edb1d">Back to Earth (practical examples)</h4>
+
+<p>Let&rsquo;s come up with some practical examples of where X-fast trie can be useful:</p>
 
 <p>Imagine you are developing a flight search website. You need to build a tailored search index that is really good at one task: for the given date and search criteria returns the list of the next flights. How is it better to approach designing this?</p>
 
@@ -35,25 +274,9 @@
 
 <p>We want to design a system that for a given query element of that sequence (such as <em>our preferable flying date and time</em>) would return the closest next subsequest element that is a key of our dictionary(<em>next flight from our query time</em>):</p>
 
-<p>[
-<img src="./img/arrow.png" alt="Img" />
-
-]</p>
-
-<p><a href="http://youtu.be/AjFtTQevtq0">http://youtu.be/AjFtTQevtq0</a></p>
-
 <p>For the flight search website that would include the two following typical database tasks:</p>
 
-<ul>
-<li><strong>Looking up</strong>: searching for the next closest flights meeting some criteria for the given date and time (like <em>&ldquo;the next flight to Paris on Oct 9th after 9am&rdquo;</em>);</li>
-<li><strong>Updating</strong>: adding, editing or deleting specific flight records on request (like <em>&ldquo;the flight to Paris on Oct 9th 10am is canceled&rdquo;</em>).</li>
-</ul>
-
-<p>This problem of optimizing the flight is an example of the predecessor/successor search problem. It involves storing a dictionary with keys that make a subset of some subset</p>
-
-<p>X-fast tries is a data structure designed to store a subset of elements from a sequence in such a way so that it is possible to retrieve the next closest  element easily. People refer to such problems as the predecessor/ successor search.</p>
-
-<p>I have been reading up about <a href="http://en.wikipedia.org/wiki/X-fast_trie">x-fast tries</a> recently and decided to write up some notes  and also to make a simple python implementation to go along with it.</p>
+<p>I have been reading up about  recently and decided to write up some notes  and also to make a simple python implementation to go along with it.</p>
 
 <p>Obviously, it is incredibly inefficient to just store them as a list and go through the list each time. We need some kind of a search tree.</p>
 
@@ -67,22 +290,11 @@
 
 <p>Here is the proposition. We build an ordered binary tree atop the m elements and mark every node that is a parent of the checked element. With each layer having two times less elements we only increased the total size of the array by two.</p>
 
-<h2 id="toy-problem:58b12276bf0ae383f71846d6c29edb1d">Toy problem</h2>
+<h4 id="see-also:58b12276bf0ae383f71846d6c29edb1d">See also</h4>
 
-<p>Here is a nice toy problem that I came up with in hope that it would make some cool-loking plots.</p>
-
-<p>With movie and tv show titles such as X-files, X-men and American History X, we have a trope of X standing for anything misterious (and heavily implied to be hip). How often are movies with such titles released? What was the first X-movie released since your birth?</p>
-
-<p>To find out, let us build the X-fast trie index for such X-titled movies by the year of release.</p>
-
-<p>Here is a plot of what we get:</p>
-
-<p>[
-<img src="./img/movies.png" alt="Img" />
-
-]</p>
-
-<p>Pretty nice, huh?</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/X-fast_trie">X-fast tries</a> in Wikipedia</li>
+</ul>
 
   </div>
 <script>document.write('<script src="http://'
