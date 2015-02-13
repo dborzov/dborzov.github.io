@@ -284,10 +284,16 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 
 <h4 id="practical-examples:58b12276bf0ae383f71846d6c29edb1d">Practical Examples</h4>
 
-<p>Let&rsquo;s come up with some practical examples of where X-fast trie can be useful:</p>
+<p>Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when <code>log[N]</code> grows faster than <code>log[log[M]]</code>, or when <code>N &gt;&gt; log[M]</code>.</p>
+
+<p>So let&rsquo;s come up with some practical examples of where X-fast trie can be useful:</p>
 
 <ul>
-<li>Imagine you are developing a flight search website. For given date time of excpected departure we return the list of all the next flights.</li>
+<li><p>Imagine you are developing a flight search website. For the given datetime of expected departure we return the list of all the next flights. Flights are updated and changed frequently. Datetime minutes can make up all the possible <code>u</code> values, and the flights to a specific direction make up <code>{n}</code>.</p></li>
+
+<li><p>IP Packet Routing: an internet router needs to redirect the IP packets to other routers with the IP closest to the requested one.</p></li>
+
+<li><p>Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking this content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that <code>n &gt;&gt; log[M]</code>).  (Hey! By the way, see my other <a href="http://www.borzov.ca/posts/kademlia/">post</a> on the subject!).</p></li>
 </ul>
 
 <h4 id="data-structures-with-locality-of-reference:58b12276bf0ae383f71846d6c29edb1d">Data Structures with locality of reference</h4>
@@ -312,13 +318,13 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
         + 'script>')</script></body>
 
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-41000570-1', 'dimaborzov.com');
-ga('send', 'pageview');
+  ga('create', 'UA-41000570-2', 'auto');
+  ga('send', 'pageview');
 
 </script>
 </html>

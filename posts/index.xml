@@ -22,6 +22,8 @@
 
 &lt;h1 id=&#34;routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/h1&gt;
 
+&lt;h3 id=&#34;unfinished-draft:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;(unfinished  draft)&lt;/h3&gt;
+
 &lt;p&gt;DHTs (Distributed Hash Tables) protocols are practical and useful tehcnologies and I am sure tat we are only beginning to untap their potential. Here is a good introduction to the core concepts behind the DHT Networks: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;That article introduces Chord DHT protocol. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;
@@ -315,10 +317,16 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 
 &lt;h4 id=&#34;practical-examples:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Practical Examples&lt;/h4&gt;
 
-&lt;p&gt;Let&amp;rsquo;s come up with some practical examples of where X-fast trie can be useful:&lt;/p&gt;
+&lt;p&gt;Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when &lt;code&gt;log[N]&lt;/code&gt; grows faster than &lt;code&gt;log[log[M]]&lt;/code&gt;, or when &lt;code&gt;N &amp;gt;&amp;gt; log[M]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s come up with some practical examples of where X-fast trie can be useful:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Imagine you are developing a flight search website. For given date time of excpected departure we return the list of all the next flights.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Imagine you are developing a flight search website. For the given datetime of expected departure we return the list of all the next flights. Flights are updated and changed frequently. Datetime minutes can make up all the possible &lt;code&gt;u&lt;/code&gt; values, and the flights to a specific direction make up &lt;code&gt;{n}&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;IP Packet Routing: an internet router needs to redirect the IP packets to other routers with the IP closest to the requested one.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking this content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that &lt;code&gt;n &amp;gt;&amp;gt; log[M]&lt;/code&gt;).  (Hey! By the way, see my other &lt;a href=&#34;http://www.borzov.ca/posts/kademlia/&#34;&gt;post&lt;/a&gt; on the subject!).&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&#34;data-structures-with-locality-of-reference:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Data Structures with locality of reference&lt;/h4&gt;
