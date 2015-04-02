@@ -29,14 +29,17 @@
 
 <h3 id="unfinished-draft:fe965123d7524294753e9acd8d3c8d0a">(unfinished  draft)</h3>
 
-<p>DHTs (Distributed Hash Tables) protocols are practical and useful tehcnologies and I am sure tat we are only beginning to untap their potential. Here is a good introduction to the core concepts behind the DHT Networks: <a href="http://www.freedomlayer.org/articles/dht_intro.html">www.freedomlayer.org/articles/dht_intro.html</a></p>
+<p>That article is currently work in progress and will probably take a while to finish.</p>
 
-<p>That article introduces Chord DHT protocol. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.</p>
+<p>DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: <a href="http://www.freedomlayer.org/articles/dht_intro.html">www.freedomlayer.org/articles/dht_intro.html</a></p>
+
+<p>That intro introduces Chord DHT protocol as a somewhat  simpler case. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.</p>
 
 <p>Here I am going to use NetVis, an open source network visualizer framework, to visualize in detail how Kademlia protocol operates.</p>
 
-<p>We will review a Kademlia-style DHT implementation from the IPFS source code as an example.
-IPFS - Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should <a href="https://github.com/jbenet/ipfs">totally learn about it</a>.</p>
+<p>We will review and annotate a Kademlia-style DHT implementation from the IPFS project source code as an example.</p>
+
+<p>IPFS - the Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should <a href="https://github.com/jbenet/ipfs">totally learn about it</a>.</p>
 
 <p>While IPFS is an extensive project and combines many concepts, all we need to understand  for our purposes is that DHT there serves as  a routing purpose in the way similar to Bittorrent file swarm.</p>
 
@@ -44,20 +47,56 @@ IPFS - Interplanetary File System is an amazing project that combines best and p
 
 <p>All that is implemented within the <a href="https://godoc.org/github.com/jbenet/go-ipfs/routing">routing/dht</a> IPFS subpackage.</p>
 
-<p>DHT routing needs implement the following key commands:</p>
+<p>DHT routing implement the general routing interface defined at <a href="https://github.com/jbenet/go-ipfs/blob/9dd12922b341d891a2365beb10d0142fd10fb235/routing/routing.go"><code>routing/routing.go</code></a>:</p>
+
+<pre><code class="language-go">	type IpfsRouting interface {
+	    FindProvidersAsync(context.Context, u.Key, int) &lt;-chan peer.PeerInfo
+
+	    // PutValue adds value corresponding to given Key.
+	    PutValue(context.Context, u.Key, []byte) error
+
+	    // GetValue searches for the value corresponding to given Key.
+	    GetValue(context.Context, u.Key) ([]byte, error)
+
+	    // Announce that this node can provide value for given key
+	    Provide(context.Context, u.Key) error
+
+	    // Find specific Peer
+	    // FindPeer searches for a peer with given ID, returns a peer.PeerInfo
+	    // with relevant addresses.
+	    FindPeer(context.Context, peer.ID) (peer.PeerInfo, error)
+
+	    // Ping a peer, log the time it took
+	    Ping(context.Context, peer.ID) (time.Duration, error)
+
+	    // Bootstrap allows callers to hint to the routing system to get into a
+	    // Boostrapped state
+	    Bootstrap(context.Context) error
+	}
+</code></pre>
+
+<p>That corresponds to
+the folowing key operations:</p>
 
 <ul>
-<li><strong>PutValue</strong></li>
-<li><strong>GetValue</strong></li>
-<li><strong>Provide</strong></li>
-<li><strong>FindPeer</strong></li>
+<li><strong>PutValue</strong> - we put an entry into the hash table with <code>u.Key</code> as the key, and arbirtary <code>[]byte</code> as the value</li>
+<li><strong>GetValue</strong> - we resolve the key from the hash table</li>
+<li><strong>Provide</strong>  - A node anounces to DHT that it can serve a specific key</li>
+<li><strong>FindPeer</strong> - - we search for a peer node within the DHT network by its ID ( IPFS is a complicated project with a lot of concepts and they try to stick to a  consistent nomenclature. As they have plenty of graphs wit nodes, they call the DHT network nodes peers everywhere accross the project).</li>
+</ul>
+
+<p>The DHT package at <code>routing/dht</code> defines <code>IpfsDHT struct</code> that implements that interface.</p>
+
+<p>Here are the links we will ned in order to explore that implementation:</p>
+
+<ul>
+<li><p><a href="https://sourcegraph.com/github.com/jbenet/go-ipfs@master/.tree/routing/dht/dht.go">The package at Sourcegraph.com</a>, allows source code browsing where you can click on an item to see its definition (just like a proper IDE)</p></li>
+
+<li><p><a href="https://godoc.org/github.com/jbenet/go-ipfs/routing/dht">godoc for the package</a>, generated package documentation: signatures and docstrings of the public elements</p></li>
 </ul>
 
   </div>
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

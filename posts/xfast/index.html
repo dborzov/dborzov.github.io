@@ -284,23 +284,23 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 
 <h4 id="practical-examples:58b12276bf0ae383f71846d6c29edb1d">Practical Examples</h4>
 
-<p>Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when <code>log[N]</code> grows faster than <code>log[log[M]]</code>, or when <code>N &gt;&gt; log[M]</code>.</p>
+<p>Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when <code>log[N]</code> grows faster than <code>log[log[M]]</code>, which comes down to the criteria of <code>N &gt;&gt; log[M]</code>.</p>
 
 <p>So let&rsquo;s come up with some practical examples of where X-fast trie can be useful:</p>
 
 <ul>
-<li><p>Imagine you are developing a flight search website. For the given datetime of expected departure we return the list of all the next flights. Flights are updated and changed frequently. Datetime minutes can make up all the possible <code>u</code> values, and the flights to a specific direction make up <code>{n}</code>.</p></li>
+<li><p>Imagine you are developing a flight searching website. For the given datetime of expected departure we return the list of all the upcoming flights. Flights are updated and changed frequently. Datetime minutes can make up all the possible <code>u</code> values, and the flights to a specific direction make up <code>{n}</code> set.</p></li>
 
-<li><p>IP Packet Routing: an internet router needs to redirect the IP packets to other routers with the IP closest to the requested one.</p></li>
+<li><p>IP/other network protocols Packet Routing: an internet router needs to redirect the IP packets to other routers with the IP closest to the requested one.</p></li>
 
-<li><p>Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking this content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that <code>n &gt;&gt; log[M]</code>).  (Hey! By the way, see my other <a href="http://www.borzov.ca/posts/kademlia/">post</a> on the subject!).</p></li>
+<li><p>Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking that content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that <code>n &gt;&gt; log[M]</code>).  (Hey! By the way, see my other <a href="http://www.borzov.ca/posts/kademlia/">post</a> on the subject!).</p></li>
 </ul>
 
 <h4 id="data-structures-with-locality-of-reference:58b12276bf0ae383f71846d6c29edb1d">Data Structures with locality of reference</h4>
 
-<p>X-fast trie is an example of the data structure where locality of reference is stored. Another one we saw, more common one, is, of course, the search tree.</p>
+<p>X-fast trie is an example of the data structure where locality of reference is tracked. Another one, more famous one, would of course be the search tree. Together data structures like these compose a large family of cases where some concept of locality matters. The ones used in practice tend to share many features with the x-fast trie case we considered here.</p>
 
-<p>We looked into only one example within the large family of data structures tailored for various limiting cases  and applications. For example, the application  does not have to be one-dimensional. One can devise, for example, a similar 2D structure that tracks locality of reference information that can get useful in, say geolocation applications. Or when we develop an RTS game and want to find the closest unit of some kind efficiently. And so on.</p>
+<p>It is easy to see how wide the domain of locality-sensitive applications is. It can be extended to multidimensional cases too. Say, geolocation applications would involve ability to look up objects closest to a specific point. How can one approach this? A search tree can be a good start, but for sufficiently large maps we can devise some equivalent of 2D x-fast trie or move to other fancier <a href="http://en.wikipedia.org/wiki/Y-fast_trie">solutions</a>.</p>
 
 <p>Pretty nice, huh?</p>
 
@@ -312,10 +312,7 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 </ul>
 
   </div>
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
