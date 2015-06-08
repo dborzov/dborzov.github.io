@@ -6,9 +6,6 @@
     <description>Recent content on Dmitry Peter Borzov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    
     <lastBuildDate>Fri, 30 Jan 2015 08:36:54 -0700</lastBuildDate>
     <atom:link href="http://www.borzov.ca/index.xml" rel="self" type="application/rss+xml" />
     
@@ -95,7 +92,7 @@ the folowing key operations:&lt;/p&gt;
     <item>
       <title>Dmitry Peter Borzov</title>
       <link>http://www.borzov.ca/home/home/</link>
-      <pubDate>Fri, 23 Jan 2015 12:43:09 &#43;0500</pubDate>
+      <pubDate>Fri, 23 Jan 2015 12:43:09 +0500</pubDate>
       
       <guid>http://www.borzov.ca/home/home/</guid>
       <description>
@@ -195,8 +192,7 @@ the folowing key operations:&lt;/p&gt;
 
 &lt;p&gt;The hash table is designed to be optimal for these two operations so it is the best fit here. But what if we modify the search operation a little bit and  require returning of the next closest element if the exact value is not within  the set &lt;code&gt;{n}&lt;/code&gt;? So that for 69 in {1,55,68, 100} we would want to get 68 as it is close enough. One can see how the need for such a modification can arise in applications.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/arrow.png&#34; alt=&#34;Img&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/arrow.png&#34; alt=&#34;Img&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We can think of a couple of similar problem modifications: return the closest element, or only the next closest element that is greater than the query value (they call this the successor element search in the literature), or the closest one that is smaller (predecessor search). One can see that these problems overlap and can be reformulated in terms of each other, so let&amp;rsquo;s just start with implementing one  of them:&lt;/p&gt;
 
@@ -318,8 +314,7 @@ the folowing key operations:&lt;/p&gt;
 
 &lt;p&gt;Here is a nice illustrating graph from &lt;a href=&#34;http://opendatastructures.org/versions/edition-0.1c/ods-java/node66.html&#34;&gt;opendatastructures.org&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://opendatastructures.org/versions/edition-0.1c/ods-java/img1455.png&#34; alt=&#34;x-fast&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://opendatastructures.org/versions/edition-0.1c/ods-java/img1455.png&#34; alt=&#34;x-fast&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now we can implement the operations like this:&lt;/p&gt;
 
@@ -398,8 +393,7 @@ the folowing key operations:&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s consider years from 1950 + 64 = 2004 to be our M= 2^6 - 1=63 range.
 Here is a plot of what all the M leaves and the color of parent nodes for each of the depth levels:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/movies.png&#34; alt=&#34;Img&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/movies.png&#34; alt=&#34;Img&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We have total of &lt;code&gt;x&lt;/code&gt; levels, where x comes from $u &amp;lt; 2^x -1$. That means we have got &lt;code&gt;x&lt;/code&gt; hash functions where we store keys of the &amp;ldquo;black&amp;rdquo;-marked nodes. Root level 0 contains only one node, in our case a blue/black one (it is always black as long as there is a single value within &lt;code&gt;{n}&lt;/code&gt;). The second lower level, 1, contains two nodes and so on.&lt;/p&gt;
 

@@ -70,8 +70,7 @@
 
 <p>The hash table is designed to be optimal for these two operations so it is the best fit here. But what if we modify the search operation a little bit and  require returning of the next closest element if the exact value is not within  the set <code>{n}</code>? So that for 69 in {1,55,68, 100} we would want to get 68 as it is close enough. One can see how the need for such a modification can arise in applications.</p>
 
-<p><img src="/img/arrow.png" alt="Img" />
-</p>
+<p><img src="/img/arrow.png" alt="Img" /></p>
 
 <p>We can think of a couple of similar problem modifications: return the closest element, or only the next closest element that is greater than the query value (they call this the successor element search in the literature), or the closest one that is smaller (predecessor search). One can see that these problems overlap and can be reformulated in terms of each other, so let&rsquo;s just start with implementing one  of them:</p>
 
@@ -193,8 +192,7 @@
 
 <p>Here is a nice illustrating graph from <a href="http://opendatastructures.org/versions/edition-0.1c/ods-java/node66.html">opendatastructures.org</a>:</p>
 
-<p><img src="http://opendatastructures.org/versions/edition-0.1c/ods-java/img1455.png" alt="x-fast" />
-</p>
+<p><img src="http://opendatastructures.org/versions/edition-0.1c/ods-java/img1455.png" alt="x-fast" /></p>
 
 <p>Now we can implement the operations like this:</p>
 
@@ -273,8 +271,7 @@
 <p>Let&rsquo;s consider years from 1950 + 64 = 2004 to be our M= 2^6 - 1=63 range.
 Here is a plot of what all the M leaves and the color of parent nodes for each of the depth levels:</p>
 
-<p><img src="/img/movies.png" alt="Img" />
-</p>
+<p><img src="/img/movies.png" alt="Img" /></p>
 
 <p>We have total of <code>x</code> levels, where x comes from $u &lt; 2^x -1$. That means we have got <code>x</code> hash functions where we store keys of the &ldquo;black&rdquo;-marked nodes. Root level 0 contains only one node, in our case a blue/black one (it is always black as long as there is a single value within <code>{n}</code>). The second lower level, 1, contains two nodes and so on.</p>
 
