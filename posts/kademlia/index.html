@@ -49,30 +49,30 @@
 
 <p>DHT routing implement the general routing interface defined at <a href="https://github.com/jbenet/go-ipfs/blob/9dd12922b341d891a2365beb10d0142fd10fb235/routing/routing.go"><code>routing/routing.go</code></a>:</p>
 
-<pre><code class="language-go">	type IpfsRouting interface {
-	    FindProvidersAsync(context.Context, u.Key, int) &lt;-chan peer.PeerInfo
+<pre><code class="language-go">    type IpfsRouting interface {
+        FindProvidersAsync(context.Context, u.Key, int) &lt;-chan peer.PeerInfo
 
-	    // PutValue adds value corresponding to given Key.
-	    PutValue(context.Context, u.Key, []byte) error
+        // PutValue adds value corresponding to given Key.
+        PutValue(context.Context, u.Key, []byte) error
 
-	    // GetValue searches for the value corresponding to given Key.
-	    GetValue(context.Context, u.Key) ([]byte, error)
+        // GetValue searches for the value corresponding to given Key.
+        GetValue(context.Context, u.Key) ([]byte, error)
 
-	    // Announce that this node can provide value for given key
-	    Provide(context.Context, u.Key) error
+        // Announce that this node can provide value for given key
+        Provide(context.Context, u.Key) error
 
-	    // Find specific Peer
-	    // FindPeer searches for a peer with given ID, returns a peer.PeerInfo
-	    // with relevant addresses.
-	    FindPeer(context.Context, peer.ID) (peer.PeerInfo, error)
+        // Find specific Peer
+        // FindPeer searches for a peer with given ID, returns a peer.PeerInfo
+        // with relevant addresses.
+        FindPeer(context.Context, peer.ID) (peer.PeerInfo, error)
 
-	    // Ping a peer, log the time it took
-	    Ping(context.Context, peer.ID) (time.Duration, error)
+        // Ping a peer, log the time it took
+        Ping(context.Context, peer.ID) (time.Duration, error)
 
-	    // Bootstrap allows callers to hint to the routing system to get into a
-	    // Boostrapped state
-	    Bootstrap(context.Context) error
-	}
+        // Bootstrap allows callers to hint to the routing system to get into a
+        // Boostrapped state
+        Bootstrap(context.Context) error
+    }
 </code></pre>
 
 <p>That corresponds to
