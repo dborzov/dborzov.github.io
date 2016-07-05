@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<title>Enabling cls/Cmd&#43;K for Cygwin Bash on ConEmu - Dmitry Peter Borzov (borzov.ca)</title>
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="/css/_pygments.css" type="text/css">
+<style type="text/css"></style>
+</head>
+<body screen_capture_injected="true">
+<div class="container">
+
+<div class="header">
+  Dmitry Peter Borzov<br>
+  <a href="/">borzov.ca</a> /posts/cls4cygwin/
+</div>
+
+<div class="navigation">
+      <ul>
+        <a href="https://github.com/dborzov"><img src="/css/octocat.png" width="20">Github</a>
+      </li>
+      </ul>
+</div>
+  <div class="body">
+    <p>Sometimes I have to use a shell (a command-line interface) on Windows and overall it is pretty challenging for me.
+Windows is fundamentally different from the Unix/POSIX conventions I got used to when working with Linux and MacOSX and the native shells  for Windows (cmd/Powershell) are quite different.</p>
+
+<p>Fornunatelly, there is Cygwin, an open-source project that wraps the Windows functioanllity and makes some imitation of a bash we came to know and love that offers something similar to <a href="en.wikipedia.org/wiki/Cygwin">bash</a>. It is pretty decent for most every day uses and I like it a lot.</p>
+
+<p>One thing that helps is a decent Terminal application (the thing that provides GUI for the cli session). <a href="https://github.com/Maximus5/ConEmu">ConEmu</a> is pretty great, highly customizable and has all the basic features.</p>
+
+<p>One thing I missed from iTerm2 is to be able to clear the session screen completely with &ldquo;Cmd+K&rdquo; letters. I got investigating and I am happy to report that I found the solution.</p>
+
+<p>It turns out that there is another key difference between Unix and Windows shells: in Unix, keeping track of printed content is the responsibility of the terminal application, but for Windows it is a part of the shell&rsquo;s session. As a result, clearing the screen can be done with a shell command, <code>cls</code> in their case.</p>
+
+<p>So since Cygwin is still a Windows shell, clearing screen is a shell command as well, which is invoked with an escape code. Here it is: <code>echo -e '\0033\0143'</code>.</p>
+
+<p>Here is how to set it up:</p>
+
+<p><img src="/conemu.png" alt="Img" /></p>
+
+<p>Let&rsquo;s set up ConEmu&rsquo;s hot key to use the command. Open up the ConEmu settings (right click on the button)</p>
+
+  </div>
+</body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41000570-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
