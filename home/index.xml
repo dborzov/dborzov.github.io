@@ -39,6 +39,14 @@
 
 &lt;h2 id=&#34;writings:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Writings&lt;/h2&gt;
 
+&lt;h4 id=&#34;june-2016-analysis-of-randomized-algorithms-part-i-posts-quicksort:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/quicksort/&#34;&gt;&lt;em&gt;June 2016&lt;/em&gt; Analysis of randomized algorithms (Part I)&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Quantitative analysis of randomized algorithms may look intimidating, but a couple of simple tricks goes the long way. We look at how to build some intuition and understanding behind the algorithm&amp;rsquo;s performance using the quicksort as an example.&lt;/p&gt;
+
+&lt;h4 id=&#34;march-2016-fixing-jmeter-s-java-security-cert-certificateexception-error-posts-jmeter:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/jmeter&#34;&gt;&lt;em&gt;March 2016&lt;/em&gt; Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;A problem I had trying to make jmeter work on my machine and what fixed it&lt;/p&gt;
+
 &lt;h4 id=&#34;jan-2015-routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables-posts-kademlia:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/kademlia/&#34;&gt;&lt;em&gt;Jan 2015&lt;/em&gt; Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;Using NetVis framework to visualize algorithms behind Kademlia-styled DHT.&lt;/p&gt;
