@@ -25,9 +25,9 @@
   src=&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&#34;&gt;
 &lt;/script&gt;
 
-&lt;h3 id=&#34;abstract-building-intuition-for-randomized-algorithms-and-deriving-the-processing-time-asymptotic-behaviour-for-quicksort:58862ac77588df2b663ea23230d5232f&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; Building intuition for randomized algorithms and deriving the processing time asymptotic behaviour for quicksort&lt;/h3&gt;
+&lt;h3 id=&#34;abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example:58862ac77588df2b663ea23230d5232f&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example&lt;/h3&gt;
 
-&lt;p&gt;Randomized algorithms are fascinating and somewhat misterious: they can deliver surprising efficiency but being able to actually understand what gives them their properties can be pretty hard at times.&lt;/p&gt;
+&lt;p&gt;Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms. They can surprise you with how efficient they can be on average. I remember being amazed when I learned that the randomized algorithm for finding a median element in an unsorted graph has asymptotic performance being linearly proportional to the size of the array, for example. but being able to actually understand what gives them their properties can be pretty hard at times.&lt;/p&gt;
 
 &lt;p&gt;Specifically, deriving the execution time estimation can get pretty challenging in general case, in a sharp contrast to the deterministic algorithms. For the average execution time, for example, we have to consider each of the possible random outcomes along with its probability and then average out over all of them. Not to mention that just the average time may not enough to characterize the alorithm and we may have to investigate metrics beyond just the average. The mathematical expressions behind those easily gets so hairy that they tend to be omitted at all in many educational materials and textbooks.&lt;/p&gt;
 
@@ -53,9 +53,11 @@
   `f(n) = \frac{1}{n} \sum_{m=1...n} [ f(m) + f(n-m) + c_{1} + c_{2} n ] `
 &lt;/p&gt;
 
-&lt;p&gt;This expression does not look very friendly. Let&amp;rsquo;s start with building some intuition for what the solution might look like.&lt;/p&gt;
+&lt;p&gt;This expression does not look very friendly.&lt;/p&gt;
 
-&lt;h2 id=&#34;boundaries:58862ac77588df2b663ea23230d5232f&#34;&gt;Boundaries&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start with building some intuition for what the solution might look like.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-does-the-solution-may-look-like:58862ac77588df2b663ea23230d5232f&#34;&gt;What does the solution may look like?&lt;/h2&gt;
 
 &lt;p&gt;Let&amp;rsquo;s see what kind of solution we may expect here.&lt;/p&gt;
 
@@ -119,6 +121,31 @@ Now we can express the same relation in terms of `g(x)=f(n(x))`:
 &lt;/p&gt;
 
 &lt;p&gt;so the solution is &lt;code&gt;f(n) ~ n log (n)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;we-learned-the-upper-boundaries-and-the-lower-boundaries-for-what-we-might-expect-as-the-solution:58862ac77588df2b663ea23230d5232f&#34;&gt;We learned the upper boundaries and the lower boundaries for what we might expect as the solution.&lt;/h3&gt;
+
+&lt;h2 id=&#34;building-up-some-intuition:58862ac77588df2b663ea23230d5232f&#34;&gt;Building up some intuition&lt;/h2&gt;
+
+&lt;p&gt;The second thing that I do is I work through some custom cases. We looked at the absolutely worst case and the perfect choice, but in practice it is likely to be somewhere in between on every step. Let&amp;rsquo;s go through the case of  where somehow we happen to split the array into &lt;code&gt;1/10n&lt;/code&gt; and &lt;code&gt;9/10n&lt;/code&gt; on every step.&lt;/p&gt;
+
+&lt;p&gt;Then the performance time would be of order:&lt;/p&gt;
+
+&lt;p style=&#34;text-align:center&#34;&gt;
+  `f_{\text{sample}}(n) = f_{\text{best}}(\frac{9 n}{10}) +  f_{\text{sample}}(\frac{n}{10}) + n`
+&lt;/p&gt;
+
+&lt;p&gt;The expression may not look very trivial on the first glance. This recursive expression has multiplication instead of addition in the arguments of its function and that complicates things. However it is easy to notice that it is pretty similar to the one we already tackled, the one for the best case scenario. We were able to reduce it to something obvious by rewriting it in terms of a different variable. Let&amp;rsquo;s can apply the same trick here:&lt;/p&gt;
+
+&lt;p style=&#34;text-align:center&#34;&gt;
+`n = 10^{x}, x = \log_{10} n \text{ and } g(x) = f(x(n))`
+  `g(x) = g(x - \log_{10}\frac{10}{9}) +  g(x-1) + 10^{x}`
+&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;lg (10/9) = lg(1 + 1/9) = 0.04&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;references:58862ac77588df2b663ea23230d5232f&#34;&gt;References&lt;/h4&gt;
+
+&lt;p&gt;[1] &amp;ldquo;Algorithms&amp;rdquo;, Dasgupta, C. H. Papadimitriou, and U. V. Vazirani, §2.4 &amp;ldquo;Medians&amp;rdquo;, pp.64-66&lt;/p&gt;
 </description>
     </item>
     

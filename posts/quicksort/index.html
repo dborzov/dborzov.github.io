@@ -33,9 +33,9 @@
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-<h3 id="abstract-building-intuition-for-randomized-algorithms-and-deriving-the-processing-time-asymptotic-behaviour-for-quicksort:58862ac77588df2b663ea23230d5232f"><em>Abstract:</em> Building intuition for randomized algorithms and deriving the processing time asymptotic behaviour for quicksort</h3>
+<h3 id="abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example:58862ac77588df2b663ea23230d5232f"><em>Abstract:</em> It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example</h3>
 
-<p>Randomized algorithms are fascinating and somewhat misterious: they can deliver surprising efficiency but being able to actually understand what gives them their properties can be pretty hard at times.</p>
+<p>Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms. They can surprise you with how efficient they can be on average. I remember being amazed when I learned that the randomized algorithm for finding a median element in an unsorted graph has asymptotic performance being linearly proportional to the size of the array, for example. but being able to actually understand what gives them their properties can be pretty hard at times.</p>
 
 <p>Specifically, deriving the execution time estimation can get pretty challenging in general case, in a sharp contrast to the deterministic algorithms. For the average execution time, for example, we have to consider each of the possible random outcomes along with its probability and then average out over all of them. Not to mention that just the average time may not enough to characterize the alorithm and we may have to investigate metrics beyond just the average. The mathematical expressions behind those easily gets so hairy that they tend to be omitted at all in many educational materials and textbooks.</p>
 
@@ -61,9 +61,11 @@
   `f(n) = \frac{1}{n} \sum_{m=1...n} [ f(m) + f(n-m) + c_{1} + c_{2} n ] `
 </p>
 
-<p>This expression does not look very friendly. Let&rsquo;s start with building some intuition for what the solution might look like.</p>
+<p>This expression does not look very friendly.</p>
 
-<h2 id="boundaries:58862ac77588df2b663ea23230d5232f">Boundaries</h2>
+<p>Let&rsquo;s start with building some intuition for what the solution might look like.</p>
+
+<h2 id="what-does-the-solution-may-look-like:58862ac77588df2b663ea23230d5232f">What does the solution may look like?</h2>
 
 <p>Let&rsquo;s see what kind of solution we may expect here.</p>
 
@@ -127,6 +129,31 @@ Now we can express the same relation in terms of `g(x)=f(n(x))`:
 </p>
 
 <p>so the solution is <code>f(n) ~ n log (n)</code>.</p>
+
+<h3 id="we-learned-the-upper-boundaries-and-the-lower-boundaries-for-what-we-might-expect-as-the-solution:58862ac77588df2b663ea23230d5232f">We learned the upper boundaries and the lower boundaries for what we might expect as the solution.</h3>
+
+<h2 id="building-up-some-intuition:58862ac77588df2b663ea23230d5232f">Building up some intuition</h2>
+
+<p>The second thing that I do is I work through some custom cases. We looked at the absolutely worst case and the perfect choice, but in practice it is likely to be somewhere in between on every step. Let&rsquo;s go through the case of  where somehow we happen to split the array into <code>1/10n</code> and <code>9/10n</code> on every step.</p>
+
+<p>Then the performance time would be of order:</p>
+
+<p style="text-align:center">
+  `f_{\text{sample}}(n) = f_{\text{best}}(\frac{9 n}{10}) +  f_{\text{sample}}(\frac{n}{10}) + n`
+</p>
+
+<p>The expression may not look very trivial on the first glance. This recursive expression has multiplication instead of addition in the arguments of its function and that complicates things. However it is easy to notice that it is pretty similar to the one we already tackled, the one for the best case scenario. We were able to reduce it to something obvious by rewriting it in terms of a different variable. Let&rsquo;s can apply the same trick here:</p>
+
+<p style="text-align:center">
+`n = 10^{x}, x = \log_{10} n \text{ and } g(x) = f(x(n))`
+  `g(x) = g(x - \log_{10}\frac{10}{9}) +  g(x-1) + 10^{x}`
+</p>
+
+<p><code>lg (10/9) = lg(1 + 1/9) = 0.04</code>.</p>
+
+<h4 id="references:58862ac77588df2b663ea23230d5232f">References</h4>
+
+<p>[1] &ldquo;Algorithms&rdquo;, Dasgupta, C. H. Papadimitriou, and U. V. Vazirani, §2.4 &ldquo;Medians&rdquo;, pp.64-66</p>
 
   </div>
 </body>
