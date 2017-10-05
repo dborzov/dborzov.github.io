@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/dborzov
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://borzov.ca
+  * I am dborzov (https://keybase.io/dborzov) on keybase.
+  * I have a public key ASCG3-xj55X3F9noPeEHJd0Uif7vmA9FfqFoP_vwz4umUQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012086dfec63e795f717d9e83de10725dd1489feef980f457ea1683ffbf0cf8ba6510a",
+      "host": "keybase.io",
+      "kid": "012086dfec63e795f717d9e83de10725dd1489feef980f457ea1683ffbf0cf8ba6510a",
+      "uid": "4f7f6f279bed5bfc7f1e86e05bf3a119",
+      "username": "dborzov"
+    },
+    "merkle_root": {
+      "ctime": 1507215113,
+      "hash": "b61cf9d81d5ff89b1744bc11c93f242747dd126e6fa4f37e14861d52cd84d4d386beb66d233fa0d6b158f511f90f897f16a2522d4a585b14c75cf1edd387644e",
+      "hash_meta": "ae55a6f86e405b787d700ccc149208a247d0572a8f8b5066dbff6d7a3830e510",
+      "seqno": 1514113
+    },
+    "service": {
+      "hostname": "borzov.ca",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.33"
+  },
+  "ctime": 1507215136,
+  "expire_in": 504576000,
+  "prev": "1c6d2b13b18f926a9e8f9df82e2ffdd582ad1aa8eead5ed21de96741040f9820",
+  "seqno": 5,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEght/sY+eV9xfZ6D3hByXdFIn+75gPRX6haD/78M+LplEKp3BheWxvYWTFA0B7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwODZkZmVjNjNlNzk1ZjcxN2Q5ZTgzZGUxMDcyNWRkMTQ4OWZlZWY5ODBmNDU3ZWExNjgzZmZiZjBjZjhiYTY1MTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwODZkZmVjNjNlNzk1ZjcxN2Q5ZTgzZGUxMDcyNWRkMTQ4OWZlZWY5ODBmNDU3ZWExNjgzZmZiZjBjZjhiYTY1MTBhIiwidWlkIjoiNGY3ZjZmMjc5YmVkNWJmYzdmMWU4NmUwNWJmM2ExMTkiLCJ1c2VybmFtZSI6ImRib3J6b3YifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE1MDcyMTUxMTMsImhhc2giOiJiNjFjZjlkODFkNWZmODliMTc0NGJjMTFjOTNmMjQyNzQ3ZGQxMjZlNmZhNGYzN2UxNDg2MWQ1MmNkODRkNGQzODZiZWI2NmQyMzNmYTBkNmIxNThmNTExZjkwZjg5N2YxNmEyNTIyZDRhNTg1YjE0Yzc1Y2YxZWRkMzg3NjQ0ZSIsImhhc2hfbWV0YSI6ImFlNTVhNmY4NmU0MDViNzg3ZDcwMGNjYzE0OTIwOGEyNDdkMDU3MmE4ZjhiNTA2NmRiZmY2ZDdhMzgzMGU1MTAiLCJzZXFubyI6MTUxNDExM30sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJib3J6b3YuY2EiLCJwcm90b2NvbCI6Imh0dHBzOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4zMyJ9LCJjdGltZSI6MTUwNzIxNTEzNiwiZXhwaXJlX2luIjo1MDQ1NzYwMDAsInByZXYiOiIxYzZkMmIxM2IxOGY5MjZhOWU4ZjlkZjgyZTJmZmRkNTgyYWQxYWE4ZWVhZDVlZDIxZGU5Njc0MTA0MGY5ODIwIiwic2Vxbm8iOjUsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RA+dH5lwrr7/CHawdViyK2svGum4N6e71H8XN2DPyrwpSPzEQqc1/S2s785D17pWkaSi0BFtnD8/EYRZ8JbPUgAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIAK5zJiKORK7DqQO7o1lDqegcZ3n2iK2/Q6634ZwNBdGo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dborzov
+
+==================================================================
