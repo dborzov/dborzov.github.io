@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dmitry Peter Borzov</title>
+    <title>Dmitry Borzov</title>
     <link>http://www.borzov.ca/</link>
-    <description>Recent content on Dmitry Peter Borzov</description>
+    <description>Recent content on Dmitry Borzov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 Jul 2016 08:36:54 -0700</lastBuildDate>
-    <atom:link href="http://www.borzov.ca/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://www.borzov.ca/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity</title>
@@ -15,138 +17,7 @@
       <pubDate>Tue, 05 Jul 2016 08:36:54 -0700</pubDate>
       
       <guid>http://www.borzov.ca/posts/quicksort/</guid>
-      <description>
-
-&lt;h1 id=&#34;analysis-of-randomized-algorithms-part-i:58862ac77588df2b663ea23230d5232f&#34;&gt;Analysis of randomized algorithms (Part I)&lt;/h1&gt;
-
-&lt;h2 id=&#34;estimating-the-quicksort-s-time-performance:58862ac77588df2b663ea23230d5232f&#34;&gt;Estimating the quicksort&amp;rsquo;s time performance&lt;/h2&gt;
-
-&lt;script type=&#34;text/javascript&#34; async
-  src=&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&#34;&gt;
-&lt;/script&gt;
-
-&lt;h3 id=&#34;abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example:58862ac77588df2b663ea23230d5232f&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example&lt;/h3&gt;
-
-&lt;p&gt;Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms. They can surprise you with how efficient they can be on average. I remember being amazed when I learned that the randomized algorithm for finding a median element in an unsorted graph has asymptotic performance being linearly proportional to the size of the array, for example. but being able to actually understand what gives them their properties can be pretty hard at times.&lt;/p&gt;
-
-&lt;p&gt;Specifically, deriving the execution time estimation can get pretty challenging in general case, in a sharp contrast to the deterministic algorithms. For the average execution time, for example, we have to consider each of the possible random outcomes along with its probability and then average out over all of them. Not to mention that just the average time may not enough to characterize the alorithm and we may have to investigate metrics beyond just the average. The mathematical expressions behind those easily gets so hairy that they tend to be omitted at all in many educational materials and textbooks.&lt;/p&gt;
-
-&lt;p&gt;However, that complexity is also a bit deceptive in practice. The key is that we are usually only interested in asymptotics, that is the behaviour in some limit, such as the limit of large dataset. That simplifies the problem immensely and means that, with a bit of experience behind our belt, we can learn to arrive at the answer pretty easily. It all comes down to carefully studying what terms are important in our case of interest and what are not.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s illustrate this with an example. We will look at the asymptotics of what is probably the most famous random-based algorithm: the quicksort.&lt;/p&gt;
-
-&lt;h2 id=&#34;heads-on:58862ac77588df2b663ea23230d5232f&#34;&gt;Heads on&lt;/h2&gt;
-
-&lt;p&gt;We will be interested in the asymptotic limit of large arrays: that is, when the number of elements &lt;code&gt;n&lt;/code&gt; in the array we need to sort gets pretty big. Let&amp;rsquo;s denote this execution time for quicksort with &lt;code&gt;f(n)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The challenge here is that we don&amp;rsquo;t know how lucky we are going to get with our random choice of the pivot element: it could be the median which means we divided our problem into two smaller ones perfectly, or it could be the smallest element and we may have shifted the whole array to only &amp;ldquo;sort&amp;rdquo; one element.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s assume all the elements are different for simplicity and the pivot happened to be the &lt;code&gt;m&lt;/code&gt; the element of the array. We know the execution time for the given value &lt;code&gt;m&lt;/code&gt;: at each iteration, we would have to go through the entire array, then sort the both subsets with times &lt;code&gt;f(m)&lt;/code&gt; and &lt;code&gt;f(n-m)&lt;/code&gt; for each:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  ` f(m) + f(n-m) + c_{1} + c_{2} n`
-&lt;/p&gt;
-
-&lt;p&gt;The pivot element choice being random means that the execution time is the average over all possible values &lt;code&gt;m&lt;/code&gt;, from 1 up to &lt;code&gt;n&lt;/code&gt;:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f(n) = \frac{1}{n} \sum_{m=1...n} [ f(m) + f(n-m) + c_{1} + c_{2} n ] `
-&lt;/p&gt;
-
-&lt;p&gt;This expression does not look very friendly.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s start with building some intuition for what the solution might look like.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-does-the-solution-may-look-like:58862ac77588df2b663ea23230d5232f&#34;&gt;What does the solution may look like?&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s see what kind of solution we may expect here.&lt;/p&gt;
-
-&lt;p&gt;Why do we need to go through the derivation at all? Unless you are working in alorithms research, it is unlikely that we would ever . Numerical simulation is good enough. My reason is that it helps build a proper understanding of what is going on: see which decisions in our design matter and which are not.&lt;/p&gt;
-
-&lt;p&gt;That is why the best thing is to look into the custom cases what kind of answer we may reasonably expect.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look at the worst case &lt;code&gt;O(n)&lt;/code&gt;: this case unlikiest ever: every time we manage to make the worst pivot element ever: the smaller subset only has the pivot element, and the other one contains all the other ones, &lt;code&gt;n-1&lt;/code&gt;. We then we have to make the recursive call on that set.&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{worst}}(n) = f_{\text{worst}}(n-1) + n`
-&lt;/p&gt;
-
-&lt;p&gt;We can just unfold the expression recursively:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{worst}}(n) = f_{\text{worst}}(n-1) + n = f_{\text{worst}}(n-2) + (n-1) + n = f_{\text{worst}}(1) + \sum_{x=1..n} x`
-&lt;/p&gt;
-
-&lt;p&gt;Since we are only interested in asymptotics we don&amp;rsquo;t even need to be careful with the arithmetic sum expression  &lt;code&gt;1 + 2 + 3 + .. + n&lt;/code&gt;. We can just apply the fact that with the paring up of the elements, the average is about &lt;code&gt;x/2&lt;/code&gt; and we get &lt;code&gt;x&lt;/code&gt; of them, so&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{worst}}(n) = n^2`
-&lt;/p&gt;
-
-&lt;p&gt;In the worst case, quicksort looks like the naive sort implementation: we keep selecting the smallest (or the biggest) element of the array, insert it into the very beginning (or end).&lt;/p&gt;
-
-&lt;p&gt;Now let&amp;rsquo;s look at the best case: when every pivot we choose turns out to be the median element of the array! The two subsets are then exactly half in size:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{best}}(n) = 2 \cdot f_{\text{best}}(\frac{n}{2}) + n`
-&lt;/p&gt;
-
-&lt;p&gt;Continuing iteration, we get&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{best}}(n) = 2 \cdot f_{\text{best}}(\frac{n}{2}) + n = 4 \cdot f_{\text{best}}(\frac{n}{4}) + 3*n`
-&lt;/p&gt;
-
-&lt;p&gt;This recursive expression looks similar to the one we for the worst case, except. Let&amp;rsquo;s make it the iterative with rewriting this relation in terms of a new variable &lt;code&gt;x ~ log n&lt;/code&gt;:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
- `n=2^{x} \text{ or } x= \{log}_{2} n`
-
-
-
-Now we can express the same relation in terms of `g(x)=f(n(x))`:
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `g(x) = 2 g(x-1) + 2^{x}`
-&lt;/p&gt;
-
-&lt;p&gt;Solving this relation gets us&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `g(x-1) = 2 g(x-2) + \frac{1}{2} 2^{x}`
-&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `g(x) = 2 g(x-1) + 2^{x} = 4 g(x-2) + 2 \cdot \frac{1}{2} 2^{x} + 2^{x} = .. = g(1) + x \cdot 2^{x}`
-&lt;/p&gt;
-
-&lt;p&gt;so the solution is &lt;code&gt;f(n) ~ n log (n)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;we-learned-the-upper-boundaries-and-the-lower-boundaries-for-what-we-might-expect-as-the-solution:58862ac77588df2b663ea23230d5232f&#34;&gt;We learned the upper boundaries and the lower boundaries for what we might expect as the solution.&lt;/h3&gt;
-
-&lt;h2 id=&#34;building-up-some-intuition:58862ac77588df2b663ea23230d5232f&#34;&gt;Building up some intuition&lt;/h2&gt;
-
-&lt;p&gt;The second thing that I do is I work through some custom cases. We looked at the absolutely worst case and the perfect choice, but in practice it is likely to be somewhere in between on every step. Let&amp;rsquo;s go through the case of  where somehow we happen to split the array into &lt;code&gt;1/10n&lt;/code&gt; and &lt;code&gt;9/10n&lt;/code&gt; on every step.&lt;/p&gt;
-
-&lt;p&gt;Then the performance time would be of order:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-  `f_{\text{sample}}(n) = f_{\text{best}}(\frac{9 n}{10}) +  f_{\text{sample}}(\frac{n}{10}) + n`
-&lt;/p&gt;
-
-&lt;p&gt;The expression may not look very trivial on the first glance. This recursive expression has multiplication instead of addition in the arguments of its function and that complicates things. However it is easy to notice that it is pretty similar to the one we already tackled, the one for the best case scenario. We were able to reduce it to something obvious by rewriting it in terms of a different variable. Let&amp;rsquo;s can apply the same trick here:&lt;/p&gt;
-
-&lt;p style=&#34;text-align:center&#34;&gt;
-`n = 10^{x}, x = \log_{10} n \text{ and } g(x) = f(x(n))`
-  `g(x) = g(x - \log_{10}\frac{10}{9}) +  g(x-1) + 10^{x}`
-&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;lg (10/9) = lg(1 + 1/9) = 0.04&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4 id=&#34;references:58862ac77588df2b663ea23230d5232f&#34;&gt;References&lt;/h4&gt;
-
-&lt;p&gt;[1] &amp;ldquo;Algorithms&amp;rdquo;, Dasgupta, C. H. Papadimitriou, and U. V. Vazirani, §2.4 &amp;ldquo;Medians&amp;rdquo;, pp.64-66&lt;/p&gt;
-</description>
+      <description>Analysis of randomized algorithms (Part I) Estimating the quicksort&amp;rsquo;s time performance  Abstract: It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms.</description>
     </item>
     
     <item>
@@ -155,76 +26,19 @@ Now we can express the same relation in terms of `g(x)=f(n(x))`:
       <pubDate>Fri, 04 Mar 2016 08:36:54 -0700</pubDate>
       
       <guid>http://www.borzov.ca/posts/jmeter/</guid>
-      <description>
-
-&lt;h1 id=&#34;fixing-jmeter-s-java-security-cert-certificateexception-error:623d2b4ee8f858bb18f9c1ae91c52b0d&#34;&gt;Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error&lt;/h1&gt;
-
-&lt;p&gt;We were using &lt;a href=&#34;http://jmeter.apache.org/&#34;&gt;jmeter&lt;/a&gt; at work to test an external service. I installed &lt;code&gt;jmeter&lt;/code&gt; on macOS with &lt;code&gt;brew&lt;/code&gt; but when I tryed running the tests I had them failing with this the error message:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java.security.cert.CertificateException: Certificates does not conform to algorithm constraints
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service. So I had to dig a little into what was up with that.&lt;/p&gt;
-
-&lt;p&gt;Here is what turned out to have happened. &lt;code&gt;jmeter&lt;/code&gt; uses the JDK library to make the request. Since &lt;strong&gt;Java 7 u16&lt;/strong&gt; (see the &lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/6u17-141447.html&#34;&gt;release notes&lt;/a&gt;) the default support for some of the TLS protocols was turned off. The library just raises an exception when the library call is made to connect to endpoints that use it, ignoring the request.&lt;/p&gt;
-
-&lt;p&gt;So how to address this? The ideal solution is to use more secure and proven algorithms for your SSL.
-If it is not an option, it is possible to turn off the checker at the java setting file.&lt;/p&gt;
-
-&lt;p&gt;Find &lt;code&gt;{JDK_HOME}/jre/lib/security/java.security&lt;/code&gt; for the JRE installation that jmeter uses and comment the lines assigning the values for:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;
-jdk.tls.disabledAlgorithms=SSLv3, RC4, MD5withRSA, DH keySize &amp;lt; 768
-jdk.certpath.disabledAlgorithms=MD2, MD5, RSA keySize &amp;lt; 1024
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;where-is-the-jdk-that-jmeter-uses:623d2b4ee8f858bb18f9c1ae91c52b0d&#34;&gt;Where is the JDK that jmeter uses?&lt;/h1&gt;
-
-&lt;p&gt;Apparently macOSX has several &lt;code&gt;JDK&lt;/code&gt; distrubutions installed by different libraries and tools. I ran a global search for &lt;code&gt;java.security&lt;/code&gt; file and found several  &lt;code&gt;{JDK_HOME}&lt;/code&gt; installs. Which one does our jmeter use?&lt;/p&gt;
-
-&lt;p&gt;It turns out that in my case the file was at&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; /Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/security/java.security
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If that did not help you, you can just fix all the &lt;code&gt;java.security&lt;/code&gt; files by finding them with something
-like&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; sudo find / -iname &amp;quot;java.security&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And that worked for me.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;mailto:tihoutrom@gmail.com&#34;&gt;Let me know&lt;/a&gt; if that helped you or not.&lt;/p&gt;
-</description>
+      <description>Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error We were using jmeter at work to test an external service. I installed jmeter on macOS with brew but when I tryed running the tests I had them failing with this the error message:
+java.security.cert.CertificateException: Certificates does not conform to algorithm constraints  The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service.</description>
     </item>
     
     <item>
-      <title>Enabling cls/Cmd&#43;K for Cygwin Bash on ConEmu</title>
+      <title>Enabling iTerm&#39;s `Cmd&#43;K` hotkey for Cygwin shell with ConEmu</title>
       <link>http://www.borzov.ca/posts/cls4cygwin/</link>
       <pubDate>Thu, 03 Dec 2015 19:28:54 -0700</pubDate>
       
       <guid>http://www.borzov.ca/posts/cls4cygwin/</guid>
-      <description>&lt;p&gt;Sometimes I have to use a shell (a command-line interface) on Windows and overall it is pretty challenging for me.
-Windows is fundamentally different from the Unix/POSIX conventions I got used to when working with Linux and MacOSX and the native shells  for Windows (cmd/Powershell) are quite different.&lt;/p&gt;
-
-&lt;p&gt;Fornunatelly, there is Cygwin, an open-source project that wraps the Windows functioanllity and makes some imitation of a bash we came to know and love that offers something similar to &lt;a href=&#34;en.wikipedia.org/wiki/Cygwin&#34;&gt;bash&lt;/a&gt;. It is pretty decent for most every day uses and I like it a lot.&lt;/p&gt;
-
-&lt;p&gt;One thing that helps is a decent Terminal application (the thing that provides GUI for the cli session). &lt;a href=&#34;https://github.com/Maximus5/ConEmu&#34;&gt;ConEmu&lt;/a&gt; is pretty great, highly customizable and has all the basic features.&lt;/p&gt;
-
-&lt;p&gt;One thing I missed from iTerm2 is to be able to clear the session screen completely with &amp;ldquo;Cmd+K&amp;rdquo; letters. I got investigating and I am happy to report that I found the solution.&lt;/p&gt;
-
-&lt;p&gt;It turns out that there is another key difference between Unix and Windows shells: in Unix, keeping track of printed content is the responsibility of the terminal application, but for Windows it is a part of the shell&amp;rsquo;s session. As a result, clearing the screen can be done with a shell command, &lt;code&gt;cls&lt;/code&gt; in their case.&lt;/p&gt;
-
-&lt;p&gt;So since Cygwin is still a Windows shell, clearing screen is a shell command as well, which is invoked with an escape code. Here it is: &lt;code&gt;echo -e &#39;\0033\0143&#39;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here is how to set it up:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/conemu.png&#34; alt=&#34;Img&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s set up ConEmu&amp;rsquo;s hot key to use the command. Open up the ConEmu settings (right click on the button)&lt;/p&gt;
-</description>
+      <description>Enabling iTerm&amp;rsquo;s Cmd+K hotkey for Cygwin shell with ConEmu Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.
+Since Windows ecosystem (including shells, Powershell and cmd) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.
+Fornunatelly, there is Cygwin, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love.</description>
     </item>
     
     <item>
@@ -233,136 +47,20 @@ Windows is fundamentally different from the Unix/POSIX conventions I got used to
       <pubDate>Fri, 30 Jan 2015 08:36:54 -0700</pubDate>
       
       <guid>http://www.borzov.ca/posts/kademlia/</guid>
-      <description>
-
-&lt;h1 id=&#34;routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/h1&gt;
-
-&lt;h3 id=&#34;unfinished-draft:fe965123d7524294753e9acd8d3c8d0a&#34;&gt;(unfinished  draft)&lt;/h3&gt;
-
-&lt;p&gt;That article is currently work in progress and will probably take a while to finish.&lt;/p&gt;
-
-&lt;p&gt;DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;That intro introduces Chord DHT protocol as a somewhat  simpler case. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;
-
-&lt;p&gt;Here I am going to use NetVis, an open source network visualizer framework, to visualize in detail how Kademlia protocol operates.&lt;/p&gt;
-
-&lt;p&gt;We will review and annotate a Kademlia-style DHT implementation from the IPFS project source code as an example.&lt;/p&gt;
-
-&lt;p&gt;IPFS - the Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should &lt;a href=&#34;https://github.com/jbenet/ipfs&#34;&gt;totally learn about it&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;While IPFS is an extensive project and combines many concepts, all we need to understand  for our purposes is that DHT there serves as  a routing purpose in the way similar to Bittorrent file swarm.&lt;/p&gt;
-
-&lt;p&gt;That is, DHT network is used to fetch content stored at other nodes.  Content is identified by a unique hash. The DHT stores these content block hashes as keys and addresses of the nodes that have these content blocks as values.&lt;/p&gt;
-
-&lt;p&gt;All that is implemented within the &lt;a href=&#34;https://godoc.org/github.com/jbenet/go-ipfs/routing&#34;&gt;routing/dht&lt;/a&gt; IPFS subpackage.&lt;/p&gt;
-
-&lt;p&gt;DHT routing implement the general routing interface defined at &lt;a href=&#34;https://github.com/jbenet/go-ipfs/blob/9dd12922b341d891a2365beb10d0142fd10fb235/routing/routing.go&#34;&gt;&lt;code&gt;routing/routing.go&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;	type IpfsRouting interface {
-	    FindProvidersAsync(context.Context, u.Key, int) &amp;lt;-chan peer.PeerInfo
-
-	    // PutValue adds value corresponding to given Key.
-	    PutValue(context.Context, u.Key, []byte) error
-
-	    // GetValue searches for the value corresponding to given Key.
-	    GetValue(context.Context, u.Key) ([]byte, error)
-
-	    // Announce that this node can provide value for given key
-	    Provide(context.Context, u.Key) error
-
-	    // Find specific Peer
-	    // FindPeer searches for a peer with given ID, returns a peer.PeerInfo
-	    // with relevant addresses.
-	    FindPeer(context.Context, peer.ID) (peer.PeerInfo, error)
-
-	    // Ping a peer, log the time it took
-	    Ping(context.Context, peer.ID) (time.Duration, error)
-
-	    // Bootstrap allows callers to hint to the routing system to get into a
-	    // Boostrapped state
-	    Bootstrap(context.Context) error
-	}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That corresponds to
-the folowing key operations:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PutValue&lt;/strong&gt; - we put an entry into the hash table with &lt;code&gt;u.Key&lt;/code&gt; as the key, and arbirtary &lt;code&gt;[]byte&lt;/code&gt; as the value&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GetValue&lt;/strong&gt; - we resolve the key from the hash table&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Provide&lt;/strong&gt;  - A node anounces to DHT that it can serve a specific key&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;FindPeer&lt;/strong&gt; - - we search for a peer node within the DHT network by its ID ( IPFS is a complicated project with a lot of concepts and they try to stick to a  consistent nomenclature. As they have plenty of graphs wit nodes, they call the DHT network nodes peers everywhere accross the project).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The DHT package at &lt;code&gt;routing/dht&lt;/code&gt; defines &lt;code&gt;IpfsDHT struct&lt;/code&gt; that implements that interface.&lt;/p&gt;
-
-&lt;p&gt;Here are the links we will ned in order to explore that implementation:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://sourcegraph.com/github.com/jbenet/go-ipfs@master/.tree/routing/dht/dht.go&#34;&gt;The package at Sourcegraph.com&lt;/a&gt;, allows source code browsing where you can click on an item to see its definition (just like a proper IDE)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://godoc.org/github.com/jbenet/go-ipfs/routing/dht&#34;&gt;godoc for the package&lt;/a&gt;, generated package documentation: signatures and docstrings of the public elements&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables) (unfinished draft) That article is currently work in progress and will probably take a while to finish.
+DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: www.freedomlayer.org/articles/dht_intro.html
+That intro introduces Chord DHT protocol as a somewhat simpler case.</description>
     </item>
     
     <item>
-      <title>Dmitry Peter Borzov</title>
+      <title>Dmitry Borzov</title>
       <link>http://www.borzov.ca/home/home/</link>
       <pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
       
       <guid>http://www.borzov.ca/home/home/</guid>
-      <description>
-
-&lt;h2 id=&#34;hi-i-am-dmitry-borzov:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Hi, I am Dmitry Borzov&lt;/h2&gt;
-
-&lt;p&gt;I specialize in development of web and data analysis applications. My experience includes working with javascript [d3, Angular, Ember, node], golang, python [pandas, scipy, django, flask] and Java[Hadoop/MapReduce ecosystem, ElasticSearch] among other technologies.&lt;/p&gt;
-
-&lt;h2 id=&#34;open-source-projects:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Open source projects&lt;/h2&gt;
-
-&lt;p&gt;(also, see my &lt;a href=&#34;https://github.com/dborzov&#34;&gt;github account page&lt;/a&gt;)&lt;/p&gt;
-
-&lt;h4 id=&#34;lsp-ls-shell-command-alternative-https-github-com-dborzov-lsp:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;https://github.com/dborzov/lsp&#34;&gt;&lt;strong&gt;lsp&lt;/strong&gt;: &lt;code&gt;ls&lt;/code&gt; shell command alternative&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;ls&lt;/code&gt;  reimagined for modern times, with friendlier notations, built-in awareness of things like git repos and various dotfiles file datatypes.&lt;/p&gt;
-
-&lt;h4 id=&#34;netvis-a-tool-to-visualize-and-understand-networks-https-github-com-dborzov-netvis:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;https://github.com/dborzov/netvis&#34;&gt;&lt;strong&gt;NetVis&lt;/strong&gt;: a tool to visualize and understand networks&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;Translate your network logs to a simple JSON-based NetVis format and visualize the network events and communication in detail. Check out the &lt;a href=&#34;http://www.borzov.ca/netvis/&#34;&gt;demo&lt;/a&gt;. Built in coordination with &lt;a href=&#34;http://ipfs.io/&#34;&gt;IPFS team&lt;/a&gt;, NetVis is an indispensable tool when designing and developing network functionality on any level.&lt;/p&gt;
-
-&lt;h4 id=&#34;rusticsearch-a-simple-search-engine-server-https-github-com-dborzov-rusticsearch:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;https://github.com/dborzov/rusticsearch&#34;&gt;&lt;strong&gt;RusticSearch&lt;/strong&gt;: a simple search engine server&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;It uses in-memory suffix array to lookup index entries. RusticSearch is minimalistic in design and perfect when adding simple search functionality where &lt;a href=&#34;http://www.elasticsearch.org/&#34;&gt;fancier solutions&lt;/a&gt; can be an overkill.&lt;/p&gt;
-
-&lt;h2 id=&#34;writings:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Writings&lt;/h2&gt;
-
-&lt;h4 id=&#34;june-2016-analysis-of-randomized-algorithms-part-i-posts-quicksort:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/quicksort/&#34;&gt;&lt;em&gt;June 2016&lt;/em&gt; Analysis of randomized algorithms (Part I)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;Quantitative analysis of randomized algorithms may look intimidating, but a couple of simple tricks goes the long way. We look at how to build some intuition and understanding behind the algorithm&amp;rsquo;s performance using the quicksort as an example.&lt;/p&gt;
-
-&lt;h4 id=&#34;march-2016-fixing-jmeter-s-java-security-cert-certificateexception-error-posts-jmeter:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/jmeter&#34;&gt;&lt;em&gt;March 2016&lt;/em&gt; Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;A problem I had trying to make jmeter work on my machine and what fixed it&lt;/p&gt;
-
-&lt;h4 id=&#34;jan-2015-routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables-posts-kademlia:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/kademlia/&#34;&gt;&lt;em&gt;Jan 2015&lt;/em&gt; Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;Using NetVis framework to visualize algorithms behind Kademlia-styled DHT.&lt;/p&gt;
-
-&lt;h4 id=&#34;dec-2013-predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that-posts-xfast:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;&lt;a href=&#34;http://www.borzov.ca/posts/xfast/&#34;&gt;&lt;em&gt;Dec 2013&lt;/em&gt; Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;Introduction to X-fast trie-style data structures.&lt;/p&gt;
-
-&lt;h2 id=&#34;research-papers:b9bcf8cb73ce4a081a635ad7c0acd9dd&#34;&gt;Research papers&lt;/h2&gt;
-
-&lt;p&gt;Here is the list of academic peer-reviewed research papers I coauthored:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;M. S. Mashayekhi, J.-S. Bernier, D. Borzov, J.-L. Song, F. Zhou, &amp;ldquo;Two-dimensional Bose gases near resonance: universal three-body effects”, &lt;a href=&#34;http://prl.aps.org/abstract/PRL/v110/i14/e145301&#34;&gt;Phys. Rev. Lett. 110, 145301 (2013)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1209.4929&#34;&gt;arxiv:1209.4929&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;D.Borzov, M.S.Mashayekhi, Sh.Zhang, J.Song, F.Zhou, &amp;ldquo;Nature of 3D Bose Gases near Resonance&amp;rdquo;, &lt;a href=&#34;http://pra.aps.org/abstract/PRA/v85/i2/e023620&#34;&gt;Phys.Rev. A 85, 023620 (2012)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1110.2183&#34;&gt;arxiv:1110.2183&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;D.Borzov, &amp;ldquo;Optical vibrations of hydrogen in disordered palladium-gold alloys&amp;rdquo;, Physics of Extreme States of Matter (2009), &lt;a href=&#34;http://arxiv.org/abs/0901.1381&#34;&gt;arXiv:0901.1381v1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Hi, I am Dmitry Borzov I specialize in development of web and data analysis applications. My experience includes working with javascript [d3, Angular, Ember, node], golang, python [pandas, scipy, django, flask] and Java[Hadoop/MapReduce ecosystem, ElasticSearch] among other technologies.
+Open source projects (also, see my github account page)
+lsp: ls shell command alternative ls reimagined for modern times, with friendlier notations, built-in awareness of things like git repos and various dotfiles file datatypes.</description>
     </item>
     
     <item>
@@ -371,291 +69,7 @@ the folowing key operations:&lt;/p&gt;
       <pubDate>Sun, 01 Dec 2013 08:36:54 -0700</pubDate>
       
       <guid>http://www.borzov.ca/posts/xfast/</guid>
-      <description>
-
-&lt;h1 id=&#34;predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/h1&gt;
-
-&lt;h3 id=&#34;abstract-an-intro-to-data-structures-with-locality-of-reference-type-features-we-review-x-fast-tries-in-some-detail-and-then-talk-about-similar-data-structures-where-they-shine-and-where-they-don-t:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&amp;rsquo;t&lt;/h3&gt;
-
-&lt;p&gt;Consider a set &lt;code&gt;{n}&lt;/code&gt; of &lt;code&gt;n&lt;/code&gt; integers within the range &lt;code&gt;0..u-1&lt;/code&gt;. Let&amp;rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Look up&lt;/strong&gt;: check if an integer &lt;code&gt;x&lt;/code&gt; is in &lt;code&gt;{n}&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt;: Insert an integer into &lt;code&gt;{n}&lt;/code&gt; or delete one.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Let&amp;rsquo;s check out how some common data structures are holding up with these: a simple sorted array, a balanced binary search tree (whether it is AVL or red-black), and  a hash table:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Lookup&lt;/th&gt;
-&lt;th&gt;Update&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Sorted Array&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Balanced binary tree&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash Table&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;The hash table is designed to be optimal for these two operations so it is the best fit here. But what if we modify the search operation a little bit and  require returning of the next closest element if the exact value is not within  the set &lt;code&gt;{n}&lt;/code&gt;? So that for 69 in {1,55,68, 100} we would want to get 68 as it is close enough. One can see how the need for such a modification can arise in applications.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/arrow.png&#34; alt=&#34;Img&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can think of a couple of similar problem modifications: return the closest element, or only the next closest element that is greater than the query value (they call this the successor element search in the literature), or the closest one that is smaller (predecessor search). One can see that these problems overlap and can be reformulated in terms of each other, so let&amp;rsquo;s just start with implementing one  of them:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Find predecessor&lt;/strong&gt;  item: look up an integer &lt;code&gt;x&lt;/code&gt; and if it is not in the set, return the closest int within the set that is lower by value&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is how we can implement Predecessor Search for the data structures we considered above:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Sorted Array&lt;/strong&gt; we search for the value using binary search and if turns out that it is not within the set, we simply take the next left value from where it should have been.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Search Tree&lt;/strong&gt; approach is similar to &lt;strong&gt;Sorted Array&lt;/strong&gt;: we traverse to the next item left from where the value should have been&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hash Table&lt;/strong&gt;: if the value &lt;code&gt;x&lt;/code&gt; is not within the set, the only option is to look up &lt;code&gt;x-1&lt;/code&gt; and continue looking up lower values until we stumble upon one within the set. The average distance between the two values is asymptotically &lt;code&gt;Ө(u/n)&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Lookup&lt;/th&gt;
-&lt;th&gt;Update&lt;/th&gt;
-&lt;th&gt;Predeccessor&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Sorted Array&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(n)&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Balanced binary tree&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash Table&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;O(u/n)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;We see that the advantages of the plain hash table disappear when it comes to predecessor search. Can we think of a way to improve the hash table&amp;rsquo;s performance here?&lt;/p&gt;
-
-&lt;p&gt;One way that may come to mind at this point is to just store pointers to predecessor and successor elements for each of the the elements within &lt;code&gt;u&lt;/code&gt; right in the hash table.&lt;/p&gt;
-
-&lt;p&gt;This would enable quick predecessor lookup, but would break the performance of the Update function. Adding a value for this Hash-Table with Predecessor Pointers means we need to update the predecessor pointers for all values from the new one to the closest larger one. Which, again, means O(u/n) operations.&lt;/p&gt;
-
-&lt;p&gt;There is another drawback to this approach. Now we have to store not just &lt;code&gt;n&lt;/code&gt; set elements but all the &lt;code&gt;u&lt;/code&gt; possible values. Additionally, pointer size is bound by &lt;code&gt;log(u)&lt;/code&gt; needed to store the value position. So the total size of the structure now depends on &lt;code&gt;u&lt;/code&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;We can sum it up with this:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Lookup&lt;/th&gt;
-&lt;th&gt;Update&lt;/th&gt;
-&lt;th&gt;Predeccessor&lt;/th&gt;
-&lt;th&gt;Size&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Sorted Array&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(n)&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Balanced binary tree&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash Table&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(u/n)&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash-Table with Predecessor Pointers&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(u/n)&lt;/td&gt;
-&lt;td&gt;Ө(u log(u))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&#34;some-reflection:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Some Reflection&lt;/h4&gt;
-
-&lt;p&gt;Let&amp;rsquo;s reflect on these results a little bit. We see that hash table is ideal when we look up exact values but breaks down when we start inquiring on operations where &lt;em&gt;locality&lt;/em&gt; of the value starts to matter.&lt;/p&gt;
-
-&lt;p&gt;That makes sense. A proper hash function means a &lt;a href=&#34;http://en.wikipedia.org/wiki/Numerical_stability&#34;&gt;mathematically unstable&lt;/a&gt; one: even small increments change the hash completely which insures the values are spread homogeneously among the hash table buckets.&lt;/p&gt;
-
-&lt;p&gt;At the same time we see that binary search tree-style data structures are quite resielent to &lt;em&gt;locality&lt;/em&gt; context class of problem. One can say that search tree is based on the concept of proximity and contains the information about &lt;em&gt;locality&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;X-fast trie is a data structure that combines the advantages of both search trees and hash tables.&lt;/p&gt;
-
-&lt;h4 id=&#34;enter-x-fast-trie:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Enter X-fast trie&lt;/h4&gt;
-
-&lt;p&gt;Let&amp;rsquo;s build a bitwise search tree on top of all the &lt;code&gt;u&lt;/code&gt; elements. All the &lt;code&gt;u&lt;/code&gt; values are at the tree&amp;rsquo;s leaves (which makes this search tree a trie). Let&amp;rsquo;s mark all those tree nodes where there is an ancestor leave which is within &lt;code&gt;{n}&lt;/code&gt; as &amp;ldquo;black&amp;rdquo; and the rest of the nodes keep &amp;ldquo;white&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Here is a nice illustrating graph from &lt;a href=&#34;http://opendatastructures.org/versions/edition-0.1c/ods-java/node66.html&#34;&gt;opendatastructures.org&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://opendatastructures.org/versions/edition-0.1c/ods-java/img1455.png&#34; alt=&#34;x-fast&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now we can implement the operations like this:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Predecessor&lt;/strong&gt;: there is &lt;code&gt;log(u)&lt;/code&gt; nodes within the search tree that are parents to the leave corresponding to the value we look up. If a node is marked with black all the nodes above are black too. That means we have a sorted array of &lt;code&gt;log(u)&lt;/code&gt; values corresponding to the &lt;code&gt;i&lt;/code&gt; element. We use binary search to find the lowest black element and then traverse down the left side along the black nodes to get to the predecessor value. How much will it cost? Binary search among &lt;code&gt;log(u)&lt;/code&gt; values would be &lt;code&gt;Ө(log(log(u)))&lt;/code&gt;, traversing down to predecessor value: &lt;code&gt;Ө(1)&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: is quite similar to the simple trie update case. For adding a value, ee traverse through all the parent nodes and &amp;ldquo;repaint&amp;rdquo; all of them black. For removing an item, we paint with white all the parent nodes for which no other children leaves are black. So &lt;code&gt;Ө(log(u))&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Memory needed to store the &amp;ldquo;color&amp;rdquo; (black or white) bits for all the nodes within the search tree grows steeply: we get &lt;code&gt;2u-1&lt;/code&gt; nodes for a complete binary trie with u leaves. That is where a hash table comes in, we only the &amp;ldquo;black&amp;rdquo;-marked nodes within the hash table for each level of the trie. That means &lt;code&gt;n&lt;/code&gt; entries on the leave level, less or equal than &lt;code&gt;n/2&lt;/code&gt; on the second lowest and so on for each of the &lt;code&gt;log(u)&lt;/code&gt; hash tables. So the space is  bound by &lt;code&gt;Ө(n log(u))&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s sum it up by updating the table&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Lookup&lt;/th&gt;
-&lt;th&gt;Update&lt;/th&gt;
-&lt;th&gt;Predecessor&lt;/th&gt;
-&lt;th&gt;Size&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Sorted Array&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(n)&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Balanced binary tree&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(log(n))&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash Table&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(M/n)&lt;/td&gt;
-&lt;td&gt;Ө(n)&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;Hash-Table with Predecessor Pointers&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(1)&lt;/td&gt;
-&lt;td&gt;Ө(u/n)&lt;/td&gt;
-&lt;td&gt;Ө(u log(u))&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;X-fast trie&lt;/td&gt;
-&lt;td&gt;O(1)&lt;/td&gt;
-&lt;td&gt;O(log(u))&lt;/td&gt;
-&lt;td&gt;O(log(log(u)))&lt;/td&gt;
-&lt;td&gt;O(n log(u))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&#34;toy-example:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Toy example&lt;/h4&gt;
-
-&lt;p&gt;The easiest way to grok how these operations are implemented is to implement them yourself. So I &lt;a href=&#34;https://github.com/dborzov/XLtrie&#34;&gt;did&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here is our toy case. With movie and tv show titles such as X-files, X-men and American History X, we have a trope of X standing for something misterious (and heavily implied to be hip). How often are movies with such titles released? What was the first X-movie released since, say 1975?&lt;/p&gt;
-
-&lt;p&gt;To find out, let us build the X-fast trie index for such X-titled movies by the year of release.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s consider years from 1950 + 64 = 2004 to be our M= 2^6 - 1=63 range.
-Here is a plot of what all the M leaves and the color of parent nodes for each of the depth levels:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://www.borzov.ca/img/movies.png&#34; alt=&#34;Img&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We have total of &lt;code&gt;x&lt;/code&gt; levels, where x comes from $u &amp;lt; 2^x -1$. That means we have got &lt;code&gt;x&lt;/code&gt; hash functions where we store keys of the &amp;ldquo;black&amp;rdquo;-marked nodes. Root level 0 contains only one node, in our case a blue/black one (it is always black as long as there is a single value within &lt;code&gt;{n}&lt;/code&gt;). The second lower level, 1, contains two nodes and so on.&lt;/p&gt;
-
-&lt;p&gt;In order to look up the predecessor movie for 1975 we start the binary search for the specific level where the nodes turn white by looking up the corresponding node values within the parent nodes. We find out that the level is 3. Then we traverse down along the left side and find the corresponding predecessor movie: Lolly-Maddonna XXXX (1973).&lt;/p&gt;
-
-&lt;p&gt;What would it take to add another movie, say, &amp;ldquo;Not a Real Movie X (1975)&amp;rdquo;? That would mean we need to go through all the parent nodes and make sure they are added to the corresponding level hash functions.&lt;/p&gt;
-
-&lt;h4 id=&#34;practical-examples:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Practical Examples&lt;/h4&gt;
-
-&lt;p&gt;Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when &lt;code&gt;log[N]&lt;/code&gt; grows faster than &lt;code&gt;log[log[M]]&lt;/code&gt;, which comes down to the criteria of &lt;code&gt;N &amp;gt;&amp;gt; log[M]&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;So let&amp;rsquo;s come up with some practical examples of where X-fast trie can be useful:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Imagine you are developing a flight searching website. For the given datetime of expected departure we return the list of all the upcoming flights. Flights are updated and changed frequently. Datetime minutes can make up all the possible &lt;code&gt;u&lt;/code&gt; values, and the flights to a specific direction make up &lt;code&gt;{n}&lt;/code&gt; set.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;IP/other network protocols Packet Routing: an internet router needs to redirect the IP packets to other routers with the IP closest to the requested one.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking that content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that &lt;code&gt;n &amp;gt;&amp;gt; log[M]&lt;/code&gt;).  (Hey! By the way, see my other &lt;a href=&#34;http://www.borzov.ca/posts/kademlia/&#34;&gt;post&lt;/a&gt; on the subject!).&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;data-structures-with-locality-of-reference:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;Data Structures with locality of reference&lt;/h4&gt;
-
-&lt;p&gt;X-fast trie is an example of the data structure where locality of reference is tracked. Another one, more famous one, would of course be the search tree. Together data structures like these compose a large family of cases where some concept of locality matters. The ones used in practice tend to share many features with the x-fast trie case we considered here.&lt;/p&gt;
-
-&lt;p&gt;It is easy to see how wide the domain of locality-sensitive applications is. It can be extended to multidimensional cases too. Say, geolocation applications would involve ability to look up objects closest to a specific point. How can one approach this? A search tree can be a good start, but for sufficiently large maps we can devise some equivalent of 2D x-fast trie or move to other fancier &lt;a href=&#34;http://en.wikipedia.org/wiki/Y-fast_trie&#34;&gt;solutions&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Pretty nice, huh?&lt;/p&gt;
-
-&lt;h4 id=&#34;see-also:58b12276bf0ae383f71846d6c29edb1d&#34;&gt;See also&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/X-fast_trie&#34;&gt;X-fast tries&lt;/a&gt; in Wikipedia&lt;/li&gt;
-&lt;li&gt;A &lt;a href=&#34;http://youtu.be/AjFtTQevtq0&#34;&gt;Video lecture on the subject&lt;/a&gt; from MIT OCW (the whole course is rad, totally a must watch)&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Predecessor search for Big Data: x-fast tries, locality of reference and all that Abstract: An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&amp;rsquo;t Consider a set {n} of n integers within the range 0..u-1. Let&amp;rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:</description>
     </item>
     
   </channel>

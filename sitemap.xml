@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>http://www.borzov.ca/</loc>
-    <lastmod>2016-07-05T08:36:54-07:00</lastmod>
-    <priority>0</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>http://www.borzov.ca/posts/quicksort/</loc>
@@ -35,6 +30,34 @@
   <url>
     <loc>http://www.borzov.ca/posts/xfast/</loc>
     <lastmod>2013-12-01T08:36:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.borzov.ca/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.borzov.ca/</loc>
+    <lastmod>2016-07-05T08:36:54-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.borzov.ca/home/</loc>
+    <lastmod>2015-01-23T12:43:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.borzov.ca/posts/</loc>
+    <lastmod>2016-07-05T08:36:54-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.borzov.ca/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>

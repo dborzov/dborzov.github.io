@@ -3,7 +3,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>Predecessor search for Big Data: x-fast tries, locality of reference and all that - Dmitry Peter Borzov (borzov.ca)</title>
+<title>Predecessor search for Big Data: x-fast tries, locality of reference and all that - Dmitry Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -12,7 +12,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Peter Borzov<br>
+  Dmitry Borzov<br>
   <a href="/">borzov.ca</a> /posts/xfast/
 </div>
 
@@ -25,9 +25,9 @@
   <div class="body">
     
 
-<h1 id="predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that:58b12276bf0ae383f71846d6c29edb1d">Predecessor search for Big Data: x-fast tries, locality of reference and all that</h1>
+<h1 id="predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that">Predecessor search for Big Data: x-fast tries, locality of reference and all that</h1>
 
-<h3 id="abstract-an-intro-to-data-structures-with-locality-of-reference-type-features-we-review-x-fast-tries-in-some-detail-and-then-talk-about-similar-data-structures-where-they-shine-and-where-they-don-t:58b12276bf0ae383f71846d6c29edb1d"><em>Abstract:</em> An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&rsquo;t</h3>
+<h3 id="abstract-an-intro-to-data-structures-with-locality-of-reference-type-features-we-review-x-fast-tries-in-some-detail-and-then-talk-about-similar-data-structures-where-they-shine-and-where-they-don-t"><em>Abstract:</em> An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&rsquo;t</h3>
 
 <p>Consider a set <code>{n}</code> of <code>n</code> integers within the range <code>0..u-1</code>. Let&rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:</p>
 
@@ -176,7 +176,7 @@
 </tbody>
 </table>
 
-<h4 id="some-reflection:58b12276bf0ae383f71846d6c29edb1d">Some Reflection</h4>
+<h4 id="some-reflection">Some Reflection</h4>
 
 <p>Let&rsquo;s reflect on these results a little bit. We see that hash table is ideal when we look up exact values but breaks down when we start inquiring on operations where <em>locality</em> of the value starts to matter.</p>
 
@@ -186,7 +186,7 @@
 
 <p>X-fast trie is a data structure that combines the advantages of both search trees and hash tables.</p>
 
-<h4 id="enter-x-fast-trie:58b12276bf0ae383f71846d6c29edb1d">Enter X-fast trie</h4>
+<h4 id="enter-x-fast-trie">Enter X-fast trie</h4>
 
 <p>Let&rsquo;s build a bitwise search tree on top of all the <code>u</code> elements. All the <code>u</code> values are at the tree&rsquo;s leaves (which makes this search tree a trie). Let&rsquo;s mark all those tree nodes where there is an ancestor leave which is within <code>{n}</code> as &ldquo;black&rdquo; and the rest of the nodes keep &ldquo;white&rdquo;.</p>
 
@@ -260,7 +260,7 @@
 </tbody>
 </table>
 
-<h4 id="toy-example:58b12276bf0ae383f71846d6c29edb1d">Toy example</h4>
+<h4 id="toy-example">Toy example</h4>
 
 <p>The easiest way to grok how these operations are implemented is to implement them yourself. So I <a href="https://github.com/dborzov/XLtrie">did</a>.</p>
 
@@ -279,7 +279,7 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 
 <p>What would it take to add another movie, say, &ldquo;Not a Real Movie X (1975)&rdquo;? That would mean we need to go through all the parent nodes and make sure they are added to the corresponding level hash functions.</p>
 
-<h4 id="practical-examples:58b12276bf0ae383f71846d6c29edb1d">Practical Examples</h4>
+<h4 id="practical-examples">Practical Examples</h4>
 
 <p>Comparing search time asymptotics for X-fast tries and search trees, we see that X-fast shines when <code>log[N]</code> grows faster than <code>log[log[M]]</code>, which comes down to the criteria of <code>N &gt;&gt; log[M]</code>.</p>
 
@@ -293,7 +293,7 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 <li><p>Trackless bitTorrent peer-to-peer networks look up content by hash and the nodes with IDs closest to this hash (by some metric) are assigned with tracking that content. X-fast trie can get useful to lookup content in huge networks with large number of nodes (so that <code>n &gt;&gt; log[M]</code>).  (Hey! By the way, see my other <a href="http://www.borzov.ca/posts/kademlia/">post</a> on the subject!).</p></li>
 </ul>
 
-<h4 id="data-structures-with-locality-of-reference:58b12276bf0ae383f71846d6c29edb1d">Data Structures with locality of reference</h4>
+<h4 id="data-structures-with-locality-of-reference">Data Structures with locality of reference</h4>
 
 <p>X-fast trie is an example of the data structure where locality of reference is tracked. Another one, more famous one, would of course be the search tree. Together data structures like these compose a large family of cases where some concept of locality matters. The ones used in practice tend to share many features with the x-fast trie case we considered here.</p>
 
@@ -301,7 +301,7 @@ Here is a plot of what all the M leaves and the color of parent nodes for each o
 
 <p>Pretty nice, huh?</p>
 
-<h4 id="see-also:58b12276bf0ae383f71846d6c29edb1d">See also</h4>
+<h4 id="see-also">See also</h4>
 
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/X-fast_trie">X-fast tries</a> in Wikipedia</li>

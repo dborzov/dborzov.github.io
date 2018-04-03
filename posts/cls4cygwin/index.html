@@ -3,7 +3,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>Enabling cls/Cmd&#43;K for Cygwin Bash on ConEmu - Dmitry Peter Borzov (borzov.ca)</title>
+<title>Enabling iTerm&#39;s `Cmd&#43;K` hotkey for Cygwin shell with ConEmu - Dmitry Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -12,7 +12,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Peter Borzov<br>
+  Dmitry Borzov<br>
   <a href="/">borzov.ca</a> /posts/cls4cygwin/
 </div>
 
@@ -23,24 +23,29 @@
       </ul>
 </div>
   <div class="body">
-    <p>Sometimes I have to use a shell (a command-line interface) on Windows and overall it is pretty challenging for me.
-Windows is fundamentally different from the Unix/POSIX conventions I got used to when working with Linux and MacOSX and the native shells  for Windows (cmd/Powershell) are quite different.</p>
+    
 
-<p>Fornunatelly, there is Cygwin, an open-source project that wraps the Windows functioanllity and makes some imitation of a bash we came to know and love that offers something similar to <a href="en.wikipedia.org/wiki/Cygwin">bash</a>. It is pretty decent for most every day uses and I like it a lot.</p>
+<h2 id="enabling-iterm-s-cmd-k-hotkey-for-cygwin-shell-with-conemu">Enabling iTerm&rsquo;s <code>Cmd+K</code> hotkey for Cygwin shell with ConEmu</h2>
 
-<p>One thing that helps is a decent Terminal application (the thing that provides GUI for the cli session). <a href="https://github.com/Maximus5/ConEmu">ConEmu</a> is pretty great, highly customizable and has all the basic features.</p>
+<p>Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.</p>
 
-<p>One thing I missed from iTerm2 is to be able to clear the session screen completely with &ldquo;Cmd+K&rdquo; letters. I got investigating and I am happy to report that I found the solution.</p>
+<p>Since Windows ecosystem (including shells, <code>Powershell</code> and <code>cmd</code>) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.</p>
 
-<p>It turns out that there is another key difference between Unix and Windows shells: in Unix, keeping track of printed content is the responsibility of the terminal application, but for Windows it is a part of the shell&rsquo;s session. As a result, clearing the screen can be done with a shell command, <code>cls</code> in their case.</p>
+<p>Fornunatelly, there is <a href="en.wikipedia.org/wiki/Cygwin">Cygwin</a>, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love. It is pretty decent for most every day uses.</p>
 
-<p>So since Cygwin is still a Windows shell, clearing screen is a shell command as well, which is invoked with an escape code. Here it is: <code>echo -e '\0033\0143'</code>.</p>
+<p>A decent terminal emulator application helps too. I use and recommend <a href="https://github.com/Maximus5/ConEmu">ConEmu</a>.</p>
 
-<p>Here is how to set it up:</p>
+<p>One thing I missed from iTerm2 is to be able to clear the session screen completely with &ldquo;Cmd+K&rdquo; hotkey. Here is how to reproduce the same functionality for Windows/ConEmu/Cygwin.</p>
 
-<p><img src="/conemu.png" alt="Img" /></p>
+<p>There is a key difference between Unix and Windows shells: in Unix, keeping track of the buffer content is the responsibility of the terminal emulator (iTerm2, for example), however in Windows it is a part of the shell&rsquo;s session. As a result, clearing the buffer can be done with a shell command, <code>cls</code> in their case.</p>
 
-<p>Let&rsquo;s set up ConEmu&rsquo;s hot key to use the command. Open up the ConEmu settings (right click on the button)</p>
+<p>Since Cygwin is still a Windows shell, clearing screen is a shell command as well, which is invoked with an escape code. Here it is: <code>echo -e '\0033\0143'</code>.</p>
+
+<p>Here is how to set up the hotkey binding with Conemu to achive the Cmd+K behaviour of iTerm2:</p>
+
+<p style="text-align:center">
+   <img width="500px" src="/conemu.png">
+</p>
 
   </div>
 </body>

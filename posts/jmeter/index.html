@@ -3,7 +3,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>Fixing jmeter&#39;s java.security.cert.CertificateException error - Dmitry Peter Borzov (borzov.ca)</title>
+<title>Fixing jmeter&#39;s java.security.cert.CertificateException error - Dmitry Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -12,7 +12,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Peter Borzov<br>
+  Dmitry Borzov<br>
   <a href="/">borzov.ca</a> /posts/jmeter/
 </div>
 
@@ -25,7 +25,7 @@
   <div class="body">
     
 
-<h1 id="fixing-jmeter-s-java-security-cert-certificateexception-error:623d2b4ee8f858bb18f9c1ae91c52b0d">Fixing jmeter&rsquo;s java.security.cert.CertificateException error</h1>
+<h1 id="fixing-jmeter-s-java-security-cert-certificateexception-error">Fixing jmeter&rsquo;s java.security.cert.CertificateException error</h1>
 
 <p>We were using <a href="http://jmeter.apache.org/">jmeter</a> at work to test an external service. I installed <code>jmeter</code> on macOS with <code>brew</code> but when I tryed running the tests I had them failing with this the error message:</p>
 
@@ -47,7 +47,7 @@ jdk.certpath.disabledAlgorithms=MD2, MD5, RSA keySize &lt; 1024
 
 </code></pre>
 
-<h1 id="where-is-the-jdk-that-jmeter-uses:623d2b4ee8f858bb18f9c1ae91c52b0d">Where is the JDK that jmeter uses?</h1>
+<h1 id="where-is-the-jdk-that-jmeter-uses">Where is the JDK that jmeter uses?</h1>
 
 <p>Apparently macOSX has several <code>JDK</code> distrubutions installed by different libraries and tools. I ran a global search for <code>java.security</code> file and found several  <code>{JDK_HOME}</code> installs. Which one does our jmeter use?</p>
 

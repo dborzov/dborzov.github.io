@@ -3,7 +3,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity - Dmitry Peter Borzov (borzov.ca)</title>
+<title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity - Dmitry Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -12,7 +12,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Peter Borzov<br>
+  Dmitry Borzov<br>
   <a href="/">borzov.ca</a> /posts/quicksort/
 </div>
 
@@ -25,15 +25,15 @@
   <div class="body">
     
 
-<h1 id="analysis-of-randomized-algorithms-part-i:58862ac77588df2b663ea23230d5232f">Analysis of randomized algorithms (Part I)</h1>
+<h1 id="analysis-of-randomized-algorithms-part-i">Analysis of randomized algorithms (Part I)</h1>
 
-<h2 id="estimating-the-quicksort-s-time-performance:58862ac77588df2b663ea23230d5232f">Estimating the quicksort&rsquo;s time performance</h2>
+<h2 id="estimating-the-quicksort-s-time-performance">Estimating the quicksort&rsquo;s time performance</h2>
 
 <script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-<h3 id="abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example:58862ac77588df2b663ea23230d5232f"><em>Abstract:</em> It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example</h3>
+<h3 id="abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example"><em>Abstract:</em> It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example</h3>
 
 <p>Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms. They can surprise you with how efficient they can be on average. I remember being amazed when I learned that the randomized algorithm for finding a median element in an unsorted graph has asymptotic performance being linearly proportional to the size of the array, for example. but being able to actually understand what gives them their properties can be pretty hard at times.</p>
 
@@ -43,7 +43,7 @@
 
 <p>Let&rsquo;s illustrate this with an example. We will look at the asymptotics of what is probably the most famous random-based algorithm: the quicksort.</p>
 
-<h2 id="heads-on:58862ac77588df2b663ea23230d5232f">Heads on</h2>
+<h2 id="heads-on">Heads on</h2>
 
 <p>We will be interested in the asymptotic limit of large arrays: that is, when the number of elements <code>n</code> in the array we need to sort gets pretty big. Let&rsquo;s denote this execution time for quicksort with <code>f(n)</code>.</p>
 
@@ -65,7 +65,7 @@
 
 <p>Let&rsquo;s start with building some intuition for what the solution might look like.</p>
 
-<h2 id="what-does-the-solution-may-look-like:58862ac77588df2b663ea23230d5232f">What does the solution may look like?</h2>
+<h2 id="what-does-the-solution-may-look-like">What does the solution may look like?</h2>
 
 <p>Let&rsquo;s see what kind of solution we may expect here.</p>
 
@@ -130,9 +130,9 @@ Now we can express the same relation in terms of `g(x)=f(n(x))`:
 
 <p>so the solution is <code>f(n) ~ n log (n)</code>.</p>
 
-<h3 id="we-learned-the-upper-boundaries-and-the-lower-boundaries-for-what-we-might-expect-as-the-solution:58862ac77588df2b663ea23230d5232f">We learned the upper boundaries and the lower boundaries for what we might expect as the solution.</h3>
+<h3 id="we-learned-the-upper-boundaries-and-the-lower-boundaries-for-what-we-might-expect-as-the-solution">We learned the upper boundaries and the lower boundaries for what we might expect as the solution.</h3>
 
-<h2 id="building-up-some-intuition:58862ac77588df2b663ea23230d5232f">Building up some intuition</h2>
+<h2 id="building-up-some-intuition">Building up some intuition</h2>
 
 <p>The second thing that I do is I work through some custom cases. We looked at the absolutely worst case and the perfect choice, but in practice it is likely to be somewhere in between on every step. Let&rsquo;s go through the case of  where somehow we happen to split the array into <code>1/10n</code> and <code>9/10n</code> on every step.</p>
 
@@ -151,7 +151,7 @@ Now we can express the same relation in terms of `g(x)=f(n(x))`:
 
 <p><code>lg (10/9) = lg(1 + 1/9) = 0.04</code>.</p>
 
-<h4 id="references:58862ac77588df2b663ea23230d5232f">References</h4>
+<h4 id="references">References</h4>
 
 <p>[1] &ldquo;Algorithms&rdquo;, Dasgupta, C. H. Papadimitriou, and U. V. Vazirani, §2.4 &ldquo;Medians&rdquo;, pp.64-66</p>
 
