@@ -58,9 +58,11 @@ That intro introduces Chord DHT protocol as a somewhat simpler case.</descriptio
       <pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
       
       <guid>http://www.borzov.ca/home/home/</guid>
-      <description>Hi, I am Dmitry Borzov I specialize in development of web and data analysis applications. My experience includes working with javascript [d3, Angular, Ember, node], golang, python [pandas, scipy, django, flask] and Java[Hadoop/MapReduce ecosystem, ElasticSearch] among other technologies.
+      <description>Hi, I am Dmitry Borzov I do software development and data analysis.
+Keywords of the things I am into: network protocols, distributed algorithms, databases, machine learning.
 Open source projects (also, see my github account page)
-lsp: ls shell command alternative ls reimagined for modern times, with friendlier notations, built-in awareness of things like git repos and various dotfiles file datatypes.</description>
+lsp: ls shell command alternative ls reimagined for modern times, with friendlier notations, built-in awareness of things like git repos and various dotfiles file datatypes.
+NetVis: a tool to visualize and understand networks Translate your network logs to a simple JSON-based NetVis format and visualize the network events and communication in detail.</description>
     </item>
     
     <item>
