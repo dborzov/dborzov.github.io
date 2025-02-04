@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Dmitry Borzov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Jul 2016 08:36:54 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 04 Feb 2021 12:00:54 -0700</lastBuildDate>
     
 	<atom:link href="http://www.borzov.ca/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>serene-audio-mode: how does it work?</title>
+      <link>http://www.borzov.ca/posts/serene/</link>
+      <pubDate>Thu, 04 Feb 2021 12:00:54 -0700</pubDate>
+      
+      <guid>http://www.borzov.ca/posts/serene/</guid>
+      <description>serene-audio-mode: how does it work?  Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.
+That&amp;rsquo;s what prompted me to make a thing called serene-audio-mode. It&amp;rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.</description>
+    </item>
     
     <item>
       <title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity</title>

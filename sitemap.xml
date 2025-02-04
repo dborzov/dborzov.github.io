@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://www.borzov.ca/posts/serene/</loc>
+    <lastmod>2021-02-04T12:00:54-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.borzov.ca/posts/quicksort/</loc>
     <lastmod>2016-07-05T08:36:54-07:00</lastmod>
   </url>
@@ -39,7 +44,7 @@
   
   <url>
     <loc>http://www.borzov.ca/</loc>
-    <lastmod>2016-07-05T08:36:54-07:00</lastmod>
+    <lastmod>2021-02-04T12:00:54-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -51,7 +56,7 @@
   
   <url>
     <loc>http://www.borzov.ca/posts/</loc>
-    <lastmod>2016-07-05T08:36:54-07:00</lastmod>
+    <lastmod>2021-02-04T12:00:54-07:00</lastmod>
     <priority>0</priority>
   </url>
   
