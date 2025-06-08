@@ -13,7 +13,7 @@
 
 <meta charset="utf-8">
 
-<title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT - Dmitry Borzov (borzov.ca)</title>
+<title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT - Dmitri Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style_v2.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -22,7 +22,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Borzov<br>
+  Dmitri Borzov<br>
   <a href="/">borzov.ca</a> /posts/kademlia/
 </div>
 
@@ -33,76 +33,59 @@
       </ul>
 </div>
   <div class="body">
-    
-
-<h1 id="routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables">Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)</h1>
-
-<h3 id="unfinished-draft">(unfinished  draft)</h3>
-
+    <h1 id="routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables">Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)</h1>
+<h3 id="unfinished--draft">(unfinished  draft)</h3>
 <p>That article is currently work in progress and will probably take a while to finish.</p>
-
 <p>DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: <a href="http://www.freedomlayer.org/articles/dht_intro.html">www.freedomlayer.org/articles/dht_intro.html</a></p>
-
 <p>That intro introduces Chord DHT protocol as a somewhat  simpler case. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.</p>
-
 <p>Here I am going to use NetVis, an open source network visualizer framework, to visualize in detail how Kademlia protocol operates.</p>
-
 <p>We will review and annotate a Kademlia-style DHT implementation from the IPFS project source code as an example.</p>
-
 <p>IPFS - the Interplanetary File System is an amazing project that combines best and proved approaches behind git and gittorrent and you should <a href="https://github.com/jbenet/ipfs">totally learn about it</a>.</p>
-
 <p>While IPFS is an extensive project and combines many concepts, all we need to understand  for our purposes is that DHT there serves as  a routing purpose in the way similar to Bittorrent file swarm.</p>
-
 <p>That is, DHT network is used to fetch content stored at other nodes.  Content is identified by a unique hash. The DHT stores these content block hashes as keys and addresses of the nodes that have these content blocks as values.</p>
-
 <p>All that is implemented within the <a href="https://godoc.org/github.com/jbenet/go-ipfs/routing">routing/dht</a> IPFS subpackage.</p>
-
 <p>DHT routing implement the general routing interface defined at <a href="https://github.com/jbenet/go-ipfs/blob/9dd12922b341d891a2365beb10d0142fd10fb235/routing/routing.go"><code>routing/routing.go</code></a>:</p>
-
-<pre><code class="language-go">	type IpfsRouting interface {
-	    FindProvidersAsync(context.Context, u.Key, int) &lt;-chan peer.PeerInfo
-
-	    // PutValue adds value corresponding to given Key.
-	    PutValue(context.Context, u.Key, []byte) error
-
-	    // GetValue searches for the value corresponding to given Key.
-	    GetValue(context.Context, u.Key) ([]byte, error)
-
-	    // Announce that this node can provide value for given key
-	    Provide(context.Context, u.Key) error
-
-	    // Find specific Peer
-	    // FindPeer searches for a peer with given ID, returns a peer.PeerInfo
-	    // with relevant addresses.
-	    FindPeer(context.Context, peer.ID) (peer.PeerInfo, error)
-
-	    // Ping a peer, log the time it took
-	    Ping(context.Context, peer.ID) (time.Duration, error)
-
-	    // Bootstrap allows callers to hint to the routing system to get into a
-	    // Boostrapped state
-	    Bootstrap(context.Context) error
-	}
-</code></pre>
-
-<p>That corresponds to
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IpfsRouting</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">FindProvidersAsync</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>, <span style="color:#66d9ef">int</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">PeerInfo</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// PutValue adds value corresponding to given Key.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">PutValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>, []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// GetValue searches for the value corresponding to given Key.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">GetValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Announce that this node can provide value for given key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Provide</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Find specific Peer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// FindPeer searches for a peer with given ID, returns a peer.PeerInfo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// with relevant addresses.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">FindPeer</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">PeerInfo</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Ping a peer, log the time it took
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Bootstrap allows callers to hint to the routing system to get into a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// Boostrapped state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Bootstrap</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>That corresponds to
 the folowing key operations:</p>
-
 <ul>
 <li><strong>PutValue</strong> - we put an entry into the hash table with <code>u.Key</code> as the key, and arbirtary <code>[]byte</code> as the value</li>
 <li><strong>GetValue</strong> - we resolve the key from the hash table</li>
 <li><strong>Provide</strong>  - A node anounces to DHT that it can serve a specific key</li>
 <li><strong>FindPeer</strong> - - we search for a peer node within the DHT network by its ID ( IPFS is a complicated project with a lot of concepts and they try to stick to a  consistent nomenclature. As they have plenty of graphs wit nodes, they call the DHT network nodes peers everywhere accross the project).</li>
 </ul>
-
 <p>The DHT package at <code>routing/dht</code> defines <code>IpfsDHT struct</code> that implements that interface.</p>
-
 <p>Here are the links we will ned in order to explore that implementation:</p>
-
 <ul>
-<li><p><a href="https://sourcegraph.com/github.com/jbenet/go-ipfs@master/.tree/routing/dht/dht.go">The package at Sourcegraph.com</a>, allows source code browsing where you can click on an item to see its definition (just like a proper IDE)</p></li>
-
-<li><p><a href="https://godoc.org/github.com/jbenet/go-ipfs/routing/dht">godoc for the package</a>, generated package documentation: signatures and docstrings of the public elements</p></li>
+<li>
+<p><a href="https://sourcegraph.com/github.com/jbenet/go-ipfs@master/.tree/routing/dht/dht.go">The package at Sourcegraph.com</a>, allows source code browsing where you can click on an item to see its definition (just like a proper IDE)</p>
+</li>
+<li>
+<p><a href="https://godoc.org/github.com/jbenet/go-ipfs/routing/dht">godoc for the package</a>, generated package documentation: signatures and docstrings of the public elements</p>
+</li>
 </ul>
 
   </div>

@@ -1,75 +1,68 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Dmitry Borzov</title>
+    <title>Posts on Dmitri Borzov</title>
     <link>http://www.borzov.ca/posts/</link>
-    <description>Recent content in Posts on Dmitry Borzov</description>
+    <description>Recent content in Posts on Dmitri Borzov</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Feb 2021 12:00:54 -0700</lastBuildDate>
-    
-	<atom:link href="http://www.borzov.ca/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 05 Jun 2025 08:36:54 -0700</lastBuildDate>
+    <atom:link href="http://www.borzov.ca/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Frenchirix and the Research on How We Learn Languages</title>
+      <link>http://www.borzov.ca/posts/frenchirix/</link>
+      <pubDate>Thu, 05 Jun 2025 08:36:54 -0700</pubDate>
+      <guid>http://www.borzov.ca/posts/frenchirix/</guid>
+      <description>Frenchirix and the Research on How to Learn Languages I knew from my own experience that many common ways to learn a language feel productive but are a waste of time. To help my kids with French without repeating my mistakes, I went looking for scientific evidence of what actually works. This post is a summary of some counter-intuitive principles I found, and how we are using them at home with Frenchirix.</description>
+    </item>
+    <item>
+      <title>Frenchirix and the Research on How We Learn Languages</title>
+      <link>http://www.borzov.ca/posts/frenchirix_before/</link>
+      <pubDate>Thu, 05 Jun 2025 08:36:54 -0700</pubDate>
+      <guid>http://www.borzov.ca/posts/frenchirix_before/</guid>
+      <description>Frenchirix and the Research of How to Learn Languages I&amp;rsquo;ve been working on this little side project i call Frenchirix in my spare time. The name is a spoof of Asterix (or if you are their copiright lawyer, of ancient Gaulic names [6]).&#xA;In short, it&amp;rsquo;s this little website I built to help my kids practice French with dialogue from a cartoon French TV show they like.&#xA;In this post, I want to share a bit on what I&amp;rsquo;m trying to do with it.</description>
+    </item>
     <item>
       <title>serene-audio-mode: how does it work?</title>
       <link>http://www.borzov.ca/posts/serene/</link>
       <pubDate>Thu, 04 Feb 2021 12:00:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/serene/</guid>
-      <description>serene-audio-mode: how does it work?  Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.
-That&amp;rsquo;s what prompted me to make a thing called serene-audio-mode. It&amp;rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.</description>
+      <description>serene-audio-mode: how does it work? Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.&#xA;That&amp;rsquo;s what prompted me to make a thing called serene-audio-mode. It&amp;rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.</description>
     </item>
-    
     <item>
       <title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity</title>
       <link>http://www.borzov.ca/posts/quicksort/</link>
       <pubDate>Tue, 05 Jul 2016 08:36:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/quicksort/</guid>
-      <description>Analysis of randomized algorithms (Part I) Estimating the quicksort&amp;rsquo;s time performance  Abstract: It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms.</description>
+      <description>Analysis of randomized algorithms (Part I) Estimating the quicksort&amp;rsquo;s time performance Abstract: It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms.</description>
     </item>
-    
     <item>
       <title>Fixing jmeter&#39;s java.security.cert.CertificateException error</title>
       <link>http://www.borzov.ca/posts/jmeter/</link>
       <pubDate>Fri, 04 Mar 2016 08:36:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/jmeter/</guid>
-      <description>Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error We were using jmeter at work to test an external service. I installed jmeter on macOS with brew but when I tryed running the tests I had them failing with this the error message:
-java.security.cert.CertificateException: Certificates does not conform to algorithm constraints  The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service.</description>
+      <description>Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error We were using jmeter at work to test an external service. I installed jmeter on macOS with brew but when I tryed running the tests I had them failing with this the error message:&#xA;java.security.cert.CertificateException: Certificates does not conform to algorithm constraints The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service.</description>
     </item>
-    
     <item>
       <title>Enabling iTerm&#39;s `Cmd&#43;K` hotkey for Cygwin shell with ConEmu</title>
       <link>http://www.borzov.ca/posts/cls4cygwin/</link>
       <pubDate>Thu, 03 Dec 2015 19:28:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/cls4cygwin/</guid>
-      <description>Enabling iTerm&amp;rsquo;s Cmd+K hotkey for Cygwin shell with ConEmu Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.
-Since Windows ecosystem (including shells, Powershell and cmd) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.
-Fornunatelly, there is Cygwin, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love.</description>
+      <description>Enabling iTerm&amp;rsquo;s Cmd+K hotkey for Cygwin shell with ConEmu Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.&#xA;Since Windows ecosystem (including shells, Powershell and cmd) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.&#xA;Fornunatelly, there is Cygwin, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love.</description>
     </item>
-    
     <item>
       <title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT</title>
       <link>http://www.borzov.ca/posts/kademlia/</link>
       <pubDate>Fri, 30 Jan 2015 08:36:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/kademlia/</guid>
-      <description>Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables) (unfinished draft) That article is currently work in progress and will probably take a while to finish.
-DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: www.freedomlayer.org/articles/dht_intro.html
-That intro introduces Chord DHT protocol as a somewhat simpler case.</description>
+      <description>Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables) (unfinished draft) That article is currently work in progress and will probably take a while to finish.&#xA;DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: www.freedomlayer.org/articles/dht_intro.html&#xA;That intro introduces Chord DHT protocol as a somewhat simpler case.</description>
     </item>
-    
     <item>
       <title>Predecessor search for Big Data: x-fast tries, locality of reference and all that</title>
       <link>http://www.borzov.ca/posts/xfast/</link>
       <pubDate>Sun, 01 Dec 2013 08:36:54 -0700</pubDate>
-      
       <guid>http://www.borzov.ca/posts/xfast/</guid>
       <description>Predecessor search for Big Data: x-fast tries, locality of reference and all that Abstract: An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&amp;rsquo;t Consider a set {n} of n integers within the range 0..u-1. Let&amp;rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:</description>
     </item>
-    
   </channel>
 </rss>

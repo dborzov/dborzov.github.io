@@ -13,7 +13,7 @@
 
 <meta charset="utf-8">
 
-<title>serene-audio-mode: how does it work? - Dmitry Borzov (borzov.ca)</title>
+<title>serene-audio-mode: how does it work? - Dmitri Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style_v2.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -22,7 +22,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Borzov<br>
+  Dmitri Borzov<br>
   <a href="/">borzov.ca</a> /posts/serene/
 </div>
 
@@ -33,91 +33,50 @@
       </ul>
 </div>
   <div class="body">
-    
-
-<h1 id="serene-audio-mode-how-does-it-work">serene-audio-mode: how does it work?</h1>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
+    <h1 id="serene-audio-mode-how-does-it-work">serene-audio-mode: how does it work?</h1>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.</p>
-
 <p>That&rsquo;s what prompted me to make a thing called <a href="https://github.com/dborzov/serene-audio-mode">serene-audio-mode</a>. It&rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.</p>
-
-<p><img src="/img/serene/comic.jpg" alt="Img| 300" /></p>
-
+<p><img src="/img/serene/comic.jpg" alt="Img| 300"></p>
 <p>In this post, we get a bit into the weeds how exactly it works as well as my rationale for this design.</p>
-
 <p>Existing audio rebalancing solutions, like the &ldquo;night mode&rdquo; features found in advanced video player applications (VLC, Kodi) or high-end audio amplifiers, typically rely on a family of algorithms called <a href="https://en.wikipedia.org/wiki/Dynamic_range_compression">dynamic range compression</a> (DRC).</p>
-
 <p>DRC is a great classic audio algorithm with a long history. Its uses stretch from hearing aids to audio recording hardware. Yet I find that DRC leave things lacking in when it comes to the specific use case of rebalancing we have in mind here.</p>
-
 <p><code>serene-audio</code> does not use DRC and instead applies its own, and to my knowledge,  unique approach.</p>
-
 <p>So let&rsquo;s break down the process step-by-step.</p>
-
 <h4 id="step-1-identifying-loudness-levels-of-audio-intervals">Step 1: Identifying Loudness Levels of Audio Intervals</h4>
-
 <p>The most disruptive sounds we target – explosions, gunfire, crashes, and aggressive music beats, screeching noise and so on –  have a characteristically wide frequency profile and narrow time direction span. The wide frequency profile in particular means prominent bass and sub-bass presence.</p>
-
 <p>To illustrate this, let&rsquo;s examine the <a href="https://www.youtube.com/watch?v=-nHNHIDduH4">&ldquo;filthy animal&rdquo; scene</a> from the movie <em>Home Alone</em> (1990). In this scene, we want to identify the audio intervals containing gunfire.</p>
-
 <p>First, we&rsquo;ll plot the RMS (Root Mean Square) levels, a common metric for loudness, of the scene&rsquo;s audio track:</p>
-
-<p><img src="/img/serene/02_total_rms_small.png" alt="Img| 300" /></p>
-
+<p><img src="/img/serene/02_total_rms_small.png" alt="Img| 300"></p>
 <p>The intervals with gunfire are highlighted in red. While the loudness does peak during these intervals as expected, the difference compared to other spikes is not substantial, only about 25-50% higher.</p>
-
 <p>This relatively small difference in RMS levels doesn&rsquo;t fully reflect the perceived difference in loudness and obnoxiousness of the gunfire compared to other sounds.</p>
-
 <p>Now, let&rsquo;s analyze the breakdown of these RMS levels by audio frequency bands:</p>
-
-<p><img src="/img/serene/01_freq_band_small.png" alt="Img| 300" /></p>
-
+<p><img src="/img/serene/01_freq_band_small.png" alt="Img| 300"></p>
 <p>Here, we&rsquo;re using standard frequency band definitions: Sub-Bass (16 Hz - 60 Hz), Bass (60 Hz - 250 Hz), Low Midrange (250 Hz - 500 Hz), Midrange (500 Hz - 2 kHz), Upper Midrange (2 kHz - 4 kHz), Presence (4 kHz - 20 kHz).</p>
-
 <p>In this breakdown, the gunfire intervals clearly stand out in the sub-bass, bass, and high-pitch frequency bands, outside of the midrange.</p>
-
 <p>As you know, lower pitch sounds are often perceived as the most intrusive. They also  travel the furthest. We can often only hear the bass of a song played by a passing car. Therefore, it makes sense to focus on the lowest frequency range as an indicator of the relative loudness and obnoxiousness of an audio interval.</p>
-
 <p>For this reason, when identifying spikes of loudness, <code>serene-audio</code> gives <strong>4x</strong> (configurable with <code>BASS_WEIGHT</code> parameter) weight to the impacts at sub-bass frequencies (below 70 Hz).</p>
-
 <h4 id="step-2-continuous-level-adjustment">Step 2: continuous level adjustment</h4>
-
 <p>Le&rsquo;ts say, we determined the level of loudness of a given audiotrack interval to be  <code>x</code>. Our loudness readjustment can be described in terms of <code>g(x)</code>, the gaian function , that yields the value of the desired level of loudness we would like to readjust the interval to.</p>
-
 <p>Here is the <code>g(x)</code> gain function that <code>serene-audio</code> uses:</p>
-
-<p><img src="/img/serene/03_gain_function_small.png" alt="Img| 300" /></p>
-
+<p><img src="/img/serene/03_gain_function_small.png" alt="Img| 300"></p>
 <p>Here on the <code>x</code> axis is the original level of loudness (in the internally used units), and on the <code>y</code> axis we get the desired level (in the same units) to which we would like the interval to be adjusted to.</p>
-
 <p>We see that <code>serene-mode</code> leaves quiet intervals (<code>x &lt; 10</code>) alone, but aggressively caps the levels to the hard threshold <code>y=16</code>.</p>
-
-<p>Importantly, <code>serene-mode</code> avoids a &ldquo;hard-knee&rdquo;-style threshold across the full range of its <code>g(x)</code> gain function, where sound attenuation sharply changes around some given value (see orange line on the plot for the facetious example). At it&rsquo;s worst, such a &ldquo;hard-knee threshold&rdquo; may result in audible effect of the attenuation artificially kicking in only beyond certain level.<br />
+<p>Importantly, <code>serene-mode</code> avoids a &ldquo;hard-knee&rdquo;-style threshold across the full range of its <code>g(x)</code> gain function, where sound attenuation sharply changes around some given value (see orange line on the plot for the facetious example). At it&rsquo;s worst, such a &ldquo;hard-knee threshold&rdquo; may result in audible effect of the attenuation artificially kicking in only beyond certain level.<br>
 The mathy way to describe it is that function <code>g(x)</code> is differentiable at every point.</p>
-
 <p>We illustrate application of our <code>g(x)</code> to an audiotrack with this plot of time series of original loudness levels (blue line) vs target adjusted levels (orange line):</p>
-
-<p><img src="/img/serene/04_target_levels_small.png" alt="Img| 300" /></p>
-
+<p><img src="/img/serene/04_target_levels_small.png" alt="Img| 300"></p>
 <h4 id="step-3-smoothing">Step 3: smoothing</h4>
-
 <p>Sharp adjustments in volume sound unnatural and give off this uncanny feeling.</p>
-
 <p>In <code>serene-mode</code>, the changes of volume to the target levels are applied gradually: spanning to one second by default (can be customized with the <code>time_fade</code> value). This makes these adjustments sound equivalent to someone skillfully reacting with a remote at hand and, I think, sounds much more natural.</p>
-
 <p>The gradual change are log-linear since loudness is perceived at the log scale.</p>
-
 <h4 id="summary">Summary</h4>
-
 <p>In summary, here are the features of <code>serene-audio-mode</code> that are missing from dynamic range compression or any other loudness rebalancing solution that I know of:</p>
-
 <ul>
 <li>It specifically emphasizes the jarring and unpleasant sounds (gunshots, aggressive music beats) by the width of their frequency profile, especially the characteristically prominent bass and sub-bass band contributions.</li>
-<li>No characteristic &ldquo;hard knee&rdquo; / threshold kick-in effect. Adjustments are continuously scaled across the entire range.<br /></li>
-<li>Gradual volume adjustments sound natural, indistinguishable from someone manually adjusting the volume with a remote control.<br /></li>
+<li>No characteristic &ldquo;hard knee&rdquo; / threshold kick-in effect. Adjustments are continuously scaled across the entire range.</li>
+<li>Gradual volume adjustments sound natural, indistinguishable from someone manually adjusting the volume with a remote control.</li>
 </ul>
 
   </div>

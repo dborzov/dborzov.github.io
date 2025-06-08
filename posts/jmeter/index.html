@@ -13,7 +13,7 @@
 
 <meta charset="utf-8">
 
-<title>Fixing jmeter&#39;s java.security.cert.CertificateException error - Dmitry Borzov (borzov.ca)</title>
+<title>Fixing jmeter&#39;s java.security.cert.CertificateException error - Dmitri Borzov (borzov.ca)</title>
 <link rel="stylesheet" href="/css/style_v2.css" type="text/css">
 <link rel="stylesheet" href="/css/_pygments.css" type="text/css">
 <style type="text/css"></style>
@@ -22,7 +22,7 @@
 <div class="container">
 
 <div class="header">
-  Dmitry Borzov<br>
+  Dmitri Borzov<br>
   <a href="/">borzov.ca</a> /posts/jmeter/
 </div>
 
@@ -33,47 +33,25 @@
       </ul>
 </div>
   <div class="body">
-    
-
-<h1 id="fixing-jmeter-s-java-security-cert-certificateexception-error">Fixing jmeter&rsquo;s java.security.cert.CertificateException error</h1>
-
+    <h1 id="fixing-jmeters-javasecuritycertcertificateexception-error">Fixing jmeter&rsquo;s java.security.cert.CertificateException error</h1>
 <p>We were using <a href="http://jmeter.apache.org/">jmeter</a> at work to test an external service. I installed <code>jmeter</code> on macOS with <code>brew</code> but when I tryed running the tests I had them failing with this the error message:</p>
-
-<pre><code>java.security.cert.CertificateException: Certificates does not conform to algorithm constraints
-</code></pre>
-
-<p>The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service. So I had to dig a little into what was up with that.</p>
-
+<pre tabindex="0"><code>java.security.cert.CertificateException: Certificates does not conform to algorithm constraints
+</code></pre><p>The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service. So I had to dig a little into what was up with that.</p>
 <p>Here is what turned out to have happened. <code>jmeter</code> uses the JDK library to make the request. Since <strong>Java 7 u16</strong> (see the <a href="http://www.oracle.com/technetwork/java/javase/6u17-141447.html">release notes</a>) the default support for some of the TLS protocols was turned off. The library just raises an exception when the library call is made to connect to endpoints that use it, ignoring the request.</p>
-
 <p>So how to address this? The ideal solution is to use more secure and proven algorithms for your SSL.
 If it is not an option, it is possible to turn off the checker at the java setting file.</p>
-
 <p>Find <code>{JDK_HOME}/jre/lib/security/java.security</code> for the JRE installation that jmeter uses and comment the lines assigning the values for:</p>
-
-<pre><code>
+<pre tabindex="0"><code>
 jdk.tls.disabledAlgorithms=SSLv3, RC4, MD5withRSA, DH keySize &lt; 768
 jdk.certpath.disabledAlgorithms=MD2, MD5, RSA keySize &lt; 1024
-
-</code></pre>
-
-<h1 id="where-is-the-jdk-that-jmeter-uses">Where is the JDK that jmeter uses?</h1>
-
+</code></pre><h1 id="where-is-the-jdk-that-jmeter-uses">Where is the JDK that jmeter uses?</h1>
 <p>Apparently macOSX has several <code>JDK</code> distrubutions installed by different libraries and tools. I ran a global search for <code>java.security</code> file and found several  <code>{JDK_HOME}</code> installs. Which one does our jmeter use?</p>
-
 <p>It turns out that in my case the file was at</p>
-
-<pre><code> /Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/security/java.security
-</code></pre>
-
-<p>If that did not help you, you can just fix all the <code>java.security</code> files by finding them with something
+<pre tabindex="0"><code> /Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/security/java.security
+</code></pre><p>If that did not help you, you can just fix all the <code>java.security</code> files by finding them with something
 like</p>
-
-<pre><code> sudo find / -iname &quot;java.security&quot;
-</code></pre>
-
-<p>And that worked for me.</p>
-
+<pre tabindex="0"><code> sudo find / -iname &#34;java.security&#34;
+</code></pre><p>And that worked for me.</p>
 <p><a href="mailto:tihoutrom@gmail.com">Let me know</a> if that helped you or not.</p>
 
   </div>
