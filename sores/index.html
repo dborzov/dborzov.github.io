@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sore Photographs</title>
+    <!-- Importing Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Using Inter font as a default */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="p-6 md:p-10">
+            <!-- User's text content -->
+            <h1 class="text-2xl font-semibold text-gray-800 mb-4">Weird Sores :(</h1>
+            <p class="text-gray-700 leading-relaxed">
+                Over the past week, I had several large and painful sores develop in my buttocks area.
+            </p>
+            <p class="text-gray-700 leading-relaxed mt-4">
+                Each one would start as a blister, and within two or three days, this blister bursts, leaving behind this open, raw sore, that you can see in these photographs.
+            </p>
+            <p class="text-gray-700 leading-relaxed font-medium mt-4">
+                They are super painful, weirdly large. This whole thing is very atypical for me, I typically never get any major skin issues like that.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed font-medium mt-4">
+                What the hell is this? Thanks you.
+            </p>
+
+            <!-- Image gallery section -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800 mb-5">Photographs</h2>
+                
+                <!-- Grid layout for images, responsive -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Image 1 -->
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm border border-gray-200">
+                        <img src="1.png" 
+                             alt="Photograph of sore 1" 
+                             class="w-full h-auto object-cover rounded-md bg-gray-200 aspect-square cursor-pointer"
+                             onerror="this.src='https://placehold.co/400x400/eeeeee/aaaaaa?text=1.png'; this.onerror=null;"
+                             onclick="openModal('1.png')">
+                        <p class="text-center text-sm text-gray-600 mt-2">1.png</p>
+                    </div>
+                    
+                    <!-- Image 2 -->
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm border border-gray-200">
+                        <img src="2.png" 
+                             alt="Photograph of sore 2" 
+                             class="w-full h-auto object-cover rounded-md bg-gray-200 aspect-square cursor-pointer"
+                             onerror="this.src='https://placehold.co/400x400/eeeeee/aaaaaa?text=2.png'; this.onerror=null;"
+                             onclick="openModal('2.png')">
+                        <p class="text-center text-sm text-gray-600 mt-2">2.png</p>
+                    </div>
+                    
+                    <!-- Image 3 -->
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm border border-gray-200">
+                        <img src="3.png" 
+                             alt="Photograph of sore 3" 
+                             class="w-full h-auto object-cover rounded-md bg-gray-200 aspect-square cursor-pointer"
+                             onerror="this.src='https://placehold.co/400x400/eeeeee/aaaaaa?text=3.png'; this.onerror=null;"
+                             onclick="openModal('3.png')">
+                        <p class="text-center text-sm text-gray-600 mt-2">3.png</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Modal (Lightbox) Structure -->
+    <div id="imageModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+        <!-- Close Button -->
+        <button id="closeModal" class="absolute top-4 right-4 text-white text-4xl font-bold cursor-pointer transition-transform hover:scale-110">&times;</button>
+        
+        <!-- Modal Content (Image) -->
+        <img id="modalImage" src="" alt="Full-size view" class="max-w-full max-h-full rounded-lg shadow-xl"
+             onerror="this.src='https://placehold.co/800x800/eeeeee/aaaaaa?text=Image+Not+Found'; this.onerror=null;">
+    </div>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        /**
+         * Opens the modal and displays the clicked image.
+         * @param {string} src - The source path of the image to display.
+         */
+        function openModal(src) {
+            // Use the original src if available, otherwise fallback to placeholder
+            const originalImage = document.querySelector(`img[src='${src}']`);
+            if (originalImage && originalImage.src.startsWith('https://placehold.co')) {
+                // If the original image is already a placeholder, use that.
+                modalImg.src = originalImage.src;
+            } else {
+                // Set the image source
+                modalImg.src = src;
+            }
+            // Display the modal
+            modal.classList.remove('hidden');
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        /**
+         * Closes the modal.
+         */
+        function closeModal() {
+            // Hide the modal
+            modal.classList.add('hidden');
+            // Reset the image source
+            modalImg.src = "";
+            // Restore background scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add event listeners
+        closeModalBtn.onclick = closeModal;
+
+        // Close modal when clicking on the background overlay
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Close modal with the Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
