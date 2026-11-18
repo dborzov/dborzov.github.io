@@ -45,29 +45,29 @@
 <p>That is, DHT network is used to fetch content stored at other nodes.  Content is identified by a unique hash. The DHT stores these content block hashes as keys and addresses of the nodes that have these content blocks as values.</p>
 <p>All that is implemented within the <a href="https://godoc.org/github.com/jbenet/go-ipfs/routing">routing/dht</a> IPFS subpackage.</p>
 <p>DHT routing implement the general routing interface defined at <a href="https://github.com/jbenet/go-ipfs/blob/9dd12922b341d891a2365beb10d0142fd10fb235/routing/routing.go"><code>routing/routing.go</code></a>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IpfsRouting</span> <span style="color:#66d9ef">interface</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IpfsRouting</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">FindProvidersAsync</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>, <span style="color:#66d9ef">int</span>) <span style="color:#f92672">&lt;-</span><span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">PeerInfo</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// PutValue adds value corresponding to given Key.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">PutValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>, []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// PutValue adds value corresponding to given Key.</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">PutValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>, []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// GetValue searches for the value corresponding to given Key.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">GetValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// GetValue searches for the value corresponding to given Key.</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">GetValue</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Announce that this node can provide value for given key
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Provide</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Announce that this node can provide value for given key</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">Provide</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Key</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Find specific Peer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// FindPeer searches for a peer with given ID, returns a peer.PeerInfo
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// with relevant addresses.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">FindPeer</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">PeerInfo</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Find specific Peer</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// FindPeer searches for a peer with given ID, returns a peer.PeerInfo</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// with relevant addresses.</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">FindPeer</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">PeerInfo</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Ping a peer, log the time it took
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Ping a peer, log the time it took</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">ID</span>) (<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Bootstrap allows callers to hint to the routing system to get into a
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#75715e">// Boostrapped state
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	    <span style="color:#a6e22e">Bootstrap</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Bootstrap allows callers to hint to the routing system to get into a</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">// Boostrapped state</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#a6e22e">Bootstrap</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>	}
 </span></span></code></pre></div><p>That corresponds to
 the folowing key operations:</p>

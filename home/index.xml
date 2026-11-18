@@ -1,27 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Homes on Dmitry Borzov</title>
-    <link>http://www.borzov.ca/home/</link>
-    <description>Recent content in Homes on Dmitry Borzov</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 23 Jan 2015 12:43:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://www.borzov.ca/home/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Dmitry Borzov</title>
-      <link>http://www.borzov.ca/home/home/</link>
-      <pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
-      
-      <guid>http://www.borzov.ca/home/home/</guid>
-      <description>Hi! I am Dmitri Borzov and this is my website. Keywords: machine learning, information theory, data compression, audio and video codecs, distributed network protocols.
-Reach me at d@borzov.ca
-Papers Published peer-reviewed research papers:
- D.Borzov, T.Yuan, M.Ignatovich, J.Li, &amp;ldquo;KolmoLD: Data Modeling for the Modern Internet&amp;rdquo;, ACM SIGCOMM 2019 M. S. Mashayekhi, J.-S. Bernier, D. Borzov, J.-L. Song, F. Zhou, &amp;ldquo;Two-dimensional Bose gases near resonance: universal three-body effects”, Phys. Rev. Lett.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Homes on Dmitri Borzov</title>
+		<link>http://www.borzov.ca/home/</link>
+		<description>Recent content in Homes on Dmitri Borzov</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 23 Jan 2015 12:43:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://www.borzov.ca/home/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Dmitry Borzov</title>
+				<link>http://www.borzov.ca/home/home/</link>
+				<pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
+				<guid>http://www.borzov.ca/home/home/</guid>
+				<description>&lt;h1 id=&#34;hi-i-am-dmitri-borzov-and-this-is-my-website&#34;&gt;Hi! I am Dmitri Borzov and this is my website.&lt;/h1&gt;&#xA;&lt;p&gt;Keywords: &lt;em&gt;machine learning&lt;/em&gt;, &lt;em&gt;information theory&lt;/em&gt;, &lt;em&gt;data compression&lt;/em&gt;, &lt;em&gt;audio and video codecs&lt;/em&gt;, &lt;em&gt;distributed network protocols&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Reach me at &lt;a href=&#34;mailto:d@borzov.ca&#34;&gt;d@borzov.ca&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;papers&#34;&gt;Papers&lt;/h1&gt;&#xA;&lt;p&gt;Published peer-reviewed research papers:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;D.Borzov, T.Yuan, M.Ignatovich, J.Li, &amp;ldquo;KolmoLD: Data Modeling for the Modern Internet&amp;rdquo;, &lt;a href=&#34;https://dl.acm.org/doi/10.1145/3341558.3342198&#34;&gt;ACM SIGCOMM 2019&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;M. S. Mashayekhi, J.-S. Bernier, D. Borzov, J.-L. Song, F. Zhou, &amp;ldquo;Two-dimensional Bose gases near resonance: universal three-body effects”, &lt;a href=&#34;http://prl.aps.org/abstract/PRL/v110/i14/e145301&#34;&gt;Phys. Rev. Lett. 110, 145301 (2013)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1209.4929&#34;&gt;arxiv:1209.4929&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;D.Borzov, M.S.Mashayekhi, Sh.Zhang, J.Song, F.Zhou, &amp;ldquo;Nature of 3D Bose Gases near Resonance&amp;rdquo;, &lt;a href=&#34;http://pra.aps.org/abstract/PRA/v85/i2/e023620&#34;&gt;Phys.Rev. A 85, 023620 (2012)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1110.2183&#34;&gt;arxiv:1110.2183&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;D.Borzov, &amp;ldquo;Optical vibrations of hydrogen in disordered palladium-gold alloys&amp;rdquo;, Physics of Extreme States of Matter (2009), &lt;a href=&#34;http://arxiv.org/abs/0901.1381&#34;&gt;arXiv:0901.1381v1&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;patents&#34;&gt;Patents&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;2020. Galois-OT&lt;/strong&gt;: Methods and apparatuses for oblivious transfer using trusted environment. (&lt;a href=&#34;https://patents.google.com/patent/US11303617B2&#34;&gt;US11303617B2&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;2022. Jaccard Deduplication&lt;/strong&gt;: Method and apparatus for replicating a target file between devices (&lt;a href=&#34;https://patents.google.com/patent/WO2023000915A1&#34;&gt;WO2023000915A1&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;open-source-projects&#34;&gt;Open source projects&lt;/h1&gt;&#xA;&lt;p&gt;(also, see my &lt;a href=&#34;https://github.com/dborzov&#34;&gt;github account page&lt;/a&gt;)&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

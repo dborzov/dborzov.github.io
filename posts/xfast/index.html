@@ -42,30 +42,30 @@
 </ul>
 <p>Let&rsquo;s check out how some common data structures are holding up with these: a simple sorted array, a balanced binary search tree (whether it is AVL or red-black), and  a hash table:</p>
 <table>
-<thead>
-<tr>
-<th>Lookup</th>
-<th>Update</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Sorted Array</td>
-<td>Ө(log(n))</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>Balanced binary tree</td>
-<td>Ө(log(n))</td>
-<td>Ө(log(n))</td>
-</tr>
-<tr>
-<td>Hash Table</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Lookup</th>
+					<th>Update</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Sorted Array</td>
+					<td>Ө(log(n))</td>
+					<td>O(n)</td>
+			</tr>
+			<tr>
+					<td>Balanced binary tree</td>
+					<td>Ө(log(n))</td>
+					<td>Ө(log(n))</td>
+			</tr>
+			<tr>
+					<td>Hash Table</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+			</tr>
+	</tbody>
 </table>
 <p>The hash table is designed to be optimal for these two operations so it is the best fit here. But what if we modify the search operation a little bit and  require returning of the next closest element if the exact value is not within  the set <code>{n}</code>? So that for 69 in {1,55,68, 100} we would want to get 68 as it is close enough. One can see how the need for such a modification can arise in applications.</p>
 <p><img src="/img/arrow.png" alt="Img"></p>
@@ -79,34 +79,34 @@
 <li><strong>Search Tree</strong> approach is similar to <strong>Sorted Array</strong>: we traverse to the next item left from where the value should have been</li>
 <li><strong>Hash Table</strong>: if the value <code>x</code> is not within the set, the only option is to look up <code>x-1</code> and continue looking up lower values until we stumble upon one within the set. The average distance between the two values is asymptotically <code>Ө(u/n)</code>.
 <table>
-<thead>
-<tr>
-<th>Lookup</th>
-<th>Update</th>
-<th>Predeccessor</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Sorted Array</td>
-<td>Ө(log(n))</td>
-<td>O(n)</td>
-<td>O(log(n))</td>
-</tr>
-<tr>
-<td>Balanced binary tree</td>
-<td>Ө(log(n))</td>
-<td>Ө(log(n))</td>
-<td>O(log(n))</td>
-</tr>
-<tr>
-<td>Hash Table</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-<td>O(u/n)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Lookup</th>
+					<th>Update</th>
+					<th>Predeccessor</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Sorted Array</td>
+					<td>Ө(log(n))</td>
+					<td>O(n)</td>
+					<td>O(log(n))</td>
+			</tr>
+			<tr>
+					<td>Balanced binary tree</td>
+					<td>Ө(log(n))</td>
+					<td>Ө(log(n))</td>
+					<td>O(log(n))</td>
+			</tr>
+			<tr>
+					<td>Hash Table</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+					<td>O(u/n)</td>
+			</tr>
+	</tbody>
 </table>
 </li>
 </ul>
@@ -116,45 +116,45 @@
 <p>There is another drawback to this approach. Now we have to store not just <code>n</code> set elements but all the <code>u</code> possible values. Additionally, pointer size is bound by <code>log(u)</code> needed to store the value position. So the total size of the structure now depends on <code>u</code> as well.</p>
 <p>We can sum it up with this:</p>
 <table>
-<thead>
-<tr>
-<th>Lookup</th>
-<th>Update</th>
-<th>Predeccessor</th>
-<th>Size</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Sorted Array</td>
-<td>Ө(log(n))</td>
-<td>O(n)</td>
-<td>O(log(n))</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Balanced binary tree</td>
-<td>Ө(log(n))</td>
-<td>Ө(log(n))</td>
-<td>O(log(n))</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Hash Table</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-<td>Ө(u/n)</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Hash-Table with Predecessor Pointers</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-<td>Ө(u/n)</td>
-<td>Ө(u log(u))</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Lookup</th>
+					<th>Update</th>
+					<th>Predeccessor</th>
+					<th>Size</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Sorted Array</td>
+					<td>Ө(log(n))</td>
+					<td>O(n)</td>
+					<td>O(log(n))</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Balanced binary tree</td>
+					<td>Ө(log(n))</td>
+					<td>Ө(log(n))</td>
+					<td>O(log(n))</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Hash Table</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+					<td>Ө(u/n)</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Hash-Table with Predecessor Pointers</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+					<td>Ө(u/n)</td>
+					<td>Ө(u log(u))</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="some-reflection">Some Reflection</h4>
 <p>Let&rsquo;s reflect on these results a little bit. We see that hash table is ideal when we look up exact values but breaks down when we start inquiring on operations where <em>locality</em> of the value starts to matter.</p>
@@ -177,52 +177,52 @@
 <p>Memory needed to store the &ldquo;color&rdquo; (black or white) bits for all the nodes within the search tree grows steeply: we get <code>2u-1</code> nodes for a complete binary trie with u leaves. That is where a hash table comes in, we only the &ldquo;black&rdquo;-marked nodes within the hash table for each level of the trie. That means <code>n</code> entries on the leave level, less or equal than <code>n/2</code> on the second lowest and so on for each of the <code>log(u)</code> hash tables. So the space is  bound by <code>Ө(n log(u))</code>.</p>
 <p>Let&rsquo;s sum it up by updating the table</p>
 <table>
-<thead>
-<tr>
-<th>Lookup</th>
-<th>Update</th>
-<th>Predecessor</th>
-<th>Size</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Sorted Array</td>
-<td>Ө(log(n))</td>
-<td>O(n)</td>
-<td>O(log(n))</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Balanced binary tree</td>
-<td>Ө(log(n))</td>
-<td>Ө(log(n))</td>
-<td>O(log(n))</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Hash Table</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-<td>Ө(M/n)</td>
-<td>Ө(n)</td>
-</tr>
-<tr>
-<td>Hash-Table with Predecessor Pointers</td>
-<td>Ө(1)</td>
-<td>Ө(1)</td>
-<td>Ө(u/n)</td>
-<td>Ө(u log(u))</td>
-</tr>
-<tr>
-<td>X-fast trie</td>
-<td>O(1)</td>
-<td>O(log(u))</td>
-<td>O(log(log(u)))</td>
-<td>O(n log(u))</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Lookup</th>
+					<th>Update</th>
+					<th>Predecessor</th>
+					<th>Size</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Sorted Array</td>
+					<td>Ө(log(n))</td>
+					<td>O(n)</td>
+					<td>O(log(n))</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Balanced binary tree</td>
+					<td>Ө(log(n))</td>
+					<td>Ө(log(n))</td>
+					<td>O(log(n))</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Hash Table</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+					<td>Ө(M/n)</td>
+					<td>Ө(n)</td>
+			</tr>
+			<tr>
+					<td>Hash-Table with Predecessor Pointers</td>
+					<td>Ө(1)</td>
+					<td>Ө(1)</td>
+					<td>Ө(u/n)</td>
+					<td>Ө(u log(u))</td>
+			</tr>
+			<tr>
+					<td>X-fast trie</td>
+					<td>O(1)</td>
+					<td>O(log(u))</td>
+					<td>O(log(log(u)))</td>
+					<td>O(n log(u))</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="toy-example">Toy example</h4>
 <p>The easiest way to grok how these operations are implemented is to implement them yourself. So I <a href="https://github.com/dborzov/XLtrie">did</a>.</p>

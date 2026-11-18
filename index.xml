@@ -1,87 +1,73 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Dmitry Borzov</title>
-    <link>http://www.borzov.ca/</link>
-    <description>Recent content on Dmitry Borzov</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 04 Feb 2021 12:00:54 -0700</lastBuildDate>
-    
-	<atom:link href="http://www.borzov.ca/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>serene-audio-mode: how does it work?</title>
-      <link>http://www.borzov.ca/posts/serene/</link>
-      <pubDate>Thu, 04 Feb 2021 12:00:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/serene/</guid>
-      <description>serene-audio-mode: how does it work?  Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.
-That&amp;rsquo;s what prompted me to make a thing called serene-audio-mode. It&amp;rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.</description>
-    </item>
-    
-    <item>
-      <title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity</title>
-      <link>http://www.borzov.ca/posts/quicksort/</link>
-      <pubDate>Tue, 05 Jul 2016 08:36:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/quicksort/</guid>
-      <description>Analysis of randomized algorithms (Part I) Estimating the quicksort&amp;rsquo;s time performance  Abstract: It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms.</description>
-    </item>
-    
-    <item>
-      <title>Fixing jmeter&#39;s java.security.cert.CertificateException error</title>
-      <link>http://www.borzov.ca/posts/jmeter/</link>
-      <pubDate>Fri, 04 Mar 2016 08:36:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/jmeter/</guid>
-      <description>Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error We were using jmeter at work to test an external service. I installed jmeter on macOS with brew but when I tryed running the tests I had them failing with this the error message:
-java.security.cert.CertificateException: Certificates does not conform to algorithm constraints  The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service.</description>
-    </item>
-    
-    <item>
-      <title>Enabling iTerm&#39;s `Cmd&#43;K` hotkey for Cygwin shell with ConEmu</title>
-      <link>http://www.borzov.ca/posts/cls4cygwin/</link>
-      <pubDate>Thu, 03 Dec 2015 19:28:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/cls4cygwin/</guid>
-      <description>Enabling iTerm&amp;rsquo;s Cmd+K hotkey for Cygwin shell with ConEmu Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.
-Since Windows ecosystem (including shells, Powershell and cmd) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.
-Fornunatelly, there is Cygwin, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love.</description>
-    </item>
-    
-    <item>
-      <title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT</title>
-      <link>http://www.borzov.ca/posts/kademlia/</link>
-      <pubDate>Fri, 30 Jan 2015 08:36:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/kademlia/</guid>
-      <description>Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables) (unfinished draft) That article is currently work in progress and will probably take a while to finish.
-DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: www.freedomlayer.org/articles/dht_intro.html
-That intro introduces Chord DHT protocol as a somewhat simpler case.</description>
-    </item>
-    
-    <item>
-      <title>Dmitry Borzov</title>
-      <link>http://www.borzov.ca/home/home/</link>
-      <pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
-      
-      <guid>http://www.borzov.ca/home/home/</guid>
-      <description>Hi! I am Dmitri Borzov and this is my website. Keywords: machine learning, information theory, data compression, audio and video codecs, distributed network protocols.
-Reach me at d@borzov.ca
-Papers Published peer-reviewed research papers:
- D.Borzov, T.Yuan, M.Ignatovich, J.Li, &amp;ldquo;KolmoLD: Data Modeling for the Modern Internet&amp;rdquo;, ACM SIGCOMM 2019 M. S. Mashayekhi, J.-S. Bernier, D. Borzov, J.-L. Song, F. Zhou, &amp;ldquo;Two-dimensional Bose gases near resonance: universal three-body effects”, Phys. Rev. Lett.</description>
-    </item>
-    
-    <item>
-      <title>Predecessor search for Big Data: x-fast tries, locality of reference and all that</title>
-      <link>http://www.borzov.ca/posts/xfast/</link>
-      <pubDate>Sun, 01 Dec 2013 08:36:54 -0700</pubDate>
-      
-      <guid>http://www.borzov.ca/posts/xfast/</guid>
-      <description>Predecessor search for Big Data: x-fast tries, locality of reference and all that Abstract: An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&amp;rsquo;t Consider a set {n} of n integers within the range 0..u-1. Let&amp;rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Dmitri Borzov</title>
+		<link>http://www.borzov.ca/</link>
+		<description>Recent content on Dmitri Borzov</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 05 Jun 2025 08:36:54 -0700</lastBuildDate>
+		
+			<atom:link href="http://www.borzov.ca/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Frenchirix and the Research on How We Learn Languages</title>
+				<link>http://www.borzov.ca/posts/frenchirix/</link>
+				<pubDate>Thu, 05 Jun 2025 08:36:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/frenchirix/</guid>
+				<description>&lt;h1 id=&#34;frenchirix-and-the-research-on-how-we-learn-languages&#34;&gt;&lt;strong&gt;Frenchirix and the Research on How We Learn Languages&lt;/strong&gt;&lt;/h1&gt;&#xA;&lt;div class=&#34;tldr&#34;&gt;&#xA;&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; What academic research on language learning tells us:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Like learning to bike.&lt;/strong&gt; Language is acquired subconsciously, by brain machinery built for it. Studying grammar helps about as much as physics lectures help you ride a bike.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Input before output.&lt;/strong&gt; Understanding what you hear and read is what builds a language. Speaking and writing grow out of that, so don&amp;rsquo;t rush them, and don&amp;rsquo;t keep testing.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Words map to the world.&lt;/strong&gt; The instinct we&amp;rsquo;re tapping into is for understanding people, not for passing conjugation quizzes.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Stories make it real.&lt;/strong&gt; The brain learns from messages it cares about. Example sentences that mean nothing mostly teach boredom.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;It&amp;rsquo;s okay to be confused.&lt;/strong&gt; Guessing from context is how acquisition works. Don&amp;rsquo;t stop to dissect every sentence.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use the real thing.&lt;/strong&gt; Learn the French people actually speak, not textbook French. Kids&amp;rsquo; TV shows are excellent material.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;And what I did with it: &lt;a href=&#34;#frenchirix&#34;&gt;Frenchirix&lt;/a&gt;, a small app for spaced repetition of dialogue from an unadapted French TV show.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;</description>
+			</item>
+			<item>
+				<title>serene-audio-mode: how does it work?</title>
+				<link>http://www.borzov.ca/posts/serene/</link>
+				<pubDate>Thu, 04 Feb 2021 12:00:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/serene/</guid>
+				<description>&lt;h1 id=&#34;serene-audio-mode-how-does-it-work&#34;&gt;serene-audio-mode: how does it work?&lt;/h1&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;Tired of dramatic volume swings in modern movies? Ever got frustrated trying to watch something without disturbing the others? I know I was.&lt;/p&gt;&#xA;&lt;p&gt;That&amp;rsquo;s what prompted me to make a thing called &lt;a href=&#34;https://github.com/dborzov/serene-audio-mode&#34;&gt;serene-audio-mode&lt;/a&gt;. It&amp;rsquo;s an open source tool that rebalances the audio track of videos, selectively reducing the volume of obnoxiously loud, bass-heavy, and jarring sounds (think explosions, gunfire, and aggressive musical beats) while preserving the clarity of other scenes like dialogue.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Analysing random algorithms (Part I): deriving quicksort&#39;s time complexity</title>
+				<link>http://www.borzov.ca/posts/quicksort/</link>
+				<pubDate>Tue, 05 Jul 2016 08:36:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/quicksort/</guid>
+				<description>&lt;h1 id=&#34;analysis-of-randomized-algorithms-part-i&#34;&gt;Analysis of randomized algorithms (Part I)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;estimating-the-quicksorts-time-performance&#34;&gt;Estimating the quicksort&amp;rsquo;s time performance&lt;/h2&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;h4 id=&#34;abstract-it-is-not-that-hard-to-build-skills-for-analysing-randomized-algorithms-here-i-list-some-of-the-basic-tricks-that-work-for-me-using-quicksort-as-an-example&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; It is not that hard to build skills for analysing randomized algorithms. Here I list some of the basic tricks that work for me using quicksort as an example&lt;/h4&gt;&#xA;&lt;p&gt;Randomized algorithms are fascinating to me. Many classic algorithms are somewhat obvious in the hindsight: you can see right away their value and what makes them good. That is not the case for Randomized algorithms. They can surprise you with how efficient they can be on average. I remember being amazed when I learned that the randomized algorithm for finding a median element in an unsorted graph has asymptotic performance being linearly proportional to the size of the array, for example. but being able to actually understand what gives them their properties can be pretty hard at times.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Fixing jmeter&#39;s java.security.cert.CertificateException error</title>
+				<link>http://www.borzov.ca/posts/jmeter/</link>
+				<pubDate>Fri, 04 Mar 2016 08:36:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/jmeter/</guid>
+				<description>&lt;h1 id=&#34;fixing-jmeters-javasecuritycertcertificateexception-error&#34;&gt;Fixing jmeter&amp;rsquo;s java.security.cert.CertificateException error&lt;/h1&gt;&#xA;&lt;p&gt;We were using &lt;a href=&#34;http://jmeter.apache.org/&#34;&gt;jmeter&lt;/a&gt; at work to test an external service. I installed &lt;code&gt;jmeter&lt;/code&gt; on macOS with &lt;code&gt;brew&lt;/code&gt; but when I tryed running the tests I had them failing with this the error message:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;java.security.cert.CertificateException: Certificates does not conform to algorithm constraints&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The sucky thing was that it was failing only on my machine, it was working fine for my teammates. The tested service was obviously up and it looked was that the issue was with some versioning divergence for some shared code or service. So I had to dig a little into what was up with that.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Enabling iTerm&#39;s `Cmd&#43;K` hotkey for Cygwin shell with ConEmu</title>
+				<link>http://www.borzov.ca/posts/cls4cygwin/</link>
+				<pubDate>Thu, 03 Dec 2015 19:28:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/cls4cygwin/</guid>
+				<description>&lt;h2 id=&#34;enabling-iterms-cmdk-hotkey-for-cygwin-shell-with-conemu&#34;&gt;Enabling iTerm&amp;rsquo;s &lt;code&gt;Cmd+K&lt;/code&gt; hotkey for Cygwin shell with ConEmu&lt;/h2&gt;&#xA;&lt;p&gt;Sometimes I have to use the shell (a command-line interface) on Windows and that sucks.&lt;/p&gt;&#xA;&lt;p&gt;Since Windows ecosystem (including shells, &lt;code&gt;Powershell&lt;/code&gt; and &lt;code&gt;cmd&lt;/code&gt;) has been historically quite removed from POSIX/UNIX patterns we came to know and love, even performing basic tasks gets challenging for me.&lt;/p&gt;&#xA;&lt;p&gt;Fornunatelly, there is &lt;a href=&#34;en.wikipedia.org/wiki/Cygwin&#34;&gt;Cygwin&lt;/a&gt;, an open-source project that wraps the Windows system calls and makes an imitation of a bash shell we came to know and love. It is pretty decent for most every day uses.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Understanding routing in Bittorrents: algorithms behind Kademlia DHT</title>
+				<link>http://www.borzov.ca/posts/kademlia/</link>
+				<pubDate>Fri, 30 Jan 2015 08:36:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/kademlia/</guid>
+				<description>&lt;h1 id=&#34;routing-at-bittorrent-understanding-kademlia-dhts-distributed-hash-tables&#34;&gt;Routing at Bittorrent: understanding Kademlia DHTs (Distributed Hash Tables)&lt;/h1&gt;&#xA;&lt;h3 id=&#34;unfinished--draft&#34;&gt;(unfinished  draft)&lt;/h3&gt;&#xA;&lt;p&gt;That article is currently work in progress and will probably take a while to finish.&lt;/p&gt;&#xA;&lt;p&gt;DHTs (Distributed Hash Tables) protocols are beautiful and practical and I am convinced that we as a species are only beginning to untap their true potential. Here is a good introduction to the core concepts behind the DHT Networks: &lt;a href=&#34;http://www.freedomlayer.org/articles/dht_intro.html&#34;&gt;www.freedomlayer.org/articles/dht_intro.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;That intro introduces Chord DHT protocol as a somewhat  simpler case. In practice, many applications for untrusted networks use Kademlia, including the most succesful one to date: trackerless Bitttorrent file sharing.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Dmitry Borzov</title>
+				<link>http://www.borzov.ca/home/home/</link>
+				<pubDate>Fri, 23 Jan 2015 12:43:00 +0000</pubDate>
+				<guid>http://www.borzov.ca/home/home/</guid>
+				<description>&lt;h1 id=&#34;hi-i-am-dmitri-borzov-and-this-is-my-website&#34;&gt;Hi! I am Dmitri Borzov and this is my website.&lt;/h1&gt;&#xA;&lt;p&gt;Keywords: &lt;em&gt;machine learning&lt;/em&gt;, &lt;em&gt;information theory&lt;/em&gt;, &lt;em&gt;data compression&lt;/em&gt;, &lt;em&gt;audio and video codecs&lt;/em&gt;, &lt;em&gt;distributed network protocols&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Reach me at &lt;a href=&#34;mailto:d@borzov.ca&#34;&gt;d@borzov.ca&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;papers&#34;&gt;Papers&lt;/h1&gt;&#xA;&lt;p&gt;Published peer-reviewed research papers:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;D.Borzov, T.Yuan, M.Ignatovich, J.Li, &amp;ldquo;KolmoLD: Data Modeling for the Modern Internet&amp;rdquo;, &lt;a href=&#34;https://dl.acm.org/doi/10.1145/3341558.3342198&#34;&gt;ACM SIGCOMM 2019&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;M. S. Mashayekhi, J.-S. Bernier, D. Borzov, J.-L. Song, F. Zhou, &amp;ldquo;Two-dimensional Bose gases near resonance: universal three-body effects”, &lt;a href=&#34;http://prl.aps.org/abstract/PRL/v110/i14/e145301&#34;&gt;Phys. Rev. Lett. 110, 145301 (2013)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1209.4929&#34;&gt;arxiv:1209.4929&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;D.Borzov, M.S.Mashayekhi, Sh.Zhang, J.Song, F.Zhou, &amp;ldquo;Nature of 3D Bose Gases near Resonance&amp;rdquo;, &lt;a href=&#34;http://pra.aps.org/abstract/PRA/v85/i2/e023620&#34;&gt;Phys.Rev. A 85, 023620 (2012)&lt;/a&gt;, &lt;a href=&#34;http://arxiv.org/abs/1110.2183&#34;&gt;arxiv:1110.2183&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;D.Borzov, &amp;ldquo;Optical vibrations of hydrogen in disordered palladium-gold alloys&amp;rdquo;, Physics of Extreme States of Matter (2009), &lt;a href=&#34;http://arxiv.org/abs/0901.1381&#34;&gt;arXiv:0901.1381v1&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;patents&#34;&gt;Patents&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;2020. Galois-OT&lt;/strong&gt;: Methods and apparatuses for oblivious transfer using trusted environment. (&lt;a href=&#34;https://patents.google.com/patent/US11303617B2&#34;&gt;US11303617B2&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;2022. Jaccard Deduplication&lt;/strong&gt;: Method and apparatus for replicating a target file between devices (&lt;a href=&#34;https://patents.google.com/patent/WO2023000915A1&#34;&gt;WO2023000915A1&lt;/a&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;open-source-projects&#34;&gt;Open source projects&lt;/h1&gt;&#xA;&lt;p&gt;(also, see my &lt;a href=&#34;https://github.com/dborzov&#34;&gt;github account page&lt;/a&gt;)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Predecessor search for Big Data: x-fast tries, locality of reference and all that</title>
+				<link>http://www.borzov.ca/posts/xfast/</link>
+				<pubDate>Sun, 01 Dec 2013 08:36:54 -0700</pubDate>
+				<guid>http://www.borzov.ca/posts/xfast/</guid>
+				<description>&lt;h1 id=&#34;predecessor-search-for-big-data-x-fast-tries-locality-of-reference-and-all-that&#34;&gt;Predecessor search for Big Data: x-fast tries, locality of reference and all that&lt;/h1&gt;&#xA;&lt;h4 id=&#34;abstract-an-intro-to-data-structures-with-locality-of-reference-type-features-we-review-x-fast-tries-in-some-detail-and-then-talk-about-similar-data-structures-where-they-shine-and-where-they-dont&#34;&gt;&lt;em&gt;Abstract:&lt;/em&gt; An intro to data structures with locality of reference-type features. We review x-fast tries in some detail and then talk about similar data structures, where they shine and where they don&amp;rsquo;t&lt;/h4&gt;&#xA;&lt;p&gt;Consider a set &lt;code&gt;{n}&lt;/code&gt; of &lt;code&gt;n&lt;/code&gt; integers within the range &lt;code&gt;0..u-1&lt;/code&gt;. Let&amp;rsquo;s assume we need to build a data structure that allows for performing of the following operations efficiently:&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>
