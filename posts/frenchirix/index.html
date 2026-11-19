@@ -37,14 +37,14 @@
 <div class="tldr">
 <p><strong>TL;DR:</strong> What academic research on language learning tells us:</p>
 <ul>
-<li><strong>Like learning to bike.</strong> Language is acquired subconsciously, by brain machinery built for it. Studying grammar helps about as much as physics lectures help you ride a bike.</li>
-<li><strong>Input before output.</strong> Understanding what you hear and read is what builds a language. Speaking and writing grow out of that, so don&rsquo;t rush them, and don&rsquo;t keep testing.</li>
+<li><strong>Like learning to bike.</strong> Language is acquired subconsciously, by brain machinery built for it. Studying things like grammar matters, but its value is like that of a physics explanation when you&rsquo;re learning to ride a bike: it helps you know what to notice. But the bulk of the work is getting back on that bike over and over, until you start falling a bit less.</li>
+<li><strong>Input before output.</strong> That brain machinery activates most easily when you hear or read something in the target language that you can at least partially understand. So getting more exposure to it, under any pretext, is where it&rsquo;s at. Speaking and writing grow out of that, so don&rsquo;t rush them, and don&rsquo;t keep testing.</li>
 <li><strong>Words map to the world.</strong> The instinct we&rsquo;re tapping into is for understanding people, not for passing conjugation quizzes.</li>
 <li><strong>Stories make it real.</strong> The brain learns from messages it cares about. Example sentences that mean nothing mostly teach boredom.</li>
 <li><strong>It&rsquo;s okay to be confused.</strong> Guessing from context is how acquisition works. Don&rsquo;t stop to dissect every sentence.</li>
 <li><strong>Use the real thing.</strong> Learn the French people actually speak, not textbook French. Kids&rsquo; TV shows are excellent material.</li>
 </ul>
-<p>And what I did with it: <a href="#frenchirix">Frenchirix</a>, a small app for spaced repetition of dialogue from an unadapted French TV show.</p>
+<p>And what I did with it: <a href="#frenchirix">Frenchirix</a>, a small app for spaced repetition of dialogue from an unadapted French TV show. Its code is <a href="https://github.com/dborzov/frenchirix-open-source">open source</a>.</p>
 
 </div>
 
@@ -66,16 +66,23 @@
 <li><a href="#footnotes">Footnotes</a></li>
 </ul>
 <h3 id="introduction">Introduction</h3>
-<p>I wanted to help my kids with their French, and I realized I didn&rsquo;t know how.</p>
-<p>That was odd, because I&rsquo;ve learned two second languages as an adult. But the main thing that experience taught me was distrust.</p>
-<p>Language learning is full of traps. Some kinds of work look exactly like what studying is supposed to look like, yet much of the effort spent on them is wasted. I know because I wasted it.</p>
-<p>Wasting my own time on busywork is one thing. Making my kids waste theirs is another. I didn&rsquo;t want to do that.</p>
+<p>My kids are in French immersion. They are awesome and generally ace the hell out of that French, but I&rsquo;ve also watched them run into the same potholes I hit as a kid.</p>
+<p>It made me think back to my childhood years of learning English in school. If you added up all the hours of &ldquo;instruction and practice&rdquo; I sat through, you would expect me to be able to read Shakespeare with ease.</p>
+<p>But, as you can guess, the reality was less impressive. Looking back, I realize that a lot of those hours ended up being pointless busywork.</p>
+<p>To be fair, my kids have it much better. We&rsquo;ve seen some of the teachers at their school go out of their way to do an incredible job for their students. Our family is very grateful to them for it.</p>
+<p>But individual teachers aside, I got the impression that the way schools approach language learning is still the same rigid system I remember.</p>
+<p>For some reason, that got to me. As a parent, the last thing you want is for your kids to go through the same thing you did. You want them to skip the bad parts.</p>
+<p>So I started wondering if there was anything useful I could do about it.</p>
+<p>But as I kept thinking about it, I was surprised to realize I didn&rsquo;t really know how.</p>
+<p>This was odd, because I&rsquo;d ended up having to learn two languages as an adult. In theory, this experience alone should have taught me what works and what doesn&rsquo;t.</p>
+<p>But if anything, the main thing that experience had taught me was distrust.</p>
+<p>Language learning is full of traps. Some kinds of work look exactly like what studying is supposed to look like, yet much of the effort spent on them is wasted.</p>
 <p>In most things, the more experience you have, the more confident you get. Language learning was different. I was surest of how it worked at the start, before I&rsquo;d tried anything. Then I spent years at it, and what I mostly came away with was a deep respect for how much more there is to it than meets the eye.</p>
 <p>Yes, through trial and error I stumbled on a few tricks that worked well enough to get me by. But why those? Would they work for anyone else? If I was honest with myself, I didn&rsquo;t know.</p>
 <p>After all those years, it was still alchemy to me: mysterious, murky, nothing quite what it seemed.</p>
 <p>Then I realized the way out was the same as it was for alchemy: chemistry.</p>
-<p>So I went looking for what&rsquo;s actually known: findings backed by evidence, not just confident opinions.</p>
-<p>This time I did the groundwork. I asked people with degrees in linguistics, education, and second language acquisition what I should read, and got a list <a href="#references">[1–5]</a>. Then I read the books they recommended, and used AI to get through the denser ones <a href="#footnotes">[7]</a>.</p>
+<p>So I went looking for what&rsquo;s actually known: findings backed by evidence and studies, not opinions and impressions.</p>
+<p>I figured that with all these AI tools, I would be able to do it right this time. I asked people with degrees in linguistics, education, and second language acquisition what I should read, and got a list <a href="#references">[1–5]</a>. Then I read the books they recommended, and used AI to summarize the denser ones <a href="#footnotes">[7]</a>.</p>
 <p>What follows is what I took from them: the handful of principles most of that research agrees on, several of which are pretty counter-intuitive.</p>
 <h3 id="the-science-of-what-works-for-language-learning"><strong>The Science of What Works for Language Learning</strong></h3>
 <p>You can see the <a href="#references">list of references I read as a result of all this at the end of this post</a>.</p>
@@ -193,6 +200,16 @@
 </li>
 </ul>
 <p>That&rsquo;s pretty much it. I&rsquo;m trying to apply what the science says works, not what people expect language learning to look like.</p>
+<p><strong>The code is open source.</strong> It&rsquo;s on GitHub as <a href="https://github.com/dborzov/frenchirix-open-source">frenchirix-open-source</a>, under the MIT license. It has two parts:</p>
+<ul>
+<li>
+<p><em>A pipeline that turns your own video files into practice material.</em> Point it at, say, the episodes of a TV show: it picks out short dialogue scenes, transcribes them, and aligns every word to the audio, so any word or expression can be replayed on its own.</p>
+</li>
+<li>
+<p><em>The web app itself</em>, with the practice puzzles and the spaced repetition.</p>
+</li>
+</ul>
+<p>It doesn&rsquo;t come with any show&rsquo;s material, so you build the content from videos you have. It was built for French learned through English, but the approach works for any language pair. It&rsquo;s a working project rather than a polished product, so expect to read the docs and change some code.</p>
 <h4 id="thats-all-folks">That&rsquo;s all, folks!</h4>
 <p>There you have it, my understanding of academic science about language learning, and how I am trying to apply this to my little side project called Frenchirix.</p>
 <p>If you have any feedback, or better ideas, please email me at <a href="mailto:d@borzov.ca">d@borzov.ca</a>.</p>
@@ -209,7 +226,7 @@
 <ol start="7">
 <li>Well, I only read the book that was written to be fun to read (Pinker&rsquo;s). I skimmed and used an LLM to get the chapter summaries for Hummel&rsquo;s.</li>
 <li>And like with GPUs, things are actually much more complicated, and I do not claim to understand all this all that much. But I have gotta say that this is an oversimplification to get a point across.</li>
-<li>The website currently uses some dialogue lines from a Netflix TV show as language examples for educational purposes. As a non-commercial educational website, this use fully meets the conditions of the &ldquo;fair use&rdquo; doctrine in the US and &ldquo;fair dealing&rdquo; in Canada. Still, we all know that this has never stopped some of those companies with lawyers that need to find ways to justify their salaries. Therefore, the idea is to build a data processing pipeline that will work for any video media, not just the specific one currently used. This way, the second that specific copyright owners express disagreement with this particular use, the public version of this website will switch to something else.</li>
+<li>The website currently uses some dialogue lines from a Netflix TV show as language examples for educational purposes. As a non-commercial educational website, this use fully meets the conditions of the &ldquo;fair use&rdquo; doctrine in the US and &ldquo;fair dealing&rdquo; in Canada. Still, we all know that this has never stopped some of those companies with lawyers that need to find ways to justify their salaries. Therefore, the idea is to build a data processing pipeline that will work for any video media, not just the specific one currently used. This way, the second that specific copyright owners express disagreement with this particular use, the public version of this website will switch to something else. That pipeline is now part of the <a href="https://github.com/dborzov/frenchirix-open-source">open-source release</a>.</li>
 </ol>
 
   </div>
